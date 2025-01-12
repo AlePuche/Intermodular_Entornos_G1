@@ -3,11 +3,11 @@
 namespace PuchePerezAlejandroSimulacion1
 {
     /// <summary>
-    /// Lógica de interacción para SegundaVentana.xaml
+    /// Lógica de interacción para AddHabitacion.xaml
     /// </summary>
-    public partial class SegundaVentana : Window
+    public partial class AddHabitacion : Window
     {
-        public SegundaVentana()
+        public AddHabitacion()
         {
             InitializeComponent();
         }

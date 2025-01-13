@@ -20,7 +20,7 @@
             <StackPanel Canvas.Top="300" Canvas.Left="100">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
                     <Border BorderThickness="1" Height="2" Width="60" BorderBrush="Black" Background="Black" VerticalAlignment="Bottom"></Border>
-                    <TextBlock Text="Acceso" VerticalAlignment="Bottom" FontSize="15" Foreground="#68EB9C" FontWeight="ExtraBold"  FontFamily="Montserrat" Margin="30,0,0,0"/>
+                    <TextBlock Text="Acceso" VerticalAlignment="Bottom" FontSize="15" Foreground="#278498" FontWeight="ExtraBold"  FontFamily="Montserrat" Margin="30,0,0,0"/>
                 </StackPanel>
                 <StackPanel>
                     <TextBlock Text="Email" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="30,0,0,0"/>

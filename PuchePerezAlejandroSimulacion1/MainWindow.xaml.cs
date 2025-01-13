@@ -23,6 +23,8 @@ namespace PuchePerezAlejandroSimulacion1
             s.Show();
             Buscador b = new Buscador();
             b.Show();
+            CrearReserva crear = new CrearReserva();
+            crear.Show();
         }
     }
 }

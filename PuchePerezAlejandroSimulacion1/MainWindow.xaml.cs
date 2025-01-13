@@ -10,14 +10,18 @@ namespace PuchePerezAlejandroSimulacion1
         public MainWindow()
         {
             InitializeComponent();
+            /*
             SegundaVentana s = new SegundaVentana();
             s.Show();
             Buscador b = new Buscador();
             b.Show();
-            AddHabitacion a = new AddHabitacion();
-            a.Show();
             CrearReserva crear = new CrearReserva();
             crear.Show();
+            */
+            AddHabitacion a = new AddHabitacion();
+            a.Show();
+            ListaHabitaciones lh = new ListaHabitaciones();
+            lh.Show();
         }
     }
 }

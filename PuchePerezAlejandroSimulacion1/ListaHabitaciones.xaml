@@ -1,0 +1,83 @@
+﻿<Window x:Class="PuchePerezAlejandroSimulacion1.ListaHabitaciones"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
+        mc:Ignorable="d"
+        Title="ListaHabitaciones" Height="1018" Width="1440">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Image HorizontalAlignment="Left" Width="300" Source="/Images/hotelperemaria_horizontal.png" Margin="50,0"/>
+            <TextBlock Grid.Row="1" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60" Margin="50,0"/>
+            <Border Grid.Row="2" CornerRadius="20" Background="WhiteSmoke" Margin="50,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="20,20,50,0">
+                        <TextBlock  Text="Nombre" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBox Height="40"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="20,0,50,0">
+                        <TextBlock Text="Huéspedes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <ComboBox Height="40">
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="3"/>
+                            <ComboBoxItem Content="4"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Margin="20,0,50,0">
+                        <TextBlock  Text="Descripción" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <RichTextBox Height="80" VerticalScrollBarVisibility="Auto">
+                            <FlowDocument>
+                                <Paragraph LineHeight="5"/>
+                            </FlowDocument>
+                        </RichTextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Margin="20,0,50,0">
+                        <TextBlock Text="Opciones" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10">
+                            <CheckBox Content="Cuna"/>
+                            <CheckBox Content="Cama extra" Margin="20,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Margin="20,0,50,0">
+                        <TextBlock Text="Reservada/Ocupada" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <ComboBox Height="40">
+                            <ComboBoxItem Content="Si"/>
+                            <ComboBoxItem Content="No"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Margin="20,0,50,0">
+                        <TextBlock Text="Fecha de reserva/ocupación" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <DatePicker Height="40"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6">
+                        <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50" Margin="0,50,0,20">
+                            <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        
+
+    </Grid>
+</Window>

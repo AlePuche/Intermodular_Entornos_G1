@@ -9,8 +9,8 @@
     <Grid>
         <Canvas>
             <StackPanel  Width="1400" Orientation="Horizontal" Canvas.Top="10" Canvas.Left="30">
-                <Image Width="60" Source="/Images/Logo.png"/>
-                <TextBlock VerticalAlignment="Center" Text="Hotel Pere María |" FontSize="25" FontWeight="Medium" FontFamily="Montserrat" Foreground="Black"/>
+                <Image Width="300" Source="/Images/hotelperemaria_horizontal.png"/>
+                <TextBlock VerticalAlignment="Center" Text="   |" FontSize="25" FontWeight="Medium" FontFamily="Montserrat" Foreground="Black"/>
                 <StackPanel Orientation="Vertical">
                     <TextBlock VerticalAlignment="Bottom" Text="Bienvenido" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Foreground="Black" Margin="10,0,0,0"/>
                     <TextBlock VerticalAlignment="Top" Text="Cerrar sesión" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Foreground="LightGray" Margin="10,0,0,0"/>

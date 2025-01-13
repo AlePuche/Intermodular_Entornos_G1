@@ -13,8 +13,7 @@
         </Grid.ColumnDefinitions>
         <Canvas>
             <StackPanel Orientation="Horizontal" Margin="50,10,0,0">
-                <Image Source="/Images/Logo.png" Width="50"/>
-                <TextBlock Text="Hotel Pere María" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="30"/>
+                <Image Width="300" Source="/Images/hotelperemaria_horizontal.png"/>
             </StackPanel>
 
             <TextBlock Canvas.Top="80" Canvas.Left="60" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60"/>

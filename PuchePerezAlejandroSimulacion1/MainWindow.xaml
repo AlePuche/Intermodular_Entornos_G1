@@ -14,8 +14,7 @@
         <Image Grid.Column="1" Source="/Images/img-cover-login.png" Stretch="Fill"/>
         <Canvas>
             <StackPanel Orientation="Horizontal" Canvas.Top="170" Canvas.Left="100">
-                <Image Width="60" Source="/Images/Logo.png"/>
-                <TextBlock VerticalAlignment="Center" Text="Hotel Pere María" FontSize="25" FontWeight="ExtraBold" FontFamily="Montserrat" Foreground="Black"/>
+                <Image Width="450" Source="/Images/hotelperemaria.png"/>
             </StackPanel>
             <StackPanel Canvas.Top="300" Canvas.Left="100">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,20">

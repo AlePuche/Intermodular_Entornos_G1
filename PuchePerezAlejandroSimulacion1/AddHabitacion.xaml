@@ -31,13 +31,13 @@
                         <ColumnDefinition Width="1.6*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel>
-                       <TextBlock  Text="Nombre" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" Margin="50,00,0,0"/>
-                       <TextBox Height="40" Margin="50,0,50,0"/>
+                    <StackPanel Margin="50,0,50,0">
+                       <TextBlock  Text="Nombre" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                       <TextBox Height="40"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1">
-                        <TextBlock Text="Huéspedes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" Margin="50,0,0,0"/>
-                        <ComboBox Height="40" Margin="50,0,50,0">
+                    <StackPanel Grid.Column="1" Margin="50,0,50,0">
+                        <TextBlock Text="Huéspedes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <ComboBox Height="40">
                             <ComboBoxItem Content="1"/>
                             <ComboBoxItem Content="2"/>
                             <ComboBoxItem Content="3"/>
@@ -47,7 +47,11 @@
                 </Grid>
                 <StackPanel Grid.Row="2" Margin="50,0,50,0">
                     <TextBlock  Text="Descripción" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                    <TextBox Height="200"/>
+                    <RichTextBox Height="200" VerticalScrollBarVisibility="Auto">
+                        <FlowDocument>
+                            <Paragraph LineHeight="5"/>
+                        </FlowDocument>
+                    </RichTextBox>
                 </StackPanel>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -77,7 +81,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="1" CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="150" Height="50" Margin="0,0,20,20">
-                        <Button Content="Buscar" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20"/>
+                        <Button Content="Añadir" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20"/>
                     </Border>
                 </Grid>
             </Grid>

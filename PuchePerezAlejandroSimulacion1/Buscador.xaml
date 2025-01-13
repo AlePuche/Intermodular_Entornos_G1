@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
         mc:Ignorable="d"
-            Title="Buscador" Height="1000" Width="1200">
+            Title="Buscador" Height="1018" Width="1440">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

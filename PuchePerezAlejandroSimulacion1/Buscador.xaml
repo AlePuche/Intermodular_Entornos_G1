@@ -17,7 +17,7 @@
                 <TextBlock Text="Hotel Pere María" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="30"/>
             </StackPanel>
 
-            <TextBlock Canvas.Top="80" Canvas.Left="60" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#68eb9c" FontSize="60"/>
+            <TextBlock Canvas.Top="80" Canvas.Left="60" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60"/>
             <Border Canvas.Top="150" Canvas.Left="60" CornerRadius="20" Background="WhiteSmoke">
                 <StackPanel>
                     <StackPanel Width="300">
@@ -54,11 +54,11 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
-                        <Border CornerRadius="25" BorderThickness="2" BorderBrush="#68eb9c" Width="150" Height="50">
+                        <Border CornerRadius="25" BorderThickness="2" BorderBrush="#278498" Width="150" Height="50">
                             <Button Content="VIP" BorderBrush="Transparent" FontSize="20" Background="Transparent"/>
                         </Border>
-                        <Border CornerRadius="30" BorderThickness="2" BorderBrush="#68eb9c"  Background="#68eb9c" Width="150" Height="50" Margin="0,50,0,20">
-                            <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" FontSize="20"/>
+                        <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50" Margin="0,50,0,20">
+                            <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20"/>
                         </Border>
                     </StackPanel>
                 </StackPanel>
@@ -101,7 +101,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
@@ -128,7 +128,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
@@ -142,7 +142,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
@@ -156,7 +156,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
@@ -170,7 +170,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
@@ -184,7 +184,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
@@ -198,7 +198,7 @@
                         <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
                         <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
                         <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#68eb9c" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
+                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
                             <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>

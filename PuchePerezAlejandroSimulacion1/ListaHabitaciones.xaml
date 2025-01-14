@@ -39,7 +39,8 @@
                        Value="{TemplateBinding Value}"
                        Minimum="{TemplateBinding Minimum}"
                        Maximum="{TemplateBinding Maximum}"
-                       ViewportSize="{TemplateBinding ViewportSize}">
+                       ViewportSize="{TemplateBinding ViewportSize}"
+                       IsDirectionReversed="True">
                                 <Track.Thumb>
                                     <Thumb Style="{StaticResource ScrollThumbStyle}" />
                                 </Track.Thumb>
@@ -178,12 +179,23 @@
         </Grid>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Habitaciones" FontFamily="Montserrat" FontWeight="Bold" Foreground="Black" FontSize="60" Margin="50,0"/>
         <Grid Grid.Column="1" Grid.Row="2" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <!-- Encabezado -->
-                <RowDefinition Height="*" />
-                <!-- Filas dinámicas con scroll -->
-            </Grid.RowDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" /> <!-- Encabezado -->
+        <RowDefinition Height="*" />    <!-- Filas dinámicas con scroll -->
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <!-- Encabezado -->
+    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" BorderThickness="1" BorderBrush="WhiteSmoke" Background="#F0F0F0">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -193,68 +205,55 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            <!-- Encabezado -->
-            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" BorderThickness="1" BorderBrush="WhiteSmoke" Background="#F0F0F0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="ID" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="1" Content="Foto" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="2" Content="Tipo" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="3" Content="Huéspedes" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="4" Content="Descripción" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="5" Content="¿Reservada?" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="6" Content="Acción" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Grid>
-            </Border>
-
-            <!-- Filas dinámicas con scroll -->
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Habitaciones}">
-                    <ItemsControl.ItemsPanel>
-                        <!-- Usa un StackPanel para apilar verticalmente -->
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,5">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Content="{Binding Id}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Image Grid.Column="1" Source="{Binding FotoUrl}" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="2" Content="{Binding Tipo}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="3" Content="{Binding Huespedes}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="4" Content="{Binding Descripcion}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="5" Content="{Binding Reservada}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
-                                        <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
-                                        <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+            <Label Grid.Column="0" Content="ID" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Grid.Column="1" Content="Foto" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Grid.Column="2" Content="Tipo" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Grid.Column="3" Content="Huéspedes" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Grid.Column="4" Content="Descripción" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Grid.Column="5" Content="¿Reservada?" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Grid.Column="6" Content="Acción" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
+    </Border>
+
+    <!-- Filas dinámicas con scroll -->
+    <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Habitaciones}">
+            <ItemsControl.ItemsPanel>
+                <!-- Usa un StackPanel para apilar verticalmente -->
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="{Binding Id}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Grid.Column="1" Source="{Binding FotoUrl}" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="2" Content="{Binding Tipo}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="3" Content="{Binding Huespedes}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="4" Content="{Binding Descripcion}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="5" Content="{Binding Reservada}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
+                                <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
+                                <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</Grid>
     </Grid>
 </Window>

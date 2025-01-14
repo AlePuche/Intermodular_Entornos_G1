@@ -18,14 +18,20 @@ namespace PuchePerezAlejandroSimulacion1
         {
             Habitaciones = new List<Habitacion>
             {
-                new Habitacion { Nombre = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Habitación Deluxe", PrecioPorNoche = "50€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Suite Presidencial", PrecioPorNoche = "120€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Habitación Económica", PrecioPorNoche = "25€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Habitación Deluxe", PrecioPorNoche = "50€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Suite Presidencial", PrecioPorNoche = "120€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Nombre = "Habitación Económica", PrecioPorNoche = "25€ / noche", FotoUrl = "Images/habitacion.png" }
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
+           
             };
         }
     }

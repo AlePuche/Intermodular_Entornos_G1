@@ -7,6 +7,49 @@
         mc:Ignorable="d"
         Title="ListaHabitaciones" Height="1018" Width="1440">
     <Window.Resources>
+
+        <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#278498"/>
+        <SolidColorBrush x:Key="ScrollBarHoverThumbBrush" Color="#1E6F82"/>
+
+        <Style x:Key="ScrollThumbStyle" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="{StaticResource ScrollBarThumbBrush}"
+                    CornerRadius="10"                          
+                    Width="16"
+                    />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource ScrollBarBackgroundBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Rectangle Fill="{TemplateBinding Background}" />
+                            <Track Name="PART_Track"
+                       Orientation="{TemplateBinding Orientation}"
+                       Value="{TemplateBinding Value}"
+                       Minimum="{TemplateBinding Minimum}"
+                       Maximum="{TemplateBinding Maximum}"
+                       ViewportSize="{TemplateBinding ViewportSize}">
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollThumbStyle}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -137,9 +180,9 @@
         <Grid Grid.Column="1" Grid.Row="2" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-
-                <RowDefinition Height="Auto" />
-
+                <!-- Encabezado -->
+                <RowDefinition Height="*" />
+                <!-- Filas dinámicas con scroll -->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -151,6 +194,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!-- Encabezado -->
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" BorderThickness="1" BorderBrush="WhiteSmoke" Background="#F0F0F0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -162,7 +206,6 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
                     <Label Grid.Column="0" Content="ID" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Grid.Column="1" Content="Foto" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Grid.Column="2" Content="Tipo" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -173,59 +216,44 @@
                 </Grid>
             </Border>
 
+            <!-- Filas dinámicas con scroll -->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
-                    
-                    <Border BorderThickness="1" BorderBrush="LightGray">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="#115" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Image Grid.Column="1" Source="/Images/usuario.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="2" Content="Habitación Doble" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="3" Content="4" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="4" Content="Amplia y cómoda" Foreground="Black" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="5" Content="Sí" Foreground="Green" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
-                                <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
-                                <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-
-                    <Border BorderThickness="1" BorderBrush="LightGray">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Content="#116" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Image Grid.Column="1" Source="/Images/usuario.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="2" Content="Habitación Simple" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="3" Content="1" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="4" Content="Con vistas al mar" Foreground="Black" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Label Grid.Column="5" Content="No" Foreground="Red" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
-                                <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
-                                <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </StackPanel>
+                <ItemsControl ItemsSource="{Binding Habitaciones}">
+                    <ItemsControl.ItemsPanel>
+                        <!-- Usa un StackPanel para apilar verticalmente -->
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Content="{Binding Id}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Image Grid.Column="1" Source="{Binding FotoUrl}" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="2" Content="{Binding Tipo}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="3" Content="{Binding Huespedes}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="4" Content="{Binding Descripcion}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="5" Content="{Binding Reservada}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
+                                        <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
+                                        <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
     </Grid>

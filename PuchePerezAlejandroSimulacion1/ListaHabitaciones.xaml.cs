@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,37 @@ namespace PuchePerezAlejandroSimulacion1
     /// </summary>
     public partial class ListaHabitaciones : Window
     {
+        public ObservableCollection<Habitacion> Habitaciones { get; set; }
         public ListaHabitaciones()
         {
             InitializeComponent();
+            CargarListaHabitaciones();
+            DataContext = this;
+        }
+        private void CargarListaHabitaciones() 
+        {
+            Habitaciones = new ObservableCollection<Habitacion>
+            {
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
+                new Habitacion { Id = 115, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
+                new Habitacion { Id = 116, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" }
+            };
         }
     }
 }

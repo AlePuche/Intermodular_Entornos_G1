@@ -10,8 +10,8 @@ namespace PuchePerezAlejandroSimulacion1
         public MainWindow()
         {
             InitializeComponent();
-            /*
-            SegundaVentana s = new SegundaVentana();
+            
+            /*SegundaVentana s = new SegundaVentana();
             s.Show();
             Buscador b = new Buscador();
             b.Show();
@@ -21,7 +21,9 @@ namespace PuchePerezAlejandroSimulacion1
             a.Show();
             */
             ListaHabitaciones lh = new ListaHabitaciones();
-            lh.Show();
+            lh.Show();*/
+            ListaReservas lr = new ListaReservas();
+            lr.Show();
         }
     }
 }

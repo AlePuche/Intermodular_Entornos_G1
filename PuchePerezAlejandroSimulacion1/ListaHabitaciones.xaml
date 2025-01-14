@@ -31,11 +31,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Margin="20,20,50,0">
-                        <TextBlock  Text="Nombre" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBlock  Text="Nombre" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                         <TextBox Height="40"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="20,0,50,0">
-                        <TextBlock Text="Huéspedes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBlock Text="Huéspedes" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                         <ComboBox Height="40">
                             <ComboBoxItem Content="1"/>
                             <ComboBoxItem Content="2"/>
@@ -44,7 +44,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="20,0,50,0">
-                        <TextBlock  Text="Descripción" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBlock  Text="Descripción" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                         <RichTextBox Height="80" VerticalScrollBarVisibility="Auto">
                             <FlowDocument>
                                 <Paragraph LineHeight="5"/>
@@ -52,14 +52,14 @@
                         </RichTextBox>
                     </StackPanel>
                     <StackPanel Grid.Row="3" Margin="20,0,50,0">
-                        <TextBlock Text="Opciones" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBlock Text="Opciones" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                         <StackPanel Orientation="Horizontal" Margin="0,10">
                             <CheckBox Content="Cuna"/>
                             <CheckBox Content="Cama extra" Margin="20,0"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Row="4" Margin="20,0,50,0">
-                        <TextBlock Text="Reservada/Ocupada" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBlock Text="Reservada/Ocupada" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                         <ComboBox Height="40">
                             <ComboBoxItem Content="Si"/>
                             <ComboBoxItem Content="No"/>

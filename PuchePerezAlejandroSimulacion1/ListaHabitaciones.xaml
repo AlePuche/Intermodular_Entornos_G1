@@ -6,78 +6,227 @@
         xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
         mc:Ignorable="d"
         Title="ListaHabitaciones" Height="1018" Width="1440">
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Grid>
+        <Image Width="300" Source="/Images/hotelperemaria_horizontal.png" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60" HorizontalAlignment="Center"/>
+        <Border Grid.Row="2" CornerRadius="20" Background="WhiteSmoke" Margin="50,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="20,20,50,0">
+                    <TextBlock  Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="20,0,50,0">
+                    <TextBlock Text="Huéspedes" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox Height="40">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="20,0,50,0">
+                    <TextBlock  Text="Descripción" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <RichTextBox Height="80" VerticalScrollBarVisibility="Auto">
+                        <FlowDocument>
+                            <Paragraph LineHeight="5"/>
+                        </FlowDocument>
+                    </RichTextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="20,0,50,0">
+                    <TextBlock Text="Opciones" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10">
+                        <CheckBox Content="Cuna"/>
+                        <CheckBox Content="Cama extra" Margin="20,0"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Margin="20,0,50,0">
+                    <TextBlock Text="Reservada/Ocupada" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox Height="40">
+                        <ComboBoxItem Content="Si"/>
+                        <ComboBoxItem Content="No"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Margin="20,0,50,0">
+                    <TextBlock Text="Fecha inicial" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <DatePicker Height="40"/>
+                    <TextBlock Text="Fecha final" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Margin="0,10,0,0"/>
+                    <DatePicker Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Margin="20">
+                    <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50">
+                        <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="Images/campana.png" Width="25" Margin="0,10,40,0"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" />
+                <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" />
+                <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" />
+                <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" />
+            </Grid>
+        </Grid>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Habitaciones" FontFamily="Montserrat" FontWeight="Bold" Foreground="Black" FontSize="60" Margin="50,0"/>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="14*"/>
+                <RowDefinition Height="Auto" />
+
+                <RowDefinition Height="Auto" />
+
             </Grid.RowDefinitions>
-            <Image Width="300" Source="/Images/hotelperemaria_horizontal.png" Margin="50,0" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60" HorizontalAlignment="Center"/>
-            <Border Grid.Row="2" CornerRadius="20" Background="WhiteSmoke" Margin="50,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" BorderThickness="1" BorderBrush="WhiteSmoke" Background="#F0F0F0">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.6*"/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="1.5*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Margin="20,20,50,0">
-                        <TextBlock  Text="Nombre" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                        <TextBox Height="40"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Margin="20,0,50,0">
-                        <TextBlock Text="Huéspedes" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                        <ComboBox Height="40">
-                            <ComboBoxItem Content="1"/>
-                            <ComboBoxItem Content="2"/>
-                            <ComboBoxItem Content="3"/>
-                            <ComboBoxItem Content="4"/>
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2" Margin="20,0,50,0">
-                        <TextBlock  Text="Descripción" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                        <RichTextBox Height="80" VerticalScrollBarVisibility="Auto">
-                            <FlowDocument>
-                                <Paragraph LineHeight="5"/>
-                            </FlowDocument>
-                        </RichTextBox>
-                    </StackPanel>
-                    <StackPanel Grid.Row="3" Margin="20,0,50,0">
-                        <TextBlock Text="Opciones" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <CheckBox Content="Cuna"/>
-                            <CheckBox Content="Cama extra" Margin="20,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Grid.Row="4" Margin="20,0,50,0">
-                        <TextBlock Text="Reservada/Ocupada" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                        <ComboBox Height="40">
-                            <ComboBoxItem Content="Si"/>
-                            <ComboBoxItem Content="No"/>
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Grid.Row="5" Margin="20,0,50,0">
-                        <TextBlock Text="Fecha inicial" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                        <DatePicker Height="40"/>
-                        <TextBlock Text="Fecha final" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
-                        <DatePicker Height="40"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="6" Margin="20">
-                        <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50">
-                            <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20"/>
-                        </Border>
-                    </StackPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="ID" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="1" Content="Foto" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="2" Content="Tipo" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="3" Content="Huéspedes" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="4" Content="Descripción" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="5" Content="¿Reservada?" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="6" Content="Acción" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </Border>
+
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    
+                    <Border BorderThickness="1" BorderBrush="LightGray">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="#115" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Grid.Column="1" Source="/Images/usuario.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="2" Content="Habitación Doble" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="3" Content="4" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="4" Content="Amplia y cómoda" Foreground="Black" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="5" Content="Sí" Foreground="Green" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
+                                <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
+                                <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <Border BorderThickness="1" BorderBrush="LightGray">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="#116" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Grid.Column="1" Source="/Images/usuario.png" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="2" Content="Habitación Simple" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="3" Content="1" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="4" Content="Con vistas al mar" Foreground="Black" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Label Grid.Column="5" Content="No" Foreground="Red" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image Source="/Images/editar.png" Width="30" Margin="5,0" />
+                                <Image Source="/Images/informacion.png" Width="30" Margin="5,0" />
+                                <Image Source="/Images/eliminar.png" Width="30" Margin="5,0" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

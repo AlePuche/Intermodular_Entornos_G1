@@ -26,6 +26,7 @@ namespace PuchePerezAlejandroSimulacion1
             InitializeComponent();
             CargarListaHabitaciones();
             DataContext = this;
+
         }
         private void CargarListaHabitaciones() 
         {
@@ -53,6 +54,15 @@ namespace PuchePerezAlejandroSimulacion1
             };
         }
 
-        
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var habitacion = (Habitacion)button.DataContext;
+                AddHabitacion ventana = new AddHabitacion(true, habitacion);
+                ventana.Show();
+            }
+        }
     }
 }

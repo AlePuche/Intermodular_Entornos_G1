@@ -239,14 +239,14 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Content="{Binding Id}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label x:Name="idHabitacion" Grid.Column="0" Content="{Binding Id}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Image Grid.Column="1" Source="{Binding FotoUrl}" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="2" Content="{Binding Tipo}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="3" Content="{Binding Huespedes}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="4" Content="{Binding Descripcion}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="5" Content="{Binding Reservada}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Button BorderBrush="Transparent" Background="Transparent">
+                                        <Button x:Name="btnEdit" BorderBrush="Transparent" Background="Transparent" Click="btnEdit_Click">
                                             <Button.Content>
                                                 <Image Width="30" Source="/Images/editar.png" Margin="5,0" />
                                             </Button.Content>

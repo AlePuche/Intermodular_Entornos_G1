@@ -18,8 +18,6 @@ namespace PuchePerezAlejandroSimulacion1
             b.Show();
             CrearReserva crear = new CrearReserva();
             crear.Show();
-            AddHabitacion a = new AddHabitacion();
-            a.Show();
             ListaReservas lr = new ListaReservas();
             lr.Show();
             

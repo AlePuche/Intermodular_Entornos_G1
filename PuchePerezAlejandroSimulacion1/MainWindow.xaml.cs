@@ -20,12 +20,14 @@ namespace PuchePerezAlejandroSimulacion1
             crear.Show();
             ListaReservas lr = new ListaReservas();
             lr.Show();
-            
-            ListaHabitaciones lh = new ListaHabitaciones();
-            lh.Show();*/
-
             ListaReservas listaReservas = new ListaReservas();
             listaReservas.Show();
+            */
+            AddHabitacion a = new AddHabitacion();
+            a.Show();
+            ListaHabitaciones lh = new ListaHabitaciones();
+            lh.Show();
+            
         }
     }
 }

@@ -46,5 +46,9 @@ namespace PuchePerezAlejandroSimulacion1
             txtDescripcion.Document.Blocks.Add(new Paragraph(new Run(habitacion.Descripcion)));
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -37,7 +37,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="txtAddEdit" Text="Añadir habitación" Foreground="#278498" FontSize="50" FontFamily="Monstserrat" FontWeight="Bold" Margin="50,30,0,0"/>
                     <Border Grid.Column="1" CornerRadius="80" BorderThickness="3" Background="Black" Height="70" VerticalAlignment="Center" Margin="0,10,10,0">
-                        <Button Width="60" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="White" FontStyle="Italic"  FontSize="30" Content="X" />
+                        <Button Width="60" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="White" FontStyle="Italic"  FontSize="30" Content="X" Click="Button_Click" />
                     </Border>
                 </Grid>
                 <Grid Grid.Row="1">

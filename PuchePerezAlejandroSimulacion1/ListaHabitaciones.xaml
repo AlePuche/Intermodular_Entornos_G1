@@ -76,6 +76,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -171,10 +184,10 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" />
-                <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" />
-                <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" />
-                <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" />
+                <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" Click="BuscadorButton_Click" />
+                <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" Click="UsuariosButton_Click" />
+                <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" Click="ReservasButton_Click" />
+                <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" Click="HabitacionesButton_Click"/>
             </Grid>
         </Grid>
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Habitaciones" FontFamily="Montserrat" FontWeight="Bold" Foreground="Black" FontSize="60" Margin="50,0"/>

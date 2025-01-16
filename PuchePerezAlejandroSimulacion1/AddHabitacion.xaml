@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
         mc:Ignorable="d"
         Title="AddHabitacion" Height="969" Width="1440">
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+        <Grid>
         <Border Height="691" Width="1297" Background="WhiteSmoke" CornerRadius="20">
             <Grid>
                 <Grid.RowDefinitions>
@@ -23,7 +37,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="txtAddEdit" Text="Añadir habitación" Foreground="#278498" FontSize="50" FontFamily="Monstserrat" FontWeight="Bold" Margin="50,30,0,0"/>
                     <Border Grid.Column="1" CornerRadius="80" BorderThickness="3" Background="Black" Height="70" VerticalAlignment="Center" Margin="0,10,10,0">
-                        <Button Width="60" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="White" FontStyle="Italic"  FontSize="30" Content="X" />
+                        <Button Width="60" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="White" FontStyle="Italic"  FontSize="30" Content="X" Click="Button_Click" />
                     </Border>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -34,11 +48,11 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="50,0,0,0">
                         <TextBlock  Text="Id" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                        <TextBox x:Name="txtId" Height="40"/>
+                        <TextBox x:Name="txtId" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="50,0,50,0">
-                       <TextBlock  Text="Nombre" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                       <TextBox x:Name="txtTipo" Height="40"/>
+                       <TextBlock  Text="Tipo" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBox x:Name="txtTipo" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Margin="50,0,50,0">
                         <TextBlock Text="Huéspedes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
@@ -54,7 +68,7 @@
                     <TextBlock  Text="Descripción" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
                     <RichTextBox x:Name="txtDescripcion" Height="200" VerticalScrollBarVisibility="Auto">
                         <FlowDocument>
-                            <Paragraph LineHeight="5"/>
+                            <Paragraph LineHeight="5" FontWeight="DemiBold" FontFamily="Montserrat" FontSize="15"/>
                         </FlowDocument>
                     </RichTextBox>
                 </StackPanel>
@@ -66,7 +80,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="50,0,50,0">
                         <TextBlock Text="Seleccionar imagen principal" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                        <Button Content="Seleccionar Archivo" Height="40" Width="300" HorizontalAlignment="Left"/>
+                        <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="200" Height="40" Margin="0,20,0,0">
+                            <Button Content="Seleccionar imagen" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20"/>
+                        </Border>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="50,0,50,0">
                         <TextBlock Text="Opciones" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>

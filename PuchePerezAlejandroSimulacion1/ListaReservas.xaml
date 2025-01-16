@@ -215,10 +215,10 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" />
-                <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" />
-                <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" />
-                <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" />
+                <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" Click="Button_Click" />
+                <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" Click="Button_Click_1" />
+                <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" Click="Button_Click_2" />
+                <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" Click="Button_Click_3" />
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="2" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -248,15 +248,17 @@
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="ID" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="1" Content="Huésped" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="2" Content="Precio" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="3" Content="Fecha Inicio" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="4" Content="Fecha Fin" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="5" Content="Tipo" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Column="6" Content="Acción" FontSize="18" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="0" Content="ID" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="1" Content="Huésped" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="2" Content="Precio" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="3" Content="Fecha Inicio" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="4" Content="Fecha Fin" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="5" Content="Tipo" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="6" Content="Nº Per" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="7" Content="Acción" FontSize="15" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                 </Grid>
             </Border>
 
@@ -279,6 +281,7 @@
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="2*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Content="{Binding Id}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -287,11 +290,12 @@
                                     <Label Grid.Column="3" Content="{Binding FechaInicioFormatted}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="4" Content="{Binding FechaFinFormatted}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="5" Content="{Binding Tipo}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0">
+                                    <Label Grid.Column="6" Content="{Binding Huespedes}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <StackPanel Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0" Click="EditarButton_Click">
                                             <Image Width="24" Height="24" Source="/Images/editar.png" />
                                         </Button>
-                                        <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0">
+                                        <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0" Click="InfoButton_Click">
                                             <Image Width="24" Height="24" Source="/Images/informacion.png" />
                                         </Button>
                                         <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0">

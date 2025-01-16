@@ -34,5 +34,37 @@ namespace PuchePerezAlejandroSimulacion1
            
             };
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SegundaVentana sv = new SegundaVentana();
+            sv.Show();
+
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Buscador buscador = new Buscador();
+            buscador.Show();
+
+            Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            ListaReservas listaReservas = new ListaReservas();
+            listaReservas.Show();
+
+            Close();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            ListaHabitaciones listaHabitaciones = new ListaHabitaciones();
+            listaHabitaciones.Show();
+
+            Close();
+        }
     }
 }

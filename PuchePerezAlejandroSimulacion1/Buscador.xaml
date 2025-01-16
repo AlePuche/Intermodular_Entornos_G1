@@ -65,10 +65,10 @@
         </Canvas>
         <Canvas Grid.Column="1">
             <StackPanel Orientation="Horizontal">
-                <Button Content="Buscador" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0"/>
-                <Button Content="Usuarios" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0"/>
-                <Button Content="Reservas" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0"/>
-                <Button Content="Habitaciones" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0"/>
+                <Button Content="Buscador" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click"/>
+                <Button Content="Usuarios" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click_1"/>
+                <Button Content="Reservas" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click_2"/>
+                <Button Content="Habitaciones" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click"/>
             </StackPanel>
             <TextBlock Canvas.Top="80" Canvas.Left="60" Text="Usuarios" FontFamily="Montserrat" FontWeight="Bold" FontSize="60"/>
             <TextBlock Canvas.Top="110" Canvas.Left="650" Text="ListView" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="20"/>

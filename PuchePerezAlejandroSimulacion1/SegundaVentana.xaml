@@ -49,6 +49,32 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -59,14 +85,62 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="20,20,0,0">
-                <Image Width="300" Source="/Images/hotelperemaria_horizontal.png"/>
-                <TextBlock VerticalAlignment="Center" Text="   |" FontSize="25" FontWeight="Medium" FontFamily="Montserrat" Foreground="Black"/>
-                <StackPanel Orientation="Vertical">
-                    <TextBlock VerticalAlignment="Bottom" Text="Bienvenido" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Foreground="Black" Margin="10,0,0,0"/>
-                    <TextBlock VerticalAlignment="Top" Text="Cerrar sesión" FontSize="15" FontWeight="Medium" FontFamily="Montserrat" Foreground="LightGray" Margin="10,0,0,0"/>
-                </StackPanel>
-            </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Image HorizontalAlignment="Left" Width="300" Source="/Images/hotelperemaria_horizontal.png" Margin="50,0"/>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,10,0">
+                            <TextBlock Text="Iván N" FontSize="20" Foreground="#278498" FontWeight="DemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+                            <Menu Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <MenuItem Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                                    <MenuItem.Header>
+                                        <Grid>
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" FontSize="15"
+           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </MenuItem.Header>
+
+                                    <MenuItem Header="Cerrar sesión" />
+                                </MenuItem>
+                            </Menu>
+                        </StackPanel>
+
+                        <Image Source="Images/campana.png" Width="25" Margin="0,10,40,0" Grid.Column="1"/>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" Click="Button_Click" />
+                        <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" Click="Button_Click_1" />
+                        <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" Click="Button_Click_2" />
+                        <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" Click="Button_Click_3" />
+                    </Grid>
+                </Grid>
+
+            </Grid>
         </StackPanel>
 
         <StackPanel Canvas.Top="70" Grid.Row="1" Margin="0,23,0,0">

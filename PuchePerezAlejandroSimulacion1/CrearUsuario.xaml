@@ -1,0 +1,102 @@
+﻿<Window x:Class="PuchePerezAlejandroSimulacion1.CrearUsuario"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
+        mc:Ignorable="d"
+        Title="CrearUsuario" Height="1018" Width="1440">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <!-- Espacio flexible para el formulario -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <!-- Columna más grande para los controles -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="Formulario de Añadir Usuario" FontSize="32" Foreground="#278498" FontWeight="Bold" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Nombre y Apellidos -->
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Nombre y Apellidos:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <TextBox Name="txtNombreApellidos" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12" Width="1118"/>
+        </StackPanel>
+
+        <!-- Rol del Usuario -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Rol del Usuario:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <ComboBox Name="cmbRolUsuario" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12" Width="1119">
+                <ComboBoxItem>Administrador</ComboBoxItem>
+                <ComboBoxItem>Empleado</ComboBoxItem>
+                <ComboBoxItem>Cliente</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Email -->
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Email:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <TextBox Name="txtEmail" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12" Width="1115"/>
+        </StackPanel>
+
+        <!-- Contraseña -->
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Contraseña:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <PasswordBox Name="pwdContraseña" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12" Width="1113"/>
+        </StackPanel>
+
+        <!-- Fecha de Nacimiento -->
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Fecha de Nacimiento:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <DatePicker Name="dpFechaNacimiento" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12"/>
+        </StackPanel>
+
+        <!-- Ciudad -->
+        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Ciudad:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <ComboBox Name="cmbCiudad" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12" Width="1110">
+                <ComboBoxItem>Madrid</ComboBoxItem>
+                <ComboBoxItem>Barcelona</ComboBoxItem>
+                <ComboBoxItem>Valencia</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Sexo -->
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Sexo:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Center">
+                <RadioButton Name="rbMasculino" Content="Masculino" Margin="10" FontSize="18"/>
+                <RadioButton Name="rbFemenino" Content="Femenino" Margin="10" FontSize="18"/>
+                <RadioButton Name="rbIndeterminado" Content="Indeterminado" Margin="10" FontSize="18"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Imagen de Perfil -->
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Imagen de Perfil:" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <Button Name="btnSubirImagen" Content="Subir Imagen" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12"/>
+        </StackPanel>
+
+        <!-- Miembro VIP -->
+        <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,10">
+            <TextBlock Text="Miembro VIP (para Clientes):" VerticalAlignment="Center" Width="250" FontSize="18"/>
+            <ToggleButton Name="tbMiembroVIP" Content="Sí / No" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Center" FontSize="18" Padding="12"/>
+        </StackPanel>
+
+        <!-- Botón de Enviar -->
+        <Button Name="btnEnviar" Content="Añadir Usuario" Width="250" HorizontalAlignment="Center" Grid.Row="10" Grid.ColumnSpan="2" Margin="10" FontSize="20" Padding="15" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

@@ -9,7 +9,7 @@ namespace PuchePerezAlejandroSimulacion1
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();          
             /*
             ListaReservas listaReservas = new ListaReservas();
             listaReservas.Show();

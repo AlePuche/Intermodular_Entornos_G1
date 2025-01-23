@@ -17,6 +17,7 @@
     <None Remove="Images\editar.png" />
     <None Remove="Images\eliminar.png" />
     <None Remove="Images\habitacion.png" />
+    <None Remove="Images\hotellogoestrellas.png" />
     <None Remove="Images\hotelperemaria.png" />
     <None Remove="Images\hotelperemaria_horizontal.png" />
     <None Remove="Images\img-cover-login.png" />
@@ -48,6 +49,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\habitacion.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\hotellogoestrellas.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\hotelperemaria.png">

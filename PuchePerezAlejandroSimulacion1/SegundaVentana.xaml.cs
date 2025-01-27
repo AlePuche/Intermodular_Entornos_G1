@@ -69,5 +69,16 @@ namespace PuchePerezAlejandroSimulacion1
 
             Close();
         }
+
+        private void btnReservar_Click(object sender, RoutedEventArgs e)
+        {
+            CrearReserva crearReserva = new CrearReserva();
+            crearReserva.Show();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            listaScroll.Visibility = Visibility.Visible;
+        }
     }
 }

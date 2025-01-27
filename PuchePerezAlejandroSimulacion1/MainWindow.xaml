@@ -11,7 +11,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="1" Source="/Images/img-cover-login.png" Stretch="Fill"/>
+        <Image Grid.Column="1" Source="/Images/imgLogin.jpeg" Stretch="Fill"/>
         <Canvas>
             <StackPanel Orientation="Horizontal" Canvas.Top="100" Canvas.Left="100">
                 <Image Width="450" Source="/Images/hotellogoestrellas.png"/>

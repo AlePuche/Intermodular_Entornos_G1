@@ -10,6 +10,7 @@ namespace PuchePerezAlejandroSimulacion1
     {
         public int Id { get; set; }
         public int Huespedes { get; set; }
+        public int idHabitacion { get; set; }
         public string Huesped { get; set; }
         public string Precio { get; set; }
         public DateTime FechaInicio { get; set; }

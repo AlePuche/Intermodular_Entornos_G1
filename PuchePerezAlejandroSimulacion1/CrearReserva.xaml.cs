@@ -33,7 +33,7 @@ namespace PuchePerezAlejandroSimulacion1
                 reservaButton.Content = "Editar Reserva";
                 lblTitulo.Text = "Editar Reserva";
 
-                txtTipo.Text = "Habitación " + reservaEdit.Tipo;
+                txtTipo.Text = "Habitación " + reservaEdit.TipoHabitacion;
 
                 txtFechaEntrada.Visibility = Visibility.Collapsed;
                 txtFechaEntradaEdit.Visibility = Visibility.Visible;
@@ -45,7 +45,7 @@ namespace PuchePerezAlejandroSimulacion1
 
                 txtHuespedes.Visibility = Visibility.Collapsed;
                 txtHuespedesEdit.Visibility = Visibility.Visible;
-                txtHuespedesEdit.Text = reservaEdit.Huespedes.ToString();
+                txtHuespedesEdit.Text = reservaEdit.NumPersonas.ToString();
 
                 txtPrecio.Visibility = Visibility.Collapsed;
                 txtPrecioEdit.Visibility = Visibility.Visible;
@@ -53,14 +53,14 @@ namespace PuchePerezAlejandroSimulacion1
 
                 txtClienteLbl.Visibility = Visibility.Collapsed;
                 txtCliente.Visibility = Visibility.Visible;
-                txtCliente.Text = reservaEdit.Huesped;
+                txtCliente.Text = reservaEdit.Cliente.Nombre;
             }
             else
             {
                 reservaButton.Visibility = Visibility.Collapsed;
                 lblTitulo.Text = "Info Reserva";
 
-                txtTipo.Text = "Habitación " + reservaEdit.Tipo;
+                txtTipo.Text = "Habitación " + reservaEdit.TipoHabitacion;
 
                 txtFechaEntradaEdit.Visibility = Visibility.Collapsed;
                 txtFechaEntrada.Visibility = Visibility.Visible;
@@ -72,7 +72,7 @@ namespace PuchePerezAlejandroSimulacion1
 
                 txtHuespedesEdit.Visibility = Visibility.Collapsed;
                 txtHuespedes.Visibility = Visibility.Visible;
-                txtHuespedes.Text = reservaEdit.Huespedes.ToString();
+                txtHuespedes.Text = reservaEdit.NumPersonas.ToString();
 
                 txtPrecioEdit.Visibility = Visibility.Collapsed;
                 txtPrecio.Visibility = Visibility.Visible;
@@ -80,7 +80,7 @@ namespace PuchePerezAlejandroSimulacion1
 
                 txtCliente.Visibility = Visibility.Collapsed;
                 txtClienteLbl.Visibility = Visibility.Visible;
-                txtClienteLbl.Text = reservaEdit.Huesped;
+                txtClienteLbl.Text = reservaEdit.Cliente.Nombre;
             }
         }
         public CrearReserva()

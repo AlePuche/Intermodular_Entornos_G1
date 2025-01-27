@@ -21,12 +21,9 @@ namespace PuchePerezAlejandroSimulacion1
         {
             InitializeComponent();
             this.habitacion = habitacion;
-            
-                txtAddEdit.Text = "Editar habitación";
-                btnAddEdit.Content = "Editar";
-                RellenarCampos(habitacion);
-            
-          
+            txtAddEdit.Text = "Editar habitación";
+            btnAddEdit.Content = "Editar";
+            RellenarCampos(habitacion);
         }
         private void RellenarCampos(Habitacion habitacion)
         {

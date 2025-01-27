@@ -303,7 +303,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="btn_Add" Grid.Column="1" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Click="btn_Add_Click">
                 <Button.Content>
-                    <Image Source="/Images/añadir_usuario.png" Width="50" Margin="0,0,30,10"/>
+                    <Image Source="/Images/botonanadir.png" Width="50" Margin="0,0,30,10"/>
                 </Button.Content>
             </Button>
         </Grid>

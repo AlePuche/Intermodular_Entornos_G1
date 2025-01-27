@@ -9,15 +9,16 @@ namespace PuchePerezAlejandroSimulacion1
     public class Reserva
     {
         public int Id { get; set; }
-        public int Huespedes { get; set; }
-        public int idHabitacion { get; set; }
-        public string Huesped { get; set; }
-        public string Precio { get; set; }
+        public int IdHabitacion { get; set; }
+        public ClienteReserva Cliente { get; set; }
+        public double Precio { get; set; }
         public DateTime FechaInicio { get; set; }
-        public DateTime FechaFin { get; set; }
-        public string Tipo { get; set; }
+        public DateTime FechaSalida { get; set; }
+        public string TipoHabitacion { get; set; }
+        public int NumPersonas { get; set; }
+        public double Extras { get; set; }
 
         public string FechaInicioFormatted => FechaInicio.ToString("dd/MM/yyyy");
-        public string FechaFinFormatted => FechaFin.ToString("dd/MM/yyyy");
+        public string FechaFinFormatted => FechaSalida.ToString("dd/MM/yyyy");
     }
 }

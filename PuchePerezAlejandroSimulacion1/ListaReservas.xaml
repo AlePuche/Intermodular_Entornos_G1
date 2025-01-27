@@ -107,10 +107,10 @@
                     <RowDefinition Height="103*"/>
                     <RowDefinition Height="108*"/>
                     <RowDefinition Height="105*"/>
-                    <RowDefinition Height="151*"/>
-                    <RowDefinition Height="120*"/>
-                    <RowDefinition Height="66*"/>
-                    <RowDefinition Height="183*"/>
+                    <RowDefinition Height="106*"/>
+                    <RowDefinition Height="141*"/>
+                    <RowDefinition Height="103*"/>
+                    <RowDefinition Height="170*"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Margin="20,20,50,8">
@@ -118,7 +118,12 @@
                     <TextBox Height="40" FontSize="15"/>
                 </StackPanel>
 
-                <StackPanel Margin="20,20,50,1" Grid.Row="1">
+                <StackPanel Margin="20,20,50,8" Grid.Row="1">
+                    <TextBlock  Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox Height="40" FontSize="15"/>
+                </StackPanel>
+
+                <StackPanel Margin="20,20,50,1" Grid.Row="2">
                     <TextBlock  Text="Cliente" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <ComboBox Height="40" FontSize="15">
                         <ComboBoxItem Content="1"/>
@@ -128,7 +133,7 @@
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel Margin="20,20,50,3" Grid.Row="2">
+                <StackPanel Margin="20,20,50,3" Grid.Row="3">
                     <TextBlock  Text="Nº Personas" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <ComboBox Height="40" FontSize="15">
                         <ComboBoxItem Content="1"/>
@@ -138,7 +143,7 @@
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel Margin="20,20,50,3" Grid.Row="3" >
+                <StackPanel Margin="20,20,50,3" Grid.Row="4" >
                     <TextBlock  Text="Fecha (rango)" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
 
@@ -155,7 +160,7 @@
 
                 </StackPanel>
 
-                <StackPanel Margin="20,20,50,3" Grid.Row="4">
+                <StackPanel Margin="20,20,50,3" Grid.Row="5">
                     <TextBlock  Text="Tipo de habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <ComboBox Height="40" FontSize="15">
                         <ComboBoxItem Content="1"/>
@@ -288,13 +293,13 @@
                                         <ColumnDefinition Width="2*" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Content="{Binding Id}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="1" Content="{Binding idHabitacion}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="2" Content="{Binding Huesped}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="1" Content="{Binding IdHabitacion}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="2" Content="{Binding Cliente.Nombre}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="3" Content="{Binding Precio}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="4" Content="{Binding FechaInicioFormatted}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="5" Content="{Binding FechaFinFormatted}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="6" Content="{Binding Tipo}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="7" Content="{Binding Huespedes}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="6" Content="{Binding TipoHabitacion}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="7" Content="{Binding NumPersonas}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <StackPanel Grid.Column="8" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0" Click="EditarButton_Click">
                                             <Image Width="24" Height="24" Source="/Images/editar.png" />

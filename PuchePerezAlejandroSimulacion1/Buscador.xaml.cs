@@ -10,10 +10,11 @@ namespace PuchePerezAlejandroSimulacion1
     public partial class Buscador : Window
     {
         private ObservableCollection<Usuario> Usuarios { get; set; }
-
-        public Buscador()
+        public Usuario usuarioLogeado { get; private set; }
+        public Buscador(Usuario usuarioLogeado)
         {
             InitializeComponent();
+            this.usuarioLogeado = usuarioLogeado;
             CargarListaUsuarios();
             DataContext = this;
         }
@@ -57,28 +58,28 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void ReservasButton_Click(object sender, RoutedEventArgs e)
         {
-            ListaReservas lr = new ListaReservas();
+            ListaReservas lr = new ListaReservas(usuarioLogeado);
             lr.Show();
             Close();
         }
 
         private void UsuariosButton_Click(object sender, RoutedEventArgs e)
         {
-            Buscador b = new Buscador();
+            Buscador b = new Buscador(usuarioLogeado);
             b.Show();
             Close();
         }
 
         private void HabitacionesButton_Click(object sender, RoutedEventArgs e)
         {
-            ListaHabitaciones lh = new ListaHabitaciones();
+            ListaHabitaciones lh = new ListaHabitaciones(usuarioLogeado);
             lh.Show();
             Close();
         }
 
         private void BuscadorButton_Click(object sender, RoutedEventArgs e)
         {
-            SegundaVentana s = new SegundaVentana();
+            SegundaVentana s = new SegundaVentana(usuarioLogeado);
             s.Show();
             Close();
         }

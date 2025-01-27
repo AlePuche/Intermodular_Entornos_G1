@@ -174,8 +174,8 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,10,0">
-                    <TextBlock Text="Iván N" FontSize="20" Foreground="#278498" FontWeight="DemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,10,0" Cursor="">
+                    <TextBlock Text="{Binding usuarioLogeado.Name}" FontSize="20" Foreground="#278498" FontWeight="DemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
                     <Menu Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <MenuItem Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
@@ -278,12 +278,13 @@
                                                 <Image Width="30" Source="/Images/editar.png" Margin="5,0" />
                                             </Button.Content>
                                         </Button>
-                                        <Button BorderBrush="Transparent" Background="Transparent">
+                                        <!--Button BorderBrush="Transparent" Background="Transparent">
                                             <Button.Content>
                                                 <Image Width="30" Source="/Images/informacion.png" Margin="5,0" />
                                             </Button.Content>
                                         </Button>
-                                        <Button BorderBrush="Transparent" Background="Transparent">
+                                        -->
+                                        <Button x:Name="btnDelete" BorderBrush="Transparent" Background="Transparent" Click="btnDelete_Click">
                                             <Button.Content>
                                                 <Image Width="30" Source="/Images/eliminar.png" Margin="5,0" />
                                             </Button.Content>

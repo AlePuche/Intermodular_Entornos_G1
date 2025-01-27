@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PuchePerezAlejandroSimulacion1
 {
-    internal class Usuario
+    public class Usuario
     {
         public string Name { get; set; }
         public string Email { get; set; }

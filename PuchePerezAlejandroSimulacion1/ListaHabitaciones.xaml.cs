@@ -10,13 +10,16 @@ namespace PuchePerezAlejandroSimulacion1
     public partial class ListaHabitaciones : Window
     {
         public ObservableCollection<Habitacion> Habitaciones { get; set; }
-
-        public ListaHabitaciones()
+        public Usuario usuarioLogeado { get; set; }
+        public ListaHabitaciones(Usuario usuarioLogeado)
         {
             InitializeComponent();
+            this.usuarioLogeado = usuarioLogeado;
             CargarListaHabitaciones();
             DataContext = this;
         }
+
+        
 
         private void CargarListaHabitaciones()
         {
@@ -46,6 +49,11 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            if (usuarioLogeado.Role == "Empleado")
+            {
+                MessageBox.Show("No tienes permisos para editar habitaciones.", "Acceso denegado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             var button = sender as Button;
             if (button != null)
             {
@@ -57,36 +65,73 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void ReservasButton_Click(object sender, RoutedEventArgs e)
         {
-            ListaReservas lr = new ListaReservas();
+            ListaReservas lr = new ListaReservas(usuarioLogeado);
             lr.Show();
             Close();
         }
 
         private void UsuariosButton_Click(object sender, RoutedEventArgs e)
         {
-            Buscador b = new Buscador();
+            Buscador b = new Buscador(usuarioLogeado);
             b.Show();
             Close();
         }
 
         private void HabitacionesButton_Click(object sender, RoutedEventArgs e)
         {
-            ListaHabitaciones lh = new ListaHabitaciones();
+            ListaHabitaciones lh = new ListaHabitaciones(usuarioLogeado);
             lh.Show();
             Close();
         }
 
         private void BuscadorButton_Click(object sender, RoutedEventArgs e)
         {
-            SegundaVentana s = new SegundaVentana();
+            SegundaVentana s = new SegundaVentana(usuarioLogeado);
             s.Show();
             Close();
         }
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
+            if (usuarioLogeado.Role == "Empleado")
+            {
+                MessageBox.Show("No tienes permisos para añadir habitaciones.", "Acceso denegado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             AddHabitacion ventana = new AddHabitacion();
             ventana.Show();
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (usuarioLogeado.Role == "Empleado")
+            {
+                MessageBox.Show("No tienes permisos para eliminar habitaciones.", "Acceso denegado", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var button = sender as Button;
+            if (button != null)
+            {
+                var habitacion = button.DataContext as Habitacion;
+                if (habitacion != null)
+                {
+                    var result = MessageBox.Show($"¿Seguro que deseas eliminar la habitación {habitacion.Id}?",
+                                                 "Confirmación",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Habitaciones.Remove(habitacion);
+
+                        MessageBox.Show($"Habitación {habitacion.Id} eliminada correctamente.",
+                                        "Éxito",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Information);
+                    }
+                }
+            }
         }
     }
 }

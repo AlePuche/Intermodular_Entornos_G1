@@ -24,16 +24,16 @@
                 <StackPanel>
                     <TextBlock Text="Email" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="30,0,0,0"/>
                     <Border BorderThickness="2" BorderBrush="LightGray" >
-                        <TextBox Width="500" Height="40" Background="WhiteSmoke" VerticalContentAlignment="Center" Foreground="Gray" FontWeight="Bold"/>
+                        <TextBox x:Name="txtEmail" Width="500" Height="40" Background="WhiteSmoke" VerticalContentAlignment="Center" Foreground="Gray" FontWeight="Bold"/>
                     </Border>
                 </StackPanel>
                 <StackPanel Margin="0,20,0,30">
                     <TextBlock Text="Password" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="30,0,0,0"/>
                     <Border BorderThickness="2" BorderBrush="LightGray" >
-                        <PasswordBox Width="500" Height="40" Background="WhiteSmoke" VerticalContentAlignment="Center" Foreground="Gray" FontWeight="Bold"/>
+                        <PasswordBox x:Name="txtPassword" Width="500" Height="40" Background="WhiteSmoke" VerticalContentAlignment="Center" Foreground="Gray" FontWeight="Bold"/>
                     </Border>
                 </StackPanel>
-                <Button Width="120" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent">
+                <Button x:Name="btn_login" Width="120" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Click="btn_login_Click">
                     <Button.Content>
                         <Image Source="/Images/btn-login.png" Stretch="Fill"></Image>
                     </Button.Content>

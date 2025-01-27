@@ -7,9 +7,12 @@ namespace PuchePerezAlejandroSimulacion1
     {
         public List<Habitacion> Habitaciones { get; set; }
 
-        public SegundaVentana()
+        public Usuario usuarioLogeado { get; private set; }
+
+        public SegundaVentana(Usuario usuarioLogeado)
         {
             InitializeComponent();
+            this.usuarioLogeado = usuarioLogeado;
             CargarHabitaciones();
             DataContext = this;
         }
@@ -37,7 +40,7 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SegundaVentana sv = new SegundaVentana();
+            SegundaVentana sv = new SegundaVentana(usuarioLogeado);
             sv.Show();
 
             Close();
@@ -45,7 +48,7 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Buscador buscador = new Buscador();
+            Buscador buscador = new Buscador(usuarioLogeado);
             buscador.Show();
 
             Close();
@@ -53,7 +56,7 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            ListaReservas listaReservas = new ListaReservas();
+            ListaReservas listaReservas = new ListaReservas(usuarioLogeado);
             listaReservas.Show();
 
             Close();
@@ -61,7 +64,7 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            ListaHabitaciones listaHabitaciones = new ListaHabitaciones();
+            ListaHabitaciones listaHabitaciones = new ListaHabitaciones(usuarioLogeado);
             listaHabitaciones.Show();
 
             Close();

@@ -10,29 +10,22 @@ namespace PuchePerezAlejandroSimulacion1
         public MainWindow()
         {
             InitializeComponent();
-  
-            ListaReservas listaReservas = new ListaReservas();
-            listaReservas.Show();
-            listaReservas.Show();
-            */
+            
+            /*
+            SegundaVentana s = new SegundaVentana();
+            s.Show();
+            Buscador b = new Buscador();
+            b.Show();
+ 
+            ListaReservas lr = new ListaReservas();
+            lr.Show();
+            CrearReserva crear = new CrearReserva();
+            crear.Show();
             AddHabitacion a = new AddHabitacion();
             a.Show();
-            ListaHabitaciones lh = new ListaHabitaciones();
-            lh.Show();*/
-CrearReserva crear = new CrearReserva();
-            crear.Show();
-            ListaReservas listaReservas = new ListaReservas();
-            listaReservas.Show();
-            listaReservas.Show();
             */
-            AddHabitacion a = new AddHabitacion();
-            a.Show();
             ListaHabitaciones lh = new ListaHabitaciones();
-            lh.Show();*/
-CrearReserva crear = new CrearReserva();
-            crear.Show();
-            ListaReservas listaReservas = new ListaReservas();
-            listaReservas.Show();
+            lh.Show();
         }
     }
 }

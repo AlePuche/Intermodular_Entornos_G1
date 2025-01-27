@@ -95,6 +95,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="14*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -294,6 +295,17 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btn_Add" Grid.Column="1" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Click="btn_Add_Click">
+                <Button.Content>
+                    <Image Source="/Images/añadir_usuario.png" Width="50" Margin="0,0,30,10"/>
+                </Button.Content>
+            </Button>
         </Grid>
     </Grid>
 </Window>

@@ -9,7 +9,7 @@ namespace PuchePerezAlejandroSimulacion1
     /// </summary>
     public partial class AddHabitacion : Window
     {
-        bool edit;
+        
         private Habitacion habitacion;
 
         public AddHabitacion()
@@ -17,17 +17,15 @@ namespace PuchePerezAlejandroSimulacion1
             InitializeComponent();
         }
 
-        public AddHabitacion(bool edit, Habitacion habitacion)
+        public AddHabitacion(Habitacion habitacion)
         {
             InitializeComponent();
-            this.edit = edit;
             this.habitacion = habitacion;
-            if (edit)
-            {
+            
                 txtAddEdit.Text = "Editar habitación";
                 btnAddEdit.Content = "Editar";
                 RellenarCampos(habitacion);
-            }
+            
           
         }
         private void RellenarCampos(Habitacion habitacion)

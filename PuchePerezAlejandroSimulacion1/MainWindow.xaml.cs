@@ -24,11 +24,8 @@ namespace PuchePerezAlejandroSimulacion1
             AddHabitacion a = new AddHabitacion();
             a.Show();
             */
-
             ListaHabitaciones lh = new ListaHabitaciones();
             lh.Show();
-            
-            
         }
     }
 }

@@ -175,14 +175,6 @@
                         <DatePicker Height="30" Margin="0,0,20,0"/>
                     </StackPanel>
 
-                    <StackPanel Margin="20,0,0,0" Grid.Column="3">
-                        <TextBlock Text="¿Miembro VIP?" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,10,0,0">
-                            <RadioButton Content="Si" Margin="0,0,20,0"></RadioButton>
-                            <RadioButton Content="No"></RadioButton>
-                        </StackPanel>
-                    </StackPanel>
-
                     <StackPanel Margin="20,10,0,0" Grid.Row="1">
                         <TextBlock Text="Extras" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat"/>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,5,0,0">
@@ -223,7 +215,7 @@
                                 <Image Source="{Binding FotoUrl}"/>
 
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Nombre}" FontFamily="Montserrat" FontSize="30" Margin="0,10,0,0"/>
+                                    <TextBlock Text="{Binding Tipo}" FontFamily="Montserrat" FontSize="30" Margin="0,10,0,0"/>
                                     <TextBlock Text="{Binding PrecioPorNoche}" FontFamily="Montserrat" FontSize="20" Foreground="#278498" Margin="70,10,0,0"/>
 
                                     <Border CornerRadius="20" BorderThickness="3" Background="#278498" Height="40" Margin="0,10,0,0">

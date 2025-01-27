@@ -6,211 +6,289 @@
         xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
         mc:Ignorable="d"
             Title="Buscador" Height="1018" Width="1440">
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#278498"/>
+        <SolidColorBrush x:Key="ScrollBarHoverThumbBrush" Color="#1E6F82"/>
+
+        <Style x:Key="ScrollThumbStyle" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border Background="{StaticResource ScrollBarThumbBrush}"
+                CornerRadius="10"                          
+                Width="16"
+                />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="{StaticResource ScrollBarBackgroundBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Rectangle Fill="{TemplateBinding Background}" />
+                            <Track Name="PART_Track"
+                   Orientation="{TemplateBinding Orientation}"
+                   Value="{TemplateBinding Value}"
+                   Minimum="{TemplateBinding Minimum}"
+                   Maximum="{TemplateBinding Maximum}"
+                   ViewportSize="{TemplateBinding ViewportSize}"
+                   IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollThumbStyle}" />
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontFamily" Value="Montserrat" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Canvas>
-            <StackPanel Orientation="Horizontal" Margin="50,10,0,0">
-                <Image Width="300" Source="/Images/hotelperemaria_horizontal.png"/>
-            </StackPanel>
-
-            <TextBlock Canvas.Top="80" Canvas.Left="60" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60"/>
-            <Border Canvas.Top="150" Canvas.Left="60" CornerRadius="20" Background="WhiteSmoke">
-                <StackPanel>
-                    <StackPanel Width="300">
-                        <Label Content="Rol" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="20" Margin="35,70,0,10"/>
-                        <ComboBox Width="250" Height="50" HorizontalAlignment="Right" Margin="0,0,10,50" VerticalContentAlignment="Center">
-                            <ComboBoxItem IsSelected="True" Content="Cliente" Foreground="Gray" />
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel Width="300">
-                        <Label Content="Usuarios" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="20" Margin="35,0,0,10"/>
-                        <StackPanel Orientation="Horizontal" Margin="35,0,0,20">
-                            <CheckBox Content="Nuevos" />
-                            <CheckBox Content="Repetidor" Margin="10,0,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Fecha de nacimiento" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15" Margin="40,0,0,10"/>
-                        <DatePicker Width="250" Height="50" Margin="35,0,0,10"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Ciudad" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15" Margin="40,0,0,10"/>
-                        <ComboBox Width="250" Height="50" VerticalContentAlignment="Center" Margin="35,0,0,10">
-                            <ComboBoxItem IsSelected="true" Content="Alicante" Foreground="Gray"></ComboBoxItem>
-                            <ComboBoxItem Content="Valencia" Foreground="Gray"></ComboBoxItem>
-                            <ComboBoxItem Content="Castellon" Foreground="Gray"></ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
-                    <StackPanel>
-                        <Label Content="Sexo" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15" Margin="40,0,0,10"/>
-                        <StackPanel Orientation="Horizontal" Margin="35,0,0,20">
-                            <RadioButton Content="H" FontWeight="DemiBold"/>
-                            <RadioButton Content="M" FontWeight="DemiBold" Margin="10,0,0,0"/>
-                            <RadioButton Content="Indeterminado" FontWeight="DemiBold" Margin="10,0,0,0"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel>
-                        <Border CornerRadius="25" BorderThickness="2" BorderBrush="#278498" Width="150" Height="50">
-                            <Button Content="VIP" BorderBrush="Transparent" FontSize="20" Background="Transparent"/>
-                        </Border>
-                        <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50" Margin="0,50,0,20">
-                            <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20"/>
-                        </Border>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-        </Canvas>
-        <Canvas Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Buscador" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click"/>
-                <Button Content="Usuarios" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click_1"/>
-                <Button Content="Reservas" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click_2"/>
-                <Button Content="Habitaciones" BorderBrush="Transparent" FontSize="20" FontWeight="DemiBold" Background="Transparent" Margin="70,10,0,0" Click="Button_Click"/>
-            </StackPanel>
-            <TextBlock Canvas.Top="80" Canvas.Left="60" Text="Usuarios" FontFamily="Montserrat" FontWeight="Bold" FontSize="60"/>
-            <TextBlock Canvas.Top="110" Canvas.Left="650" Text="ListView" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="20"/>
-            <Grid Canvas.Top="200" Canvas.Left="70" Width="700" Height="500">
+        <Image Width="300" Source="/Images/hotelperemaria_horizontal.png" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60" HorizontalAlignment="Center"/>
+        <Border Grid.Row="2" CornerRadius="20" Background="WhiteSmoke" Margin="50,20">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="0.6*"/>
+                    <RowDefinition Height="*"/>
+                    
                 </Grid.RowDefinitions>
-                <Border BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="ID" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Label Content="Foto" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0"></Label>
-                        <Label Content="Nombre" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <Label Content="Rol" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <Label Content="VIP" FontSize="20" FontWeight="DemiBold" Margin="100,0,0,0"></Label>
-                        <Label Content="Acción" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="1" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="2" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal" Margin="90,0,0,0">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="3" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="4" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="5" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="6" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="7" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="8" BorderThickness="1" BorderBrush="WhiteSmoke">
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <CheckBox Content="#115" Height="30" FontSize="20" FontWeight="DemiBold" Margin="20,0,0,0" VerticalContentAlignment="Center"></CheckBox>
-                        <Image Source="/Images/usuario.png" Margin="20,0,0,0"></Image>
-                        <Label Content="Iván Nieto" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="Administrador" FontSize="15" FontWeight="DemiBold" Margin="30,0,0,0"></Label>
-                        <Label Content="VIP" Foreground="#278498" FontSize="20" FontWeight="DemiBold" Margin="50,0,0,0"></Label>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Images/editar.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/informacion.png" Width="50" Margin="20,0,0,0"></Image>
-                            <Image Source="/Images/eliminar.png" Width="50" Margin="20,0,0,0"></Image>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
+                <StackPanel Margin="20,20,50,0">
+                    <TextBlock  Text="Nombre y Apellidos" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Margin="20,0,50,0">
+                    <TextBlock Text="Rol" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox Height="40">
+                        <ComboBoxItem Content="Usuario"/>
+                        <ComboBoxItem Content="Trabajador"/>
+                        <ComboBoxItem Content="Admin"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="20,0,50,0">
+                    <TextBlock  Text="Email" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="20,0,50,0">
+                    <TextBlock Text="Fecha Nacimiento" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <DatePicker Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Margin="20,0,50,0">
+                    <TextBlock Text="Ciudad" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox Height="40">
+                        <ComboBoxItem Content="Madrid"/>
+                        <ComboBoxItem Content="Alicante"/>
+                        <ComboBoxItem Content="Sevilla"/>
+                        <ComboBoxItem Content="Benidorm"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Margin="20,0,50,0">
+                    <TextBlock  Text="Sexo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <RadioButton Content="H" GroupName="Sexp"/>
+                    <RadioButton Content="M" GroupName="Sexo"/>
+                    <RadioButton Content="Indeterminado" GroupName="Sexo"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Margin="20,0,50,0">
+                    <TextBlock  Text="imagen de perfil" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <Button x:Name="UploadImage" Content="Subir Imagen" Background="#278498" Height="50" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Row="7" Margin="20,0,50,0">
+                    <TextBlock  Text="Miembro VIP" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ToggleButton Height="40" Width="166"/>
+                </StackPanel>
+                <StackPanel Grid.Row="8" Margin="20,0,50,0">
+                    <TextBlock  Text="Dato del usuario" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBlock Text="Aquí van los datos del usuario" Height="40"/>
+                </StackPanel>
+                <StackPanel Grid.Row="9" Margin="0,4,0,0">
+                    <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50">
+                        <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20" HorizontalAlignment="Left" Width="146"/>
+                    </Border>
+                </StackPanel>
             </Grid>
-            <Button Canvas.Right="5" Canvas.Bottom="5" BorderBrush="Transparent" FontSize="20" Background="Transparent">
-                <Button.Content>
-                    <Image Source="/Images/añadir_usuario.png"></Image>
-                </Button.Content>
-            </Button>
-        </Canvas>
+        </Border>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="Images/campana.png" Width="25" Margin="0,10,40,0"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Buscador" Style="{StaticResource CustomButtonStyle}" Grid.Column="0" Click="BuscadorButton_Click" />
+                <Button Content="Usuarios" Style="{StaticResource CustomButtonStyle}" Grid.Column="1" Click="UsuariosButton_Click" />
+                <Button Content="Reservas" Style="{StaticResource CustomButtonStyle}" Grid.Column="2" Click="ReservasButton_Click" />
+                <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" Click="HabitacionesButton_Click"/>
+            </Grid>
+        </Grid>
+        <TextBlock Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontWeight="Bold" Foreground="Black" FontSize="60" Margin="50,0"><Run Language="es-es" Text="Usuarios"/></TextBlock>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <!-- Encabezado -->
+                <RowDefinition Height="*" />
+                <!-- Filas dinámicas con scroll -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Encabezado -->
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" BorderThickness="1" BorderBrush="WhiteSmoke" Background="#F0F0F0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Nombre" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="1" Content="Rol" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="2" Content="Email" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="3" Content="Foto de Perfil" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="4" Content="VIP" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Column="5" Content="Acciones" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Filas dinámicas con scroll -->
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Usuarios}">
+                    <ItemsControl.ItemsPanel>
+                        <!-- Usa un StackPanel para apilar verticalmente -->
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label x:Name="idHabitacion" Grid.Column="0" Content="{Binding Id}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Image Grid.Column="1" Source="{Binding FotoUrl}" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="2" Content="{Binding Tipo}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="3" Content="{Binding Huespedes}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="4" Content="{Binding Descripcion}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="5" Content="{Binding Reservada}" FontSize="18" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button x:Name="btnEdit" BorderBrush="Transparent" Background="Transparent" Click="btnEdit_Click">
+                                            <Button.Content>
+                                                <Image Width="30" Source="/Images/editar.png" Margin="5,0" />
+                                            </Button.Content>
+                                        </Button>
+                                        <Button BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Content>
+                                                <Image Width="30" Source="/Images/informacion.png" Margin="5,0" />
+                                            </Button.Content>
+                                        </Button>
+                                        <Button BorderBrush="Transparent" Background="Transparent">
+                                            <Button.Content>
+                                                <Image Width="30" Source="/Images/eliminar.png" Margin="5,0" />
+                                            </Button.Content>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

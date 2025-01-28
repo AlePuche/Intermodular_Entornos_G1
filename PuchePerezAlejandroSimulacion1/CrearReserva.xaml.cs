@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +23,13 @@ namespace PuchePerezAlejandroSimulacion1
     {
         bool editable;
         Reserva reservaEdit;
+        public int extras = 0;
+        public DateTime entrada;
+        public DateTime salida;
+        public int price;
+
+        private readonly HttpClient _httpClient;
+
         public CrearReserva(bool editable, Reserva reserva)
         {
             InitializeComponent();
@@ -29,6 +38,10 @@ namespace PuchePerezAlejandroSimulacion1
 
             if (editable)
             {
+                _httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri("http://localhost:3000")
+                };
                 reservaButton.Visibility = Visibility.Visible;
                 reservaButton.Content = "Editar Reserva";
                 lblTitulo.Text = "Editar Reserva";
@@ -57,6 +70,10 @@ namespace PuchePerezAlejandroSimulacion1
             }
             else
             {
+                _httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri("http://localhost:3000")
+                };
                 reservaButton.Visibility = Visibility.Collapsed;
                 lblTitulo.Text = "Info Reserva";
 
@@ -85,12 +102,77 @@ namespace PuchePerezAlejandroSimulacion1
         }
         public CrearReserva()
         {
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:3000")
+            };
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void clickCrearReserva(object sender, RoutedEventArgs e)
+        {
+            Reserva nuevaReserva = null;
+            if (txtCliente.Text.Trim() == "" && txtEmail.Text.Trim() == "")
+            {
+                MessageBox.Show("ERROR: Hay que completar el cliente y su email");
+            }
+            else
+            {
+                nuevaReserva = new Reserva
+                {
+                    Extras = this.extras,
+                    Cliente = new ClienteReserva(txtCliente.Text, txtEmail.Text),
+                    FechaInicio = entrada,
+                    FechaSalida = salida,
+                    TipoHabitacion = txtTipo.Text,
+                    IdHabitacion = 101,
+                    NumPersonas = Int32.Parse(txtHuespedes.Text),
+                    Precio = this.price,
+                };
+
+                crearReserva(nuevaReserva);
+            }
+        }
+
+        private async void crearReserva(Reserva nuevaReserva) {
+            try
+            {
+                var reservaJson = new
+                {
+                    idHabitacion = nuevaReserva.IdHabitacion,
+                    cliente = new
+                    {
+                        nombre = nuevaReserva.Cliente.Nombre,
+                        email = nuevaReserva.Cliente.Email
+                    },
+                    precio = nuevaReserva.Precio,
+                    fechaInicio = nuevaReserva.FechaInicio.ToString("yyyy-MM-ddTHH:mm:ss"),
+                    fechaSalida = nuevaReserva.FechaSalida.ToString("yyyy-MM-ddTHH:mm:ss"),
+                    tipoHabitacion = nuevaReserva.TipoHabitacion,
+                    numPersonas = nuevaReserva.NumPersonas,
+                    extras = nuevaReserva.Extras
+                };
+
+                var json = JsonConvert.SerializeObject(reservaJson);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync("/reservas/create", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Reserva creada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al conectar con la API: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

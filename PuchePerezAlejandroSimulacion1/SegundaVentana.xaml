@@ -160,26 +160,30 @@
 
                     <StackPanel Margin="20,0,0,0">
                         <TextBlock Text="Numero de huéspedes:" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
-                        <ComboBox Margin="0,0,20,0" Height="30">
+                        <ComboBox x:Name="comboNumHuespedes" Margin="0,0,20,0" Height="30">
+                            <ComboBoxItem Content="1"></ComboBoxItem>
                             <ComboBoxItem Content="2"></ComboBoxItem>
+                            <ComboBoxItem Content="3"></ComboBoxItem>
+                            <ComboBoxItem Content="4"></ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
 
                     <StackPanel Margin="20,0,0,0" Grid.Column="1">
                         <TextBlock Text="Fecha de entrada:" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
-                        <DatePicker Height="30" Margin="0,0,20,0"/>
+                        <DatePicker x:Name="fechaEntrada" Height="30" Margin="0,0,20,0"/>
                     </StackPanel>
 
                     <StackPanel Margin="20,0,0,0" Grid.Column="2">
                         <TextBlock Text="Fecha de salida:" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
-                        <DatePicker Height="30" Margin="0,0,20,0"/>
+                        <DatePicker x:Name="fechaSalida" Height="30" Margin="0,0,20,0"/>
                     </StackPanel>
 
                     <StackPanel Margin="20,10,0,0" Grid.Row="1">
                         <TextBlock Text="Extras" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat"/>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,5,0,0">
-                            <CheckBox Content="Cuna" Margin="0,0,20,0"></CheckBox>
-                            <CheckBox Content="Cama Extra"></CheckBox>
+                            <CheckBox x:Name="extraCuna" Content="Cuna" Margin="0,0,20,0"></CheckBox>
+                            <CheckBox x:Name="extraCama" Content="Cama Extra" Margin="0,0,20,0"></CheckBox>
+                            <CheckBox x:Name="extraDesayuno" Content="Desayuno"></CheckBox>
                         </StackPanel>
                     </StackPanel>
 

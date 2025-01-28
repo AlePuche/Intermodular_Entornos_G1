@@ -92,11 +92,11 @@
                         <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3">
                             <TextBlock Text="Email" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                             <TextBlock  FontSize="50" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="#278498" Margin="0,10,0,0" Visibility="Collapsed" />
-                            <TextBox Height="50" FontSize="30" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray"/>
+                            <TextBox x:Name="txtEmail" Height="50" FontSize="30" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="3" Grid.ColumnSpan="3">
-                            <TextBlock Text="Iván Nieto  -    ivan@peremaria.com" FontSize="20" FontWeight="Light" FontFamily="Montserrat" Foreground="Gray" Margin="0,20,0,0"/>
+                            <TextBlock x:Name="txtUser" Text="Iván Nieto  -    ivan@peremaria.com" FontSize="20" FontWeight="Light" FontFamily="Montserrat" Foreground="Gray" Margin="0,20,0,0"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -107,7 +107,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Border CornerRadius="20" BorderThickness="3" Background="#278498" Height="48" Grid.Column="1" Margin="0,10,0,0">
-                        <Button x:Name="reservaButton" Width="169" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Content="Crear reserva" FontSize="20" Foreground="White"/>
+                        <Button x:Name="reservaButton" Width="169" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Content="Crear reserva" FontSize="20" Foreground="White" Click="clickCrearReserva"/>
                     </Border>
                 </Grid>
             </StackPanel>

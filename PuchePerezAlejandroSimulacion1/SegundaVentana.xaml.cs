@@ -73,12 +73,44 @@ namespace PuchePerezAlejandroSimulacion1
         private void btnReservar_Click(object sender, RoutedEventArgs e)
         {
             CrearReserva crearReserva = new CrearReserva();
+
+            crearReserva.txtFechaEntrada.Text = fechaEntrada.Text;
+            crearReserva.txtFechaSalida.Text = fechaSalida.Text;
+            crearReserva.txtHuespedes.Text = comboNumHuespedes.Text;
+            crearReserva.txtPrecio.Text = (nNoches() * 36)+" €";
+            crearReserva.txtTipo.Text = "Habitación Doble";
+            crearReserva.txtUser.Text = usuarioLogeado.Name+ "  -    "+usuarioLogeado.Email;
+            if (extraCama.IsChecked == true)
+                crearReserva.extras += 1;
+            if (extraCuna.IsChecked == true)
+                crearReserva.extras += 1;
+            if (extraDesayuno.IsChecked == true)
+                crearReserva.extras += 1;
+            crearReserva.entrada = fechaEntrada.SelectedDate.Value;
+            crearReserva.salida = fechaSalida.SelectedDate.Value;
+            crearReserva.price = (nNoches() * 36);
+
             crearReserva.Show();
+        }
+
+        private int nNoches()
+        {
+            DateTime entrada = fechaEntrada.SelectedDate.Value;
+            DateTime salida = fechaSalida.SelectedDate.Value;
+
+            return (salida - entrada).Days;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            listaScroll.Visibility = Visibility.Visible;
+            if(fechaEntrada.SelectedDate == null || fechaSalida.SelectedDate == null || comboNumHuespedes.SelectedItem == null || fechaEntrada.SelectedDate < DateTime.Now.Date || fechaSalida.SelectedDate <= fechaEntrada.SelectedDate)
+            {
+                listaScroll.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                listaScroll.Visibility = Visibility.Visible;
+            }
         }
     }
 }

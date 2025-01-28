@@ -8,6 +8,12 @@ namespace PuchePerezAlejandroSimulacion1
 {
     public class ClienteReserva
     {
+        public ClienteReserva(string nombre, string email)
+        {
+            Nombre = nombre;
+            Email = email;
+        }
+
         public string Nombre { get; set; }
         public string Email { get; set; }
     }

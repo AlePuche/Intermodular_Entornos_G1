@@ -125,12 +125,7 @@
 
                 <StackPanel Margin="20,20,50,1" Grid.Row="2">
                     <TextBlock  Text="Cliente" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox Height="40" FontSize="15">
-                        <ComboBoxItem Content="1"/>
-                        <ComboBoxItem Content="2"/>
-                        <ComboBoxItem Content="3"/>
-                        <ComboBoxItem Content="4"/>
-                    </ComboBox>
+                    <TextBox Height="40" FontSize="15"/>
                 </StackPanel>
 
                 <StackPanel Margin="20,20,50,3" Grid.Row="3">
@@ -307,7 +302,7 @@
                                         <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0" Click="InfoButton_Click">
                                             <Image Width="24" Height="24" Source="/Images/informacion.png" />
                                         </Button>
-                                        <Button BorderBrush="Transparent" Background="Transparent" Margin="5,0">
+                                        <Button x:Name="btnEliminar" BorderBrush="Transparent" Background="Transparent" Margin="5,0" Click="eliminarReserva">
                                             <Image Width="24" Height="24" Source="/Images/eliminar.png" />
                                         </Button>
                                     </StackPanel>
@@ -319,6 +314,5 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-
     </Grid>
 </Window>

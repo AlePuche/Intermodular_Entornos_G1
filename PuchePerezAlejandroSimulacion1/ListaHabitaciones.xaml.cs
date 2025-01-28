@@ -15,7 +15,7 @@ namespace PuchePerezAlejandroSimulacion1
         {
             InitializeComponent();
             this.usuarioLogeado = usuarioLogeado;
-            CargarListaHabitaciones();
+            Habitaciones = new ObservableCollection<Habitacion>();
             DataContext = this;
         }
 
@@ -23,7 +23,8 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void CargarListaHabitaciones()
         {
-            Habitaciones = new ObservableCollection<Habitacion>
+            Habitaciones.Clear();
+            var nuevasHabitaciones = new ObservableCollection<Habitacion>
             {
                 new Habitacion { Id = 102, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Doble", Huespedes = 4, Descripcion = "Amplia y cómoda", Reservada = "Sí" },
                 new Habitacion { Id = 103, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Con vistas al mar", Reservada = "No" },
@@ -44,7 +45,11 @@ namespace PuchePerezAlejandroSimulacion1
                 new Habitacion { Id = 118, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Triple", Huespedes = 3, Descripcion = "Con acceso al spa", Reservada = "Sí" },
                 new Habitacion { Id = 119, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Simple", Huespedes = 1, Descripcion = "Económica pero funcional", Reservada = "No" },
                 new Habitacion { Id = 120, FotoUrl = "/Images/usuario.png", Tipo = "Habitación Familiar", Huespedes = 5, Descripcion = "Amplia y luminosa", Reservada = "Sí" }
-            };  
+            };
+            foreach (var habitacion in nuevasHabitaciones)
+            {
+                Habitaciones.Add(habitacion);
+            }
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -132,6 +137,11 @@ namespace PuchePerezAlejandroSimulacion1
                     }
                 }
             }
+        }
+
+        private void btn_BuscarHab_Click(object sender, RoutedEventArgs e)
+        {
+            CargarListaHabitaciones();
         }
     }
 }

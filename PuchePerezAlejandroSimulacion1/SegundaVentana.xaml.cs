@@ -78,7 +78,7 @@ namespace PuchePerezAlejandroSimulacion1
             crearReserva.txtFechaSalida.Text = fechaSalida.Text;
             crearReserva.txtHuespedes.Text = comboNumHuespedes.Text;
             crearReserva.txtPrecio.Text = (nNoches() * 36)+" €";
-            crearReserva.txtTipo.Text = "Habitación Doble";
+            crearReserva.txtTipo.Text = "Doble";
             crearReserva.txtUser.Text = usuarioLogeado.Name+ "  -    "+usuarioLogeado.Email;
             if (extraCama.IsChecked == true)
                 crearReserva.extras += 1;

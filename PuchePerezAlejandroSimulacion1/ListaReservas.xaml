@@ -115,22 +115,22 @@
 
                 <StackPanel Margin="20,20,50,8">
                     <TextBlock  Text="ID" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox Height="40" FontSize="15"/>
+                    <TextBox x:Name="txtID" Height="40" FontSize="15"/>
                 </StackPanel>
 
                 <StackPanel Margin="20,20,50,8" Grid.Row="1">
                     <TextBlock  Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox Height="40" FontSize="15"/>
+                    <TextBox x:Name="txtHabitacion" Height="40" FontSize="15"/>
                 </StackPanel>
 
                 <StackPanel Margin="20,20,50,1" Grid.Row="2">
                     <TextBlock  Text="Cliente" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox Height="40" FontSize="15"/>
+                    <TextBox x:Name="txtCliente" Height="40" FontSize="15"/>
                 </StackPanel>
 
                 <StackPanel Margin="20,20,50,3" Grid.Row="3">
                     <TextBlock  Text="Nº Personas" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox Height="40" FontSize="15">
+                    <ComboBox x:Name="comboNumHuespedes" Height="40" FontSize="15">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
@@ -157,17 +157,17 @@
 
                 <StackPanel Margin="20,20,50,3" Grid.Row="5">
                     <TextBlock  Text="Tipo de habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox Height="40" FontSize="15">
-                        <ComboBoxItem Content="1"/>
-                        <ComboBoxItem Content="2"/>
-                        <ComboBoxItem Content="3"/>
-                        <ComboBoxItem Content="4"/>
+                    <ComboBox x:Name="comboTipoHabitacion" Height="40" FontSize="15">
+                        <ComboBoxItem Content="Doble" />
+                        <ComboBoxItem Content="Suite" />
+                        <ComboBoxItem Content="Triple" />
+                        <ComboBoxItem Content="Individual" />
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Grid.Row="6" Margin="0,4,0,0">
                     <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50" Margin="0,50,0,20">
-                        <Button Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20"/>
+                        <Button x:Name="btnBuscar" Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20" Click="BuscarReservas_Click"/>
                     </Border>
                 </StackPanel>
             </Grid>
@@ -289,7 +289,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Content="{Binding Id}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="1" Content="{Binding IdHabitacion}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <Label Grid.Column="2" Content="{Binding Cliente.Nombre}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label Grid.Column="2" Content="{Binding Cliente.Email}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="3" Content="{Binding Precio}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="4" Content="{Binding FechaInicioFormatted}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     <Label Grid.Column="5" Content="{Binding FechaFinFormatted}" FontSize="15" FontWeight="Normal" HorizontalAlignment="Center" VerticalAlignment="Center" />

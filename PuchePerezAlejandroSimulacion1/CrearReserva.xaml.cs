@@ -48,17 +48,13 @@ namespace PuchePerezAlejandroSimulacion1
 
                 txtTipo.Text = "Habitación " + reservaEdit.TipoHabitacion;
 
-                txtFechaEntrada.Visibility = Visibility.Collapsed;
-                txtFechaEntradaEdit.Visibility = Visibility.Visible;
                 txtFechaEntradaEdit.Text = reservaEdit.FechaInicioFormatted.ToString();
 
-                txtFechaSalida.Visibility = Visibility.Collapsed;
-                txtFechaSalidaEdit.Visibility = Visibility.Visible;
                 txtFechaSalidaEdit.Text = reservaEdit.FechaFinFormatted.ToString();
 
                 txtHuespedes.Visibility = Visibility.Collapsed;
-                txtHuespedesEdit.Visibility = Visibility.Visible;
-                txtHuespedesEdit.Text = reservaEdit.NumPersonas.ToString();
+                huespedesEdit.Visibility = Visibility.Visible;
+                huespedesEdit.Text = reservaEdit.NumPersonas.ToString();
 
                 txtPrecio.Visibility = Visibility.Collapsed;
                 txtPrecioEdit.Visibility = Visibility.Visible;
@@ -67,6 +63,10 @@ namespace PuchePerezAlejandroSimulacion1
                 txtClienteLbl.Visibility = Visibility.Collapsed;
                 txtCliente.Visibility = Visibility.Visible;
                 txtCliente.Text = reservaEdit.Cliente.Nombre;
+
+                txtEmailInfo.Visibility = Visibility.Collapsed;
+                txtEmail.Visibility = Visibility.Visible;
+                txtEmail.Text = reservaEdit.Cliente.Email;
             }
             else
             {
@@ -87,7 +87,7 @@ namespace PuchePerezAlejandroSimulacion1
                 txtFechaSalida.Visibility = Visibility.Visible;
                 txtFechaSalida.Text = reservaEdit.FechaFinFormatted.ToString();
 
-                txtHuespedesEdit.Visibility = Visibility.Collapsed;
+                huespedesEdit.Visibility = Visibility.Collapsed;
                 txtHuespedes.Visibility = Visibility.Visible;
                 txtHuespedes.Text = reservaEdit.NumPersonas.ToString();
 
@@ -98,6 +98,10 @@ namespace PuchePerezAlejandroSimulacion1
                 txtCliente.Visibility = Visibility.Collapsed;
                 txtClienteLbl.Visibility = Visibility.Visible;
                 txtClienteLbl.Text = reservaEdit.Cliente.Nombre;
+
+                txtEmail.Visibility = Visibility.Collapsed;
+                txtEmailInfo.Visibility = Visibility.Visible;
+                txtEmailInfo.Text = reservaEdit.Cliente.Email;
             }
         }
         public CrearReserva()

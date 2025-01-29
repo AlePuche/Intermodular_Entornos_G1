@@ -11,10 +11,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="1" Source="/Images/imgLogin.jpeg" Stretch="Fill"/>
+        <Image Grid.Column="1" Source="http://localhost:3000/images/pexelsbeach.jpeg" Stretch="Fill"/>
         <Canvas>
             <StackPanel Orientation="Horizontal" Canvas.Top="100" Canvas.Left="100">
-                <Image Width="450" Source="/Images/hotellogoestrellas.png"/>
+                <Image Width="450" Source="http://localhost:3000/images/hotellogoestrellas.png"/>
             </StackPanel>
             <StackPanel Canvas.Top="300" Canvas.Left="100">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
@@ -35,7 +35,7 @@
                 </StackPanel>
                 <Button x:Name="btn_login" Width="120" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Click="btn_login_Click">
                     <Button.Content>
-                        <Image Source="/Images/btn-login.png" Stretch="Fill"></Image>
+                        <Image Source="http://localhost:3000/images/btn-login.png" Stretch="Fill"></Image>
                     </Button.Content>
                 </Button>
                 <TextBlock Text="¿Recordar contraseña?" FontWeight="Bold" FontSize="14" FontFamily="Montserrat"></TextBlock>

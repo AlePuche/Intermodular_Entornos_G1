@@ -100,7 +100,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Image Width="300" Source="/Images/hotelperemaria_horizontal.png" HorizontalAlignment="Center"/>
+        <Image Width="300" Source="http://localhost:3000/images/hotelperemaria_horizontal.png" HorizontalAlignment="Center"/>
         <TextBlock Grid.Row="1" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60" HorizontalAlignment="Center"/>
         <Border Grid.Row="2" CornerRadius="20" Background="WhiteSmoke" Margin="50,20">
             <Grid>
@@ -183,7 +183,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="Images/campana.png" Width="25" Margin="0,10,40,0"/>
+                <Image Source="http://localhost:3000/images/campana.png" Width="25" Margin="0,10,40,0"/>
             </Grid>
 
             <Grid>

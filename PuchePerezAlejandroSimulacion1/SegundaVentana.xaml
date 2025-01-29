@@ -90,8 +90,8 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                
-                <Image HorizontalAlignment="Left" Width="300" Source="/Images/hotelperemaria_horizontal.png" Margin="50,0"/>
+
+                <Image HorizontalAlignment="Left" Width="300" Source="http://localhost:3000/images/hotelperemaria_horizontal.png" Margin="50,0"/>
 
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -122,7 +122,7 @@
                             </Menu>
                         </StackPanel>
 
-                        <Image Source="Images/campana.png" Width="25" Margin="0,10,40,0" Grid.Column="1"/>
+                        <Image Source="http://localhost:3000/images/campana.png" Width="25" Margin="0,10,40,0" Grid.Column="1"/>
                     </Grid>
 
                     <Grid>
@@ -232,7 +232,6 @@
                                         FontSize="16" 
                                         FontFamily="Montserrat" Click="btnReservar_Click"/>      
                                     </Border>
-
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>

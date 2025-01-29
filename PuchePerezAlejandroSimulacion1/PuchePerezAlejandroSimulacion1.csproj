@@ -72,9 +72,6 @@
     <Resource Include="Images\img-cover-login.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\imgLogin.jpeg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\informacion.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

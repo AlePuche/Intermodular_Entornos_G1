@@ -62,6 +62,7 @@ namespace PuchePerezAlejandroSimulacion1
             if (button?.DataContext is Reserva reservaSeleccionada)
             {
                 CrearReserva ventanaCrearReserva = new CrearReserva(true, reservaSeleccionada);
+                ventanaCrearReserva.txtUser.Text = usuarioLogeado.Name+"  -    "+usuarioLogeado.Email;
                 ventanaCrearReserva.Show();
             }
             else
@@ -148,18 +149,15 @@ namespace PuchePerezAlejandroSimulacion1
                 {
                     try
                     {
-                        // Crear el JSON con el ID
                         var json = JsonSerializer.Serialize(new { id = reservaSeleccionada.Id });
                         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                        // Enviar solicitud POST al servidor
                         var response = await _httpClient.PostAsync("/reservas/delete", content);
 
                         if (response.IsSuccessStatusCode)
                         {
                             MessageBox.Show("Reserva eliminada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            // Eliminar la reserva de la ObservableCollection
                             Reservas.Remove(reservaSeleccionada);
                         }
                         else
@@ -185,43 +183,33 @@ namespace PuchePerezAlejandroSimulacion1
             {
                 var filtros = new Dictionary<string, object>();
 
-                // ID de la reserva
                 if (!string.IsNullOrWhiteSpace(txtID.Text))
                     filtros.Add("id", int.Parse(txtID.Text));
 
-                // ID de la habitación
                 if (!string.IsNullOrWhiteSpace(txtHabitacion.Text))
                     filtros.Add("idHabitacion", int.Parse(txtHabitacion.Text));
 
-                // Email del cliente
                 if (!string.IsNullOrWhiteSpace(txtCliente.Text))
                     filtros.Add("cliente.email", txtCliente.Text);
 
-                // Número de personas
                 if (comboNumHuespedes.SelectedItem != null)
                     filtros.Add("numPersonas", int.Parse((comboNumHuespedes.SelectedItem as ComboBoxItem).Content.ToString()));
 
-                // Fecha de inicio
                 if (StartDatePicker.SelectedDate.HasValue)
                     filtros.Add("fechaInicio", StartDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
 
-                // Fecha de salida
                 if (EndDatePicker.SelectedDate.HasValue)
                     filtros.Add("fechaSalida", EndDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
 
-                // Tipo de habitación
                 if (comboTipoHabitacion.SelectedItem != null)
                     filtros.Add("tipoHabitacion", (comboTipoHabitacion.SelectedItem as ComboBoxItem).Content.ToString());
 
-                // Mostrar el JSON en consola para depuración
                 var json = JsonSerializer.Serialize(filtros);
                 Console.WriteLine($"Filtros enviados: {json}");
 
-                // Crear la solicitud HTTP
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync("/reservas/filter", content);
 
-                // Procesar la respuesta
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonResponse = await response.Content.ReadAsStringAsync();

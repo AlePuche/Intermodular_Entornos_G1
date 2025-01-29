@@ -306,7 +306,6 @@
                                             <Image Width="24" Height="24" Source="http://localhost:3000/images/eliminar.png" />
                                         </Button>
                                     </StackPanel>
-
                                 </Grid>
                             </Border>
                         </DataTemplate>

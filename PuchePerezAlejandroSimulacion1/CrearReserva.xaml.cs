@@ -118,32 +118,39 @@ namespace PuchePerezAlejandroSimulacion1
             Close();
         }
 
-        private void clickCrearReserva(object sender, RoutedEventArgs e)
+        private async void clickCrearReserva(object sender, RoutedEventArgs e)
         {
-            Reserva nuevaReserva = null;
-            if (txtCliente.Text.Trim() == "" && txtEmail.Text.Trim() == "")
+            if (txtCliente.Text.Trim() == "" || txtEmail.Text.Trim() == "")
             {
-                MessageBox.Show("ERROR: Hay que completar el cliente y su email");
+                MessageBox.Show("ERROR: Hay que completar el cliente y su email.");
+                return;
+            }
+
+            Reserva reserva = new Reserva
+            {
+                IdHabitacion = 101, 
+                Cliente = new ClienteReserva(txtCliente.Text, txtEmail.Text),
+                Precio = double.Parse(txtPrecioEdit.Text.Replace("€", "").Trim()),
+                FechaInicio = DateTime.Parse(txtFechaEntradaEdit.Text),
+                FechaSalida = DateTime.Parse(txtFechaSalidaEdit.Text),
+                TipoHabitacion = txtTipo.Text,
+                NumPersonas = int.Parse(huespedesEdit.Text),
+                Extras = extras
+            };
+
+            if (editable)
+            {
+                reserva.Id = reservaEdit.Id;
+                await EditarReserva(reserva);
             }
             else
             {
-                nuevaReserva = new Reserva
-                {
-                    Extras = this.extras,
-                    Cliente = new ClienteReserva(txtCliente.Text, txtEmail.Text),
-                    FechaInicio = entrada,
-                    FechaSalida = salida,
-                    TipoHabitacion = txtTipo.Text,
-                    IdHabitacion = 101,
-                    NumPersonas = Int32.Parse(txtHuespedes.Text),
-                    Precio = this.price,
-                };
-
-                crearReserva(nuevaReserva);
+                await crearReserva(reserva);
             }
         }
 
-        private async void crearReserva(Reserva nuevaReserva) {
+        private async Task crearReserva(Reserva nuevaReserva)
+        {
             try
             {
                 var reservaJson = new
@@ -172,10 +179,55 @@ namespace PuchePerezAlejandroSimulacion1
                     MessageBox.Show("Reserva creada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     Close();
                 }
+                else
+                {
+                    MessageBox.Show($"Error al crear la reserva: {response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al conectar con la API: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error de conexión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task EditarReserva(Reserva reservaActualizada)
+        {
+            try
+            {
+                var reservaJson = new
+                {
+                    id = reservaActualizada.Id, 
+                    idHabitacion = reservaActualizada.IdHabitacion,
+                    cliente = new
+                    {
+                        nombre = reservaActualizada.Cliente.Nombre,
+                        email = reservaActualizada.Cliente.Email
+                    },
+                    precio = reservaActualizada.Precio,
+                    fechaInicio = reservaActualizada.FechaInicio.ToString("yyyy-MM-ddTHH:mm:ss"),
+                    fechaSalida = reservaActualizada.FechaSalida.ToString("yyyy-MM-ddTHH:mm:ss"),
+                    numPersonas = reservaActualizada.NumPersonas,
+                    extras = reservaActualizada.Extras
+                };
+
+                var json = JsonConvert.SerializeObject(reservaJson);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PatchAsync("/reservas/update", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Reserva editada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show($"Error al editar la reserva: {response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error de conexión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

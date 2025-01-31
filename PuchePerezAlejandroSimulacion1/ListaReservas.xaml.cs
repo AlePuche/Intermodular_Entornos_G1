@@ -23,6 +23,7 @@ namespace PuchePerezAlejandroSimulacion1
     public partial class ListaReservas : Window
     {
         public ObservableCollection<Reserva> Reservas { get; set; }
+        public ObservableCollection<Notificacion> Notificaciones { get; set; } = new ObservableCollection<Notificacion>();
         public Usuario usuarioLogeado { get; private set; }
 
         public readonly HttpClient _httpClient;
@@ -40,6 +41,40 @@ namespace PuchePerezAlejandroSimulacion1
 
             Reservas = new ObservableCollection<Reserva>();
             CargarListaReservas();
+        }
+
+        private async Task CargarNotificaciones()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("/notificaciones/getAll");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var notificaciones = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    Notificaciones.Clear();
+                    foreach (var notificacion in notificaciones)
+                    {
+                        Notificaciones.Add(notificacion);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Error al obtener notificaciones: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al conectar con la API: {ex.Message}");
+            }
+        }
+
+        private async void MostrarNotificaciones(object sender, MouseButtonEventArgs e)
+        {
+            await CargarNotificaciones();
+            NotificacionesPopup.IsOpen = true;
         }
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)

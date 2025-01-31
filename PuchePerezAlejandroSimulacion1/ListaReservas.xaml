@@ -204,7 +204,30 @@
                     </Menu>
                 </StackPanel>
 
-                <Image Source="http://localhost:3000/images/campana.png" Width="25" Margin="0,10,40,0" Grid.Column="1"/>
+                <Popup x:Name="NotificacionesPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True">
+                    <Border Background="White" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Width="300" Height="400">
+                        <StackPanel>
+                            <TextBlock Text="Notificaciones" FontSize="18" FontWeight="Bold" Padding="10" Foreground="#278498"/>
+                            <ScrollViewer Height="350">
+                                <ItemsControl ItemsSource="{Binding Notificaciones}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderThickness="0,0,0,1" BorderBrush="LightGray" Padding="10">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Mensaje}" FontSize="14" TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding Fecha}" FontSize="12" Foreground="Gray"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
+                <Image Source="http://localhost:3000/images/campana.png" Width="25" Margin="0,10,40,0" Grid.Column="1"
+       MouseDown="MostrarNotificaciones"/>
             </Grid>
 
             <Grid>

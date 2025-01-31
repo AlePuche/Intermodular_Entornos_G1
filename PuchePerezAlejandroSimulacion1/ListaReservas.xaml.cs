@@ -47,8 +47,9 @@ namespace PuchePerezAlejandroSimulacion1
             var button = sender as Button;
             if (button?.DataContext is Reserva reservaSeleccionada)
             {
-                CrearReserva ventanaCrearReserva = new CrearReserva(false, reservaSeleccionada);
+                CrearReserva ventanaCrearReserva = new CrearReserva(false, reservaSeleccionada, usuarioLogeado);
                 ventanaCrearReserva.Show();
+                Close();
             }
             else
             {
@@ -61,9 +62,10 @@ namespace PuchePerezAlejandroSimulacion1
             var button = sender as Button;
             if (button?.DataContext is Reserva reservaSeleccionada)
             {
-                CrearReserva ventanaCrearReserva = new CrearReserva(true, reservaSeleccionada);
+                CrearReserva ventanaCrearReserva = new CrearReserva(true, reservaSeleccionada, usuarioLogeado);
                 ventanaCrearReserva.txtUser.Text = usuarioLogeado.Name+"  -    "+usuarioLogeado.Email;
                 ventanaCrearReserva.Show();
+                Close();
             }
             else
             {

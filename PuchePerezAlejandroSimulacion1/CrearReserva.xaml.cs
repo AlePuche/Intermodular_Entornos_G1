@@ -27,14 +27,16 @@ namespace PuchePerezAlejandroSimulacion1
         public DateTime entrada;
         public DateTime salida;
         public int price;
+        public Usuario usuarioLogeado;
 
         private readonly HttpClient _httpClient;
 
-        public CrearReserva(bool editable, Reserva reserva)
+        public CrearReserva(bool editable, Reserva reserva, Usuario usuario)
         {
             InitializeComponent();
             this.editable = editable;
             this.reservaEdit = reserva;
+            this.usuarioLogeado = usuario;
 
             if (editable)
             {
@@ -115,6 +117,8 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            ListaReservas listaReservas = new ListaReservas(usuarioLogeado);
+            listaReservas.Show();
             Close();
         }
 
@@ -130,11 +134,11 @@ namespace PuchePerezAlejandroSimulacion1
             {
                 IdHabitacion = 101, 
                 Cliente = new ClienteReserva(txtCliente.Text, txtEmail.Text),
-                Precio = double.Parse(txtPrecioEdit.Text.Replace("€", "").Trim()),
-                FechaInicio = DateTime.Parse(txtFechaEntradaEdit.Text),
-                FechaSalida = DateTime.Parse(txtFechaSalidaEdit.Text),
+                Precio = double.Parse(txtPrecio.Text.Replace("€", "").Trim()),
+                FechaInicio = DateTime.Parse(txtFechaEntrada.Text),
+                FechaSalida = DateTime.Parse(txtFechaSalida.Text),
                 TipoHabitacion = txtTipo.Text,
-                NumPersonas = int.Parse(huespedesEdit.Text),
+                NumPersonas = int.Parse(txtHuespedes.Text),
                 Extras = extras
             };
 
@@ -182,6 +186,7 @@ namespace PuchePerezAlejandroSimulacion1
                 else
                 {
                     MessageBox.Show($"Error al crear la reserva: {response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
                 }
             }
             catch (Exception ex)
@@ -218,11 +223,16 @@ namespace PuchePerezAlejandroSimulacion1
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Reserva editada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ListaReservas listaReservas = new ListaReservas(usuarioLogeado);
+                    listaReservas.Show();
                     Close();
                 }
                 else
                 {
                     MessageBox.Show($"Error al editar la reserva: {response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    ListaReservas listaReservas = new ListaReservas(usuarioLogeado);
+                    listaReservas.Show();
+                    Close();
                 }
             }
             catch (Exception ex)

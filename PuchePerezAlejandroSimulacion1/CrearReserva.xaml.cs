@@ -28,6 +28,7 @@ namespace PuchePerezAlejandroSimulacion1
         public DateTime salida;
         public int price;
         public Usuario usuarioLogeado;
+        public String id;
 
         private readonly HttpClient _httpClient;
 
@@ -132,11 +133,11 @@ namespace PuchePerezAlejandroSimulacion1
 
             Reserva reserva = new Reserva
             {
-                IdHabitacion = 101, 
+                IdHabitacion = Int32.Parse(id),
                 Cliente = new ClienteReserva(txtCliente.Text, txtEmail.Text),
                 Precio = double.Parse(txtPrecio.Text.Replace("€", "").Trim()),
-                FechaInicio = DateTime.Parse(txtFechaEntrada.Text),
-                FechaSalida = DateTime.Parse(txtFechaSalida.Text),
+                FechaInicio = entrada,
+                FechaSalida = salida,
                 TipoHabitacion = txtTipo.Text,
                 NumPersonas = int.Parse(txtHuespedes.Text),
                 Extras = extras
@@ -201,7 +202,7 @@ namespace PuchePerezAlejandroSimulacion1
             {
                 var reservaJson = new
                 {
-                    id = reservaActualizada.Id, 
+                    id = reservaActualizada.Id,
                     idHabitacion = reservaActualizada.IdHabitacion,
                     cliente = new
                     {

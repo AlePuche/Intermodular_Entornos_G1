@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace PuchePerezAlejandroSimulacion1
 {
     public partial class SegundaVentana : Window
     {
-        public List<Habitacion> Habitaciones { get; set; }
+        private readonly HttpClient _httpClient;
+        public ObservableCollection<HabitacionTipo> TiposHabitacionesDisponibles { get; set; } = new ObservableCollection<HabitacionTipo>();
 
         public Usuario usuarioLogeado { get; private set; }
 
@@ -13,29 +18,8 @@ namespace PuchePerezAlejandroSimulacion1
         {
             InitializeComponent();
             this.usuarioLogeado = usuarioLogeado;
-            CargarHabitaciones();
+            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:3000") };
             DataContext = this;
-        }
-
-        private void CargarHabitaciones()
-        {
-            Habitaciones = new List<Habitacion>
-            {
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-                new Habitacion { Tipo = "Habitación Doble", PrecioPorNoche = "36€ / noche", FotoUrl = "Images/habitacion.png" },
-           
-            };
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -72,25 +56,37 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void btnReservar_Click(object sender, RoutedEventArgs e)
         {
-            CrearReserva crearReserva = new CrearReserva();
+            var button = sender as Button;
+            if (button?.DataContext is HabitacionTipo habitacionSeleccionada)
+            {
+                CrearReserva crearReserva = new CrearReserva();
 
-            crearReserva.txtFechaEntrada.Text = fechaEntrada.Text;
-            crearReserva.txtFechaSalida.Text = fechaSalida.Text;
-            crearReserva.txtHuespedes.Text = comboNumHuespedes.Text;
-            crearReserva.txtPrecio.Text = (nNoches() * 36)+" €";
-            crearReserva.txtTipo.Text = "Doble";
-            crearReserva.txtUser.Text = usuarioLogeado.Name+ "  -    "+usuarioLogeado.Email;
-            if (extraCama.IsChecked == true)
-                crearReserva.extras += 1;
-            if (extraCuna.IsChecked == true)
-                crearReserva.extras += 1;
-            if (extraDesayuno.IsChecked == true)
-                crearReserva.extras += 1;
-            crearReserva.entrada = fechaEntrada.SelectedDate.Value;
-            crearReserva.salida = fechaSalida.SelectedDate.Value;
-            crearReserva.price = (nNoches() * 36);
+                crearReserva.txtFechaEntrada.Text = fechaEntrada.Text;
+                crearReserva.txtFechaSalida.Text = fechaSalida.Text;
+                crearReserva.txtHuespedes.Text = comboNumHuespedes.Text;
+                crearReserva.txtPrecio.Text = (nNoches() * habitacionSeleccionada.Precio) + " €";
+                crearReserva.txtTipo.Text = habitacionSeleccionada.Tipo;
+                crearReserva.txtUser.Text = usuarioLogeado.Name + "  -    " + usuarioLogeado.Email;
+                crearReserva.id = habitacionSeleccionada.IdHabitacion.ToString();
+                MessageBox.Show(crearReserva.id);
 
-            crearReserva.Show();
+                if (extraCama.IsChecked == true)
+                    crearReserva.extras += 1;
+                if (extraCuna.IsChecked == true)
+                    crearReserva.extras += 1;
+                if (extraDesayuno.IsChecked == true)
+                    crearReserva.extras += 1;
+
+                crearReserva.entrada = fechaEntrada.SelectedDate.Value;
+                crearReserva.salida = fechaSalida.SelectedDate.Value;
+                crearReserva.price = ((int)(nNoches() * habitacionSeleccionada.Precio));
+
+                crearReserva.Show();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo obtener la habitación seleccionada.");
+            }
         }
 
         private int nNoches()
@@ -101,16 +97,109 @@ namespace PuchePerezAlejandroSimulacion1
             return (salida - entrada).Days;
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private async void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            if(fechaEntrada.SelectedDate == null || fechaSalida.SelectedDate == null || comboNumHuespedes.SelectedItem == null || fechaEntrada.SelectedDate < DateTime.Now.Date || fechaSalida.SelectedDate <= fechaEntrada.SelectedDate)
+            if (fechaEntrada.SelectedDate == null || fechaSalida.SelectedDate == null || comboNumHuespedes.SelectedItem == null || fechaEntrada.SelectedDate < DateTime.Now.Date || fechaSalida.SelectedDate <= fechaEntrada.SelectedDate)
             {
                 listaScroll.Visibility = Visibility.Hidden;
+                MessageBox.Show("Por favor, selecciona fechas y cantidad de huéspedes válidos.");
+                return;
             }
-            else
+
+            await FiltrarHabitacionesDisponibles();
+        }
+
+        private async Task FiltrarHabitacionesDisponibles()
+        {
+            try
             {
-                listaScroll.Visibility = Visibility.Visible;
+                int numHuespedes = int.Parse((comboNumHuespedes.SelectedItem as ComboBoxItem).Content.ToString());
+                bool extraCamaBool = extraCama.IsChecked == true;
+
+                var responseHabitaciones = await _httpClient.GetAsync("/habitaciones/getAll");
+                var responseReservas = await _httpClient.GetAsync("/reservas/getAll");
+
+                if (!responseHabitaciones.IsSuccessStatusCode || !responseReservas.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Error al obtener datos del servidor.");
+                    return;
+                }
+
+                var jsonHabitaciones = await responseHabitaciones.Content.ReadAsStringAsync();
+                var jsonReservas = await responseReservas.Content.ReadAsStringAsync();
+
+                var habitaciones = JsonSerializer.Deserialize<List<HabitacionPrueba>>(jsonHabitaciones, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                var reservas = JsonSerializer.Deserialize<List<Reserva>>(jsonReservas, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                DateTime entrada = fechaEntrada.SelectedDate.Value;
+                DateTime salida = fechaSalida.SelectedDate.Value;
+
+                var tiposDisponibles = habitaciones
+                .Where(h => PuedeAlojarHuespedes(h, numHuespedes, extraCamaBool))
+                .GroupBy(h => h.TipoHabitacion)
+                .Select(g =>
+                {
+                    var habitacionDisponible = g.FirstOrDefault(h => HabitacionDisponible(h, reservas, entrada, salida));
+
+                    return new HabitacionTipo
+                    {
+                        IdHabitacion = habitacionDisponible?.IdHabitacion ?? 0,
+                        Tipo = g.Key,
+                        Precio = habitacionDisponible?.Precio ?? 0,
+                        FotoUrl = habitacionDisponible != null ? "http://localhost:3000" + habitacionDisponible.Imagenes.FirstOrDefault() : "",
+                        Disponible = habitacionDisponible != null
+                    };
+                })
+                .Where(t => t.Disponible)
+                .ToList();
+
+                TiposHabitacionesDisponibles.Clear();
+
+                if (tiposDisponibles.Any())
+                {
+                    foreach (var tipo in tiposDisponibles)
+                    {
+                        TiposHabitacionesDisponibles.Add(tipo);
+                    }
+
+                    listaScroll.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    listaScroll.Visibility = Visibility.Hidden;
+                    MessageBox.Show("No hay habitaciones disponibles para los criterios seleccionados.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al procesar la solicitud: {ex.Message}");
             }
         }
+
+        private bool PuedeAlojarHuespedes(HabitacionPrueba habitacion, int numHuespedes, bool extraCama)
+        {
+            return habitacion.NumPersonas >= numHuespedes || (extraCama && habitacion.NumPersonas + 1 >= numHuespedes);
+        }
+
+        private bool HabitacionDisponible(HabitacionPrueba habitacion, List<Reserva> reservas, DateTime entrada, DateTime salida)
+        {
+            var reservasHabitacion = reservas
+                .Where(r => r.IdHabitacion == habitacion.IdHabitacion)
+                .ToList();
+
+            if (!reservasHabitacion.Any())
+                return true;
+
+            foreach (var reserva in reservasHabitacion)
+            {
+                if (!(salida <= reserva.FechaInicio || entrada >= reserva.FechaSalida))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }

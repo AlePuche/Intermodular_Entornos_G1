@@ -45,12 +45,12 @@ namespace PuchePerezAlejandroSimulacion1
         {
             InitializeComponent();
             this.usuarioLogeado = usuarioLogeado;
-     
+
             DataContext = this;
 
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://localhost:3000") 
+                BaseAddress = new Uri("http://localhost:3000")
             };
 
             Reservas = new ObservableCollection<Reserva>();
@@ -69,7 +69,6 @@ namespace PuchePerezAlejandroSimulacion1
                     var json = await response.Content.ReadAsStringAsync();
                     var notificacionesNoVistas = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                    // Si hay notificaciones no vistas, cambiar icono
                     RutaCampana = notificacionesNoVistas.Length > 0
                         ? "http://localhost:3000/images/campanaNotificada.png"
                         : "http://localhost:3000/images/campana.png";
@@ -90,10 +89,8 @@ namespace PuchePerezAlejandroSimulacion1
             await CargarNotificaciones();
             NotificacionesPopup.IsOpen = true;
 
-            // Marcar las notificaciones como vistas
             await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
 
-            // Cambiar el icono de la campana a normal
             RutaCampana = "http://localhost:3000/images/campana.png";
         }
 
@@ -102,7 +99,7 @@ namespace PuchePerezAlejandroSimulacion1
             if (NotificacionesPopup.IsOpen)
             {
                 await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
-                Notificaciones.Clear(); 
+                Notificaciones.Clear();
 
                 NotificacionesPopup.IsOpen = false;
                 FondoOscuro.Visibility = Visibility.Collapsed;
@@ -134,7 +131,7 @@ namespace PuchePerezAlejandroSimulacion1
                     var json = await response.Content.ReadAsStringAsync();
                     var notificacionesNoVistas = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                    Notificaciones.Clear(); // Asegurarnos de que solo se muestran las no vistas
+                    Notificaciones.Clear();
                     foreach (var notificacion in notificacionesNoVistas)
                     {
                         Notificaciones.Add(notificacion);
@@ -167,7 +164,7 @@ namespace PuchePerezAlejandroSimulacion1
             if (button?.DataContext is Reserva reservaSeleccionada)
             {
                 CrearReserva ventanaCrearReserva = new CrearReserva(true, reservaSeleccionada, usuarioLogeado);
-                ventanaCrearReserva.txtUser.Text = usuarioLogeado.Name+"  -    "+usuarioLogeado.Email;
+                ventanaCrearReserva.txtUser.Text = usuarioLogeado.Name + "  -    " + usuarioLogeado.Email;
                 ventanaCrearReserva.Show();
                 Close();
             }
@@ -176,7 +173,7 @@ namespace PuchePerezAlejandroSimulacion1
                 MessageBox.Show("No se pudo obtener la reserva seleccionada.");
             }
         }
-        
+
         private async Task CargarListaReservas()
         {
             try

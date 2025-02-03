@@ -17,7 +17,6 @@ namespace PuchePerezAlejandroSimulacion1
         public string TipoHabitacion { get; set; }
         public int NumPersonas { get; set; }
         public double Extras { get; set; }
-
         public string FechaInicioFormatted => FechaInicio.ToString("dd/MM/yyyy");
         public string FechaFinFormatted => FechaSalida.ToString("dd/MM/yyyy");
     }

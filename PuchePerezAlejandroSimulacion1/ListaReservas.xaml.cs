@@ -27,6 +27,20 @@ namespace PuchePerezAlejandroSimulacion1
         public Usuario usuarioLogeado { get; private set; }
 
         public readonly HttpClient _httpClient;
+
+        private string _rutaCampana;
+        public string RutaCampana
+        {
+            get => _rutaCampana;
+            set
+            {
+                _rutaCampana = value;
+                Dispatcher.Invoke(() =>
+                {
+                    CampanaIcono.Source = new BitmapImage(new Uri(_rutaCampana, UriKind.RelativeOrAbsolute));
+                });
+            }
+        }
         public ListaReservas(Usuario usuarioLogeado)
         {
             InitializeComponent();
@@ -41,28 +55,28 @@ namespace PuchePerezAlejandroSimulacion1
 
             Reservas = new ObservableCollection<Reserva>();
             CargarListaReservas();
+            VerificarNotificaciones();
         }
 
-        private async Task CargarNotificaciones()
+        private async Task VerificarNotificaciones()
         {
             try
             {
-                var response = await _httpClient.GetAsync("/notificaciones/getAll");
+                var response = await _httpClient.GetAsync("/notificaciones/getNoVistas");
 
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
-                    var notificaciones = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var notificacionesNoVistas = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                    Notificaciones.Clear();
-                    foreach (var notificacion in notificaciones)
-                    {
-                        Notificaciones.Add(notificacion);
-                    }
+                    // Si hay notificaciones no vistas, cambiar icono
+                    RutaCampana = notificacionesNoVistas.Length > 0
+                        ? "http://localhost:3000/images/campanaNotificada.png"
+                        : "http://localhost:3000/images/campana.png";
                 }
                 else
                 {
-                    Console.WriteLine($"Error al obtener notificaciones: {response.StatusCode}");
+                    Console.WriteLine($"Error al obtener notificaciones no vistas: {response.StatusCode}");
                 }
             }
             catch (Exception ex)
@@ -75,8 +89,63 @@ namespace PuchePerezAlejandroSimulacion1
         {
             await CargarNotificaciones();
             NotificacionesPopup.IsOpen = true;
+
+            // Marcar las notificaciones como vistas
+            await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
+
+            // Cambiar el icono de la campana a normal
+            RutaCampana = "http://localhost:3000/images/campana.png";
         }
 
+        private async void AlternarPopupNotificaciones(object sender, MouseButtonEventArgs e)
+        {
+            if (NotificacionesPopup.IsOpen)
+            {
+                await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
+                Notificaciones.Clear(); 
+
+                NotificacionesPopup.IsOpen = false;
+                FondoOscuro.Visibility = Visibility.Collapsed;
+
+                await VerificarNotificaciones();
+            }
+            else
+            {
+                await CargarNotificaciones();
+
+                NotificacionesPopup.IsOpen = true;
+                FondoOscuro.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CerrarPopupNotificaciones(object sender, MouseButtonEventArgs e)
+        {
+            NotificacionesPopup.IsOpen = false;
+            FondoOscuro.Visibility = Visibility.Collapsed;
+        }
+        private async Task CargarNotificaciones()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("/notificaciones/getNoVistas");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var notificacionesNoVistas = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    Notificaciones.Clear(); // Asegurarnos de que solo se muestran las no vistas
+                    foreach (var notificacion in notificacionesNoVistas)
+                    {
+                        Notificaciones.Add(notificacion);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al conectar con la API: {ex.Message}");
+            }
+        }
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;

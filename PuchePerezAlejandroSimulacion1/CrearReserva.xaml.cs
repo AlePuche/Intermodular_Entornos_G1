@@ -122,38 +122,54 @@ namespace PuchePerezAlejandroSimulacion1
             listaReservas.Show();
             Close();
         }
-
         private async void clickCrearReserva(object sender, RoutedEventArgs e)
         {
-            if (txtCliente.Text.Trim() == "" || txtEmail.Text.Trim() == "")
-            {
-                MessageBox.Show("ERROR: Hay que completar el cliente y su email.");
-                return;
-            }
-
-            Reserva reserva = new Reserva
-            {
-                IdHabitacion = Int32.Parse(id),
-                Cliente = new ClienteReserva(txtCliente.Text, txtEmail.Text),
-                Precio = double.Parse(txtPrecio.Text.Replace("€", "").Trim()),
-                FechaInicio = entrada,
-                FechaSalida = salida,
-                TipoHabitacion = txtTipo.Text,
-                NumPersonas = int.Parse(txtHuespedes.Text),
-                Extras = extras
-            };
-
             if (editable)
             {
-                reserva.Id = reservaEdit.Id;
+                if (string.IsNullOrWhiteSpace(txtCliente.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
+                {
+                    MessageBox.Show("ERROR: Hay que completar el cliente y su email.");
+                    return;
+                }
+
+                Reserva reserva = new Reserva
+                {
+                    Id = reservaEdit.Id,
+                    IdHabitacion = reservaEdit.IdHabitacion,
+                    Cliente = new ClienteReserva(txtCliente.Text.Trim(), txtEmail.Text.Trim()),
+                    Precio = double.TryParse(txtPrecioEdit.Text.Replace("€", "").Trim(), out double precio) ? precio : reservaEdit.Precio,
+                    FechaInicio = DateTime.TryParse(txtFechaEntradaEdit.Text, out DateTime fechaInicio) ? fechaInicio : reservaEdit.FechaInicio,
+                    FechaSalida = DateTime.TryParse(txtFechaSalidaEdit.Text, out DateTime fechaSalida) ? fechaSalida : reservaEdit.FechaSalida,
+                    TipoHabitacion = txtTipo.Text.Trim(),
+                    NumPersonas = int.TryParse(huespedesEdit.Text, out int numPersonas) ? numPersonas : reservaEdit.NumPersonas,
+                    Extras = extras
+                };
+
                 await EditarReserva(reserva);
             }
             else
             {
+                if (string.IsNullOrWhiteSpace(txtCliente.Text) || string.IsNullOrWhiteSpace(txtEmail.Text))
+                {
+                    MessageBox.Show("ERROR: Hay que completar el cliente y su email.");
+                    return;
+                }
+
+                Reserva reserva = new Reserva
+                {
+                    IdHabitacion = int.Parse(id),
+                    Cliente = new ClienteReserva(txtCliente.Text.Trim(), txtEmail.Text.Trim()),
+                    Precio = double.Parse(txtPrecio.Text.Replace("€", "").Trim()),
+                    FechaInicio = entrada,
+                    FechaSalida = salida,
+                    TipoHabitacion = txtTipo.Text.Trim(),
+                    NumPersonas = int.Parse(txtHuespedes.Text),
+                    Extras = extras
+                };
+
                 await crearReserva(reserva);
             }
         }
-
         private async Task crearReserva(Reserva nuevaReserva)
         {
             try

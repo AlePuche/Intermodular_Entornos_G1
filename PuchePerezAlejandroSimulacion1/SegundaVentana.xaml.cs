@@ -183,6 +183,9 @@ namespace PuchePerezAlejandroSimulacion1
 
         private bool HabitacionDisponible(HabitacionPrueba habitacion, List<Reserva> reservas, DateTime entrada, DateTime salida)
         {
+            entrada = entrada.Date;  // 🔹 Eliminar la hora
+            salida = salida.Date;    // 🔹 Eliminar la hora
+
             var reservasHabitacion = reservas
                 .Where(r => r.IdHabitacion == habitacion.IdHabitacion)
                 .ToList();
@@ -192,7 +195,10 @@ namespace PuchePerezAlejandroSimulacion1
 
             foreach (var reserva in reservasHabitacion)
             {
-                if (!(salida <= reserva.FechaInicio || entrada >= reserva.FechaSalida))
+                DateTime inicioReserva = reserva.FechaInicio.Date;
+                DateTime finReserva = reserva.FechaSalida.Date;
+
+                if (!(salida <= inicioReserva || entrada >= finReserva))
                 {
                     return false;
                 }
@@ -200,6 +206,5 @@ namespace PuchePerezAlejandroSimulacion1
 
             return true;
         }
-
     }
 }

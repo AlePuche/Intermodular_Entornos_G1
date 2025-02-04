@@ -10,7 +10,7 @@ namespace PuchePerezAlejandroSimulacion1
     public partial class SegundaVentana : Window
     {
         private readonly HttpClient _httpClient;
-        public ObservableCollection<HabitacionTipo> TiposHabitacionesDisponibles { get; set; } = new ObservableCollection<HabitacionTipo>();
+        public ObservableCollection<TipoHabitacion> TiposHabitacionesDisponibles { get; set; } = new ObservableCollection<TipoHabitacion>();
 
         public Usuario usuarioLogeado { get; private set; }
 
@@ -57,7 +57,7 @@ namespace PuchePerezAlejandroSimulacion1
         private void btnReservar_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            if (button?.DataContext is HabitacionTipo habitacionSeleccionada)
+            if (button?.DataContext is TipoHabitacion habitacionSeleccionada)
             {
                 CrearReserva crearReserva = new CrearReserva();
 
@@ -128,7 +128,7 @@ namespace PuchePerezAlejandroSimulacion1
                 var jsonHabitaciones = await responseHabitaciones.Content.ReadAsStringAsync();
                 var jsonReservas = await responseReservas.Content.ReadAsStringAsync();
 
-                var habitaciones = JsonSerializer.Deserialize<List<HabitacionPrueba>>(jsonHabitaciones, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                var habitaciones = JsonSerializer.Deserialize<List<Habitacion>>(jsonHabitaciones, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 var reservas = JsonSerializer.Deserialize<List<Reserva>>(jsonReservas, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                 DateTime entrada = fechaEntrada.SelectedDate.Value;
@@ -141,7 +141,7 @@ namespace PuchePerezAlejandroSimulacion1
                 {
                     var habitacionDisponible = g.FirstOrDefault(h => HabitacionDisponible(h, reservas, entrada, salida));
 
-                    return new HabitacionTipo
+                    return new TipoHabitacion
                     {
                         IdHabitacion = habitacionDisponible?.IdHabitacion ?? 0,
                         Tipo = g.Key,
@@ -176,12 +176,12 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
-        private bool PuedeAlojarHuespedes(HabitacionPrueba habitacion, int numHuespedes, bool extraCama)
+        private bool PuedeAlojarHuespedes(Habitacion habitacion, int numHuespedes, bool extraCama)
         {
             return habitacion.NumPersonas >= numHuespedes || (extraCama && habitacion.NumPersonas + 1 >= numHuespedes);
         }
 
-        private bool HabitacionDisponible(HabitacionPrueba habitacion, List<Reserva> reservas, DateTime entrada, DateTime salida)
+        private bool HabitacionDisponible(Habitacion habitacion, List<Reserva> reservas, DateTime entrada, DateTime salida)
         {
             entrada = entrada.Date;  // 🔹 Eliminar la hora
             salida = salida.Date;    // 🔹 Eliminar la hora

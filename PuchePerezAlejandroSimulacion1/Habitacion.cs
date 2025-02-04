@@ -8,13 +8,19 @@ namespace PuchePerezAlejandroSimulacion1
 {
     public class Habitacion
     {
-        public int Id { get; set; }
-        public string FotoUrl { get; set; }
-        public string Tipo { get; set; }
-        public int Huespedes { get; set; }
-        public string Descripcion { get; set; }
-        public string Reservada { get; set; } // "Sí" o "No"
-        public string PrecioPorNoche { get; set; }
-        
+        public int IdHabitacion { get; set; }  
+        public string TipoHabitacion { get; set; }  
+        public int NumPersonas { get; set; }  
+        public string Estado { get; set; }  
+        public double Tamanyo { get; set; }  
+        public string Descripcion { get; set; }  
+        public List<string> Imagenes { get; set; }  
+        public double Precio { get; set; }  
+
+        public Habitacion()
+        {
+            Imagenes = new List<string>();
+        }
+
     }
 }

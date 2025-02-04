@@ -27,11 +27,11 @@ namespace PuchePerezAlejandroSimulacion1
         }
         private void RellenarCampos(Habitacion habitacion)
         {
-            txtId.Text = habitacion.Id.ToString();
-            txtTipo.Text = habitacion.Tipo;
+            txtId.Text = habitacion.IdHabitacion.ToString();
+            txtTipo.Text = habitacion.TipoHabitacion;
             foreach (ComboBoxItem item in numHuespedes.Items)
             {
-                if (item.Content.ToString() == habitacion.Huespedes.ToString())
+                if (item.Content.ToString() == habitacion.NumPersonas.ToString())
                 {
                     numHuespedes.SelectedItem = item;
                     break;

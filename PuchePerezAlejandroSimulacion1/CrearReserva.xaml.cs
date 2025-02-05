@@ -34,6 +34,8 @@ namespace PuchePerezAlejandroSimulacion1
 
         public CrearReserva(bool editable, Reserva reserva, Usuario usuario)
         {
+            this.WindowState = WindowState.Maximized;
+
             InitializeComponent();
             this.editable = editable;
             this.reservaEdit = reserva;
@@ -109,6 +111,8 @@ namespace PuchePerezAlejandroSimulacion1
         }
         public CrearReserva()
         {
+            this.WindowState = WindowState.Maximized;
+
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:3000")
@@ -198,11 +202,19 @@ namespace PuchePerezAlejandroSimulacion1
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Reserva creada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    SegundaVentana segundaVentana = new SegundaVentana(usuarioLogeado);
+                    segundaVentana.Show();
+
                     Close();
                 }
                 else
                 {
                     MessageBox.Show($"Error al crear la reserva: {response.StatusCode}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    SegundaVentana segundaVentana = new SegundaVentana(usuarioLogeado);
+                    segundaVentana.Show();
+
                     Close();
                 }
             }

@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace PuchePerezAlejandroSimulacion1
 {
@@ -11,17 +13,119 @@ namespace PuchePerezAlejandroSimulacion1
     {
         private readonly HttpClient _httpClient;
         public ObservableCollection<TipoHabitacion> TiposHabitacionesDisponibles { get; set; } = new ObservableCollection<TipoHabitacion>();
-
+        public ObservableCollection<Notificacion> Notificaciones { get; set; } = new ObservableCollection<Notificacion>();
         public Usuario usuarioLogeado { get; private set; }
+
+        private string _rutaCampana;
+        public string RutaCampana
+        {
+            get => _rutaCampana;
+            set
+            {
+                _rutaCampana = value;
+                Dispatcher.Invoke(() =>
+                {
+                    CampanaIcono.Source = new BitmapImage(new Uri(_rutaCampana, UriKind.RelativeOrAbsolute));
+                });
+            }
+        }
 
         public SegundaVentana(Usuario usuarioLogeado)
         {
+            this.WindowState = WindowState.Maximized;
+
             InitializeComponent();
             this.usuarioLogeado = usuarioLogeado;
             _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:3000") };
             DataContext = this;
+
+            VerificarNotificaciones();
         }
 
+        private async Task VerificarNotificaciones()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("/notificaciones/getNoVistas");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var notificacionesNoVistas = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    RutaCampana = notificacionesNoVistas.Length > 0
+                        ? "http://localhost:3000/images/campanaNotificada.png"
+                        : "http://localhost:3000/images/campana.png";
+                }
+                else
+                {
+                    Console.WriteLine($"Error al obtener notificaciones no vistas: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al conectar con la API: {ex.Message}");
+            }
+        }
+
+        private async void MostrarNotificaciones(object sender, MouseButtonEventArgs e)
+        {
+            await CargarNotificaciones();
+            NotificacionesPopup.IsOpen = true;
+
+            await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
+
+            RutaCampana = "http://localhost:3000/images/campana.png";
+        }
+
+        private async void AlternarPopupNotificaciones(object sender, MouseButtonEventArgs e)
+        {
+            if (NotificacionesPopup.IsOpen)
+            {
+                await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
+                Notificaciones.Clear();
+
+                NotificacionesPopup.IsOpen = false;
+                FondoOscuro.Visibility = Visibility.Collapsed;
+
+                await VerificarNotificaciones();
+            }
+            else
+            {
+                await CargarNotificaciones();
+
+                NotificacionesPopup.IsOpen = true;
+                FondoOscuro.Visibility = Visibility.Visible;
+            }
+        }
+        private void CerrarPopupNotificaciones(object sender, MouseButtonEventArgs e)
+        {
+            NotificacionesPopup.IsOpen = false;
+            FondoOscuro.Visibility = Visibility.Collapsed;
+        }
+        private async Task CargarNotificaciones()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync("/notificaciones/getNoVistas");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+                    var notificacionesNoVistas = JsonSerializer.Deserialize<Notificacion[]>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    Notificaciones.Clear();
+                    foreach (var notificacion in notificacionesNoVistas)
+                    {
+                        Notificaciones.Add(notificacion);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al conectar con la API: {ex.Message}");
+            }
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SegundaVentana sv = new SegundaVentana(usuarioLogeado);
@@ -57,6 +161,7 @@ namespace PuchePerezAlejandroSimulacion1
         private void btnReservar_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
+            int extrasInt = 0;
             if (button?.DataContext is TipoHabitacion habitacionSeleccionada)
             {
                 CrearReserva crearReserva = new CrearReserva();
@@ -64,24 +169,36 @@ namespace PuchePerezAlejandroSimulacion1
                 crearReserva.txtFechaEntrada.Text = fechaEntrada.Text;
                 crearReserva.txtFechaSalida.Text = fechaSalida.Text;
                 crearReserva.txtHuespedes.Text = comboNumHuespedes.Text;
-                crearReserva.txtPrecio.Text = (nNoches() * habitacionSeleccionada.Precio) + " €";
                 crearReserva.txtTipo.Text = habitacionSeleccionada.Tipo;
                 crearReserva.txtUser.Text = usuarioLogeado.Name + "  -    " + usuarioLogeado.Email;
                 crearReserva.id = habitacionSeleccionada.IdHabitacion.ToString();
                 MessageBox.Show(crearReserva.id);
 
                 if (extraCama.IsChecked == true)
+                {
                     crearReserva.extras += 1;
+                    extrasInt++;
+                }
                 if (extraCuna.IsChecked == true)
+                {
                     crearReserva.extras += 1;
+                    extrasInt++;
+                }
                 if (extraDesayuno.IsChecked == true)
+                {
                     crearReserva.extras += 1;
+                    extrasInt++;
+                }
+
+                crearReserva.txtPrecio.Text = (nNoches() * habitacionSeleccionada.Precio) + (20 * extrasInt) + " €";
 
                 crearReserva.entrada = fechaEntrada.SelectedDate.Value;
                 crearReserva.salida = fechaSalida.SelectedDate.Value;
-                crearReserva.price = ((int)(nNoches() * habitacionSeleccionada.Precio));
+                crearReserva.price = ((int)(nNoches() * habitacionSeleccionada.Precio) + (20 * extrasInt));
 
                 crearReserva.Show();
+
+                Close();
             }
             else
             {

@@ -43,6 +43,8 @@ namespace PuchePerezAlejandroSimulacion1
         }
         public ListaReservas(Usuario usuarioLogeado)
         {
+            this.WindowState = WindowState.Maximized;
+
             InitializeComponent();
             this.usuarioLogeado = usuarioLogeado;
 
@@ -262,6 +264,11 @@ namespace PuchePerezAlejandroSimulacion1
                             MessageBox.Show("Reserva eliminada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
 
                             Reservas.Remove(reservaSeleccionada);
+
+                            ListaReservas lista = new ListaReservas(usuarioLogeado);
+                            lista.Show();
+
+                            Close();
                         }
                         else
                         {
@@ -295,7 +302,7 @@ namespace PuchePerezAlejandroSimulacion1
                 if (!string.IsNullOrWhiteSpace(txtCliente.Text))
                     filtros.Add("cliente.email", txtCliente.Text);
 
-                if (comboNumHuespedes.SelectedItem != null)
+                if (comboNumHuespedes.SelectedItem != null && (comboNumHuespedes.SelectedItem as ComboBoxItem).Content.ToString() != "")
                     filtros.Add("numPersonas", int.Parse((comboNumHuespedes.SelectedItem as ComboBoxItem).Content.ToString()));
 
                 if (StartDatePicker.SelectedDate.HasValue)
@@ -304,7 +311,7 @@ namespace PuchePerezAlejandroSimulacion1
                 if (EndDatePicker.SelectedDate.HasValue)
                     filtros.Add("fechaSalida", EndDatePicker.SelectedDate.Value.ToString("yyyy-MM-dd"));
 
-                if (comboTipoHabitacion.SelectedItem != null)
+                if (comboTipoHabitacion.SelectedItem != null && (comboTipoHabitacion.SelectedItem as ComboBoxItem).Content.ToString() != "")
                     filtros.Add("tipoHabitacion", (comboTipoHabitacion.SelectedItem as ComboBoxItem).Content.ToString());
 
                 var json = JsonSerializer.Serialize(filtros);
@@ -337,6 +344,23 @@ namespace PuchePerezAlejandroSimulacion1
                 MessageBox.Show($"Error al conectar con la API: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void ResetCampos_Click(object sender, RoutedEventArgs e)
+        {
+            txtID.Clear();
+            txtHabitacion.Clear();
+            txtCliente.Clear();
 
+            comboNumHuespedes.SelectedIndex = 0;
+            comboTipoHabitacion.SelectedIndex = 0;
+
+            StartDatePicker.SelectedDate = null;
+            EndDatePicker.SelectedDate = null;
+
+            Reservas.Clear();
+
+            _ = CargarListaReservas();
+
+            MessageBox.Show("Los campos han sido restablecidos.", "Reset", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

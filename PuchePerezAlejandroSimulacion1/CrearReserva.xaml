@@ -20,7 +20,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Border Height="691" Width="1297" Background="WhiteSmoke" CornerRadius="20">
             <StackPanel Margin="50">

@@ -75,6 +75,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -249,32 +262,69 @@
                             <StackPanel Width="280" Margin="10,0,10,0">
                                 <Border CornerRadius="20" BorderThickness="0" ClipToBounds="True">
                                     <Grid>
-                                        <Image Source="{Binding FotoUrl}" 
-                                           Width="250" 
-                                           Height="350" 
-                                           Stretch="UniformToFill"
-                                           HorizontalAlignment="Center">
+                                        <!-- 🎥 Video de carga desde localhost -->
+                                        <MediaElement x:Name="LoaderVideo"
+                              Source="http://localhost:3000/images/loadingVid.mp4"
+                              Width="100" Height="100"
+                              LoadedBehavior="Play"
+                              UnloadedBehavior="Manual"
+                              Stretch="Uniform"
+                              IsMuted="True"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"/>
+
+                                        <!-- 📷 Imagen de la habitación (inicialmente oculta) -->
+                                        <Image x:Name="HabitacionImagen"
+                       Source="{Binding FotoUrl}"
+                       Width="250"
+                       Height="350"
+                       Stretch="UniformToFill"
+                       HorizontalAlignment="Center"
+                       Opacity="0">
                                             <Image.Clip>
                                                 <RectangleGeometry Rect="0,0,250,350" RadiusX="20" RadiusY="20"/>
                                             </Image.Clip>
                                         </Image>
+
+                                        <!-- 🔹 Storyboard para manejar la transición -->
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <!-- 🔄 Mostrar la imagen después de 1.5 segundos -->
+                                                        <DoubleAnimation Storyboard.TargetName="HabitacionImagen"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 From="0" To="1"
+                                                 Duration="0:0:1"
+                                                 BeginTime="0:0:1.5"/>
+
+                                                        <!-- 🔄 Ocultar el video después de 1.5 segundos -->
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoaderVideo"
+                                                               Storyboard.TargetProperty="Visibility">
+                                                            <DiscreteObjectKeyFrame KeyTime="0:0:1.5" Value="{x:Static Visibility.Collapsed}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Grid.Triggers>
                                     </Grid>
                                 </Border>
+
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="{Binding Tipo}" FontFamily="Montserrat" FontSize="30" Margin="0,10,0,0"/>
                                     <TextBlock Text="{Binding Precio, StringFormat='{}{0} € / noche'}" FontFamily="Montserrat" FontSize="20" Foreground="#278498" Margin="70,10,0,0"/>
 
                                     <Border CornerRadius="20" BorderThickness="3" Background="#278498" Height="40" Margin="0,10,0,0">
                                         <Button x:Name="btnReservar"
-                                    Width="140"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Foreground="White"
-                                    HorizontalAlignment="Center"
-                                    Content="Reservar"
-                                    FontSize="16"
-                                    FontFamily="Montserrat"
-                                    Click="btnReservar_Click"/>
+                        Width="140"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Foreground="White"
+                        HorizontalAlignment="Center"
+                        Content="Reservar"
+                        FontSize="16"
+                        FontFamily="Montserrat"
+                        Click="btnReservar_Click"/>
                                     </Border>
                                 </StackPanel>
                             </StackPanel>

@@ -14,7 +14,7 @@ namespace PuchePerezAlejandroSimulacion1
         private readonly HttpClient _httpClient;
         public ObservableCollection<TipoHabitacion> TiposHabitacionesDisponibles { get; set; } = new ObservableCollection<TipoHabitacion>();
         public ObservableCollection<Notificacion> Notificaciones { get; set; } = new ObservableCollection<Notificacion>();
-        public Usuario usuarioLogeado { get; private set; }
+        public Usuario usuarioLogeado { get; set; }
 
         private string _rutaCampana;
         public string RutaCampana
@@ -164,7 +164,7 @@ namespace PuchePerezAlejandroSimulacion1
             int extrasInt = 0;
             if (button?.DataContext is TipoHabitacion habitacionSeleccionada)
             {
-                CrearReserva crearReserva = new CrearReserva();
+                CrearReserva crearReserva = new CrearReserva(usuarioLogeado);
 
                 crearReserva.txtFechaEntrada.Text = fechaEntrada.Text;
                 crearReserva.txtFechaSalida.Text = fechaSalida.Text;
@@ -172,7 +172,6 @@ namespace PuchePerezAlejandroSimulacion1
                 crearReserva.txtTipo.Text = habitacionSeleccionada.Tipo;
                 crearReserva.txtUser.Text = usuarioLogeado.Name + "  -    " + usuarioLogeado.Email;
                 crearReserva.id = habitacionSeleccionada.IdHabitacion.ToString();
-                MessageBox.Show(crearReserva.id);
 
                 if (extraCama.IsChecked == true)
                 {

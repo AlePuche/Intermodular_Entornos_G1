@@ -107,20 +107,20 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="0.8*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="0.6*"/>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Margin="20,20,50,0">
-                    <TextBlock  Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox Height="40"/>
+                    <TextBlock Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox x:Name="IdHabitacionTextBox" Height="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="20,0,50,0">
-                    <TextBlock Text="Huéspedes" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox Height="40">
+                    <TextBlock Text="Aforo máximo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox x:Name="AforoComboBox" Height="40">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
                         <ComboBoxItem Content="3"/>
@@ -128,32 +128,23 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Margin="20,0,50,0">
-                    <TextBlock  Text="Descripción" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <RichTextBox Height="80" VerticalScrollBarVisibility="Auto">
-                        <FlowDocument>
-                            <Paragraph LineHeight="5"/>
-                        </FlowDocument>
-                    </RichTextBox>
+                    <TextBlock Text="Tipo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox x:Name="txtTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="20,0,50,0">
-                    <TextBlock Text="Opciones" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,10">
-                        <CheckBox Content="Cuna"/>
-                        <CheckBox Content="Cama extra" Margin="20,0"/>
-                    </StackPanel>
+                    <TextBlock  Text="Precio máximo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox x:Name="PrecioMaxTextBox" Height="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Margin="20,0,50,0">
-                    <TextBlock Text="Reservada/Ocupada" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox Height="40">
-                        <ComboBoxItem Content="Si"/>
-                        <ComboBoxItem Content="No"/>
+                    <TextBlock Text="Estado" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox x:Name="EstadoComboBox" Height="40">
+                        <ComboBoxItem Content="Disponible"/>
+                        <ComboBoxItem Content="Mantenimiento"/>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Margin="20,0,50,0">
-                    <TextBlock Text="Fecha inicial" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <DatePicker Height="40"/>
-                    <TextBlock Text="Fecha final" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Margin="0,10,0,0"/>
-                    <DatePicker Height="40"/>
+                    <TextBlock  Text="Tamaño (m2) máximo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <TextBox x:Name="TamanyoMaxTextBox" Height="40"/>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Margin="20">
                     <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50">
@@ -275,7 +266,7 @@
                                     <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Button x:Name="btnEdit" BorderBrush="Transparent" Background="Transparent" Click="btnEdit_Click">
                                             <Button.Content>
-                                                <Image Width="30" Source="/Images/editar.png" Margin="5,0" />
+                                                <Image Width="30" Source="http://localhost:3000/images/editar.png" Margin="5,0" />
                                             </Button.Content>
                                         </Button>
                                         <!--Button BorderBrush="Transparent" Background="Transparent">
@@ -286,7 +277,7 @@
                                         -->
                                         <Button x:Name="btnDelete" BorderBrush="Transparent" Background="Transparent" Click="btnDelete_Click">
                                             <Button.Content>
-                                                <Image Width="30" Source="/Images/eliminar.png" Margin="5,0" />
+                                                <Image Width="30" Source="http://localhost:3000/images/eliminar.png" Margin="5,0" />
                                             </Button.Content>
                                         </Button>
                                     </StackPanel>

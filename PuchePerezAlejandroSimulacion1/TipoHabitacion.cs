@@ -12,8 +12,8 @@ namespace PuchePerezAlejandroSimulacion1
         public int IdHabitacion { get; set; }
         [JsonPropertyName("nombre")]
         public string Tipo { get; set; } 
-        public double Precio { get; set; }  
-        public string FotoUrl { get; set; }  
-        public bool Disponible { get; set; } 
+        public double Precio { get; set; }
+        public string FotoUrl { get; set; }
+        public bool Disponible { get; set; }
     }
 }

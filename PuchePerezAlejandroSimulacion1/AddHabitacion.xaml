@@ -48,11 +48,11 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="50,0,0,0">
                         <TextBlock  Text="Id" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                        <TextBox x:Name="txtId" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                        <TextBox x:Name="txtId" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="50,0,50,0">
                        <TextBlock  Text="Tipo" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                        <ComboBox x:Name="txtTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" SelectedIndex="0" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                        <ComboBox x:Name="txtTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" SelectedItem="{Binding TipoSeleccionado, Mode=TwoWay}" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Margin="50,0,50,0">
                         <TextBlock Text="Huéspedes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
@@ -85,15 +85,15 @@
                         </Border>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="50,0,50,0">
-                        <TextBlock Text="Opciones" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,20">
-                            <CheckBox Content="Cuna"/>
-                            <CheckBox Content="Cama extra" Margin="20,0"/>
-                        </StackPanel>
+                        <TextBlock  Text="Tamaño (m2)" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
+                        <TextBox x:Name="txtTamanyo" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Margin="50,0,50,0">
-                        <TextBlock  Text="Precio por noche" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" />
-                        <TextBox x:Name="PrecioTextBox" Height="40"/>
+                        <TextBlock  Text="Estado" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" />
+                        <ComboBox x:Name="EstadoBox" Height="40">
+                            <ComboBoxItem IsSelected="True" Content="Disponible"/>
+                            <ComboBoxItem Content="Mantenimiento"/>
+                        </ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="4">

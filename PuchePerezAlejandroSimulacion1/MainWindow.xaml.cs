@@ -17,6 +17,7 @@ namespace PuchePerezAlejandroSimulacion1
 
         public MainWindow()
         {
+            this.WindowState = WindowState.Maximized;
             InitializeComponent();
         }
 

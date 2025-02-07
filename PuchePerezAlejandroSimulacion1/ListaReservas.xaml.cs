@@ -24,7 +24,7 @@ namespace PuchePerezAlejandroSimulacion1
     {
         public ObservableCollection<Reserva> Reservas { get; set; }
         public ObservableCollection<Notificacion> Notificaciones { get; set; } = new ObservableCollection<Notificacion>();
-        public Usuario usuarioLogeado { get; private set; }
+        public Usuario usuarioLogeado { get; set; }
 
         public readonly HttpClient _httpClient;
 
@@ -49,6 +49,13 @@ namespace PuchePerezAlejandroSimulacion1
             this.usuarioLogeado = usuarioLogeado;
 
             DataContext = this;
+
+            if (usuarioLogeado == null)
+            {
+                MessageBox.Show("Error: El usuario logeado es null. Se cerrará la aplicación.");
+                this.Close();
+                return;
+            }
 
             _httpClient = new HttpClient
             {

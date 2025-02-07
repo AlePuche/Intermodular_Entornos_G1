@@ -109,9 +109,10 @@ namespace PuchePerezAlejandroSimulacion1
                 txtEmailInfo.Text = reservaEdit.Cliente.Email;
             }
         }
-        public CrearReserva()
+        public CrearReserva(Usuario usuario)
         {
             this.WindowState = WindowState.Maximized;
+            this.usuarioLogeado = usuario;
 
             _httpClient = new HttpClient
             {

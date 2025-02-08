@@ -116,39 +116,53 @@
                 </Grid.RowDefinitions>
                 <StackPanel Margin="20,20,50,0">
                     <TextBlock Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox x:Name="IdHabitacionTextBox" Height="40"/>
+                    <TextBox x:Name="IdHabitacionTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="20,0,50,0">
-                    <TextBlock Text="Aforo máximo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox x:Name="AforoComboBox" Height="40">
-                        <ComboBoxItem Content="1"/>
-                        <ComboBoxItem Content="2"/>
-                        <ComboBoxItem Content="3"/>
-                        <ComboBoxItem Content="4"/>
-                    </ComboBox>
+                    <TextBlock Text="Aforo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <StackPanel Grid.Row="1" Margin="0,20,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Min: " FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                        <TextBox x:Name="AforoMinTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
+                        <TextBlock Text="Max: " Margin="10,0,0,0" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                        <TextBox x:Name="AforoMaxTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Margin="20,0,50,0">
                     <TextBlock Text="Tipo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <ComboBox x:Name="txtTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <ComboBox x:Name="ComboBoxTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Margin="20,0,50,0">
-                    <TextBlock  Text="Precio máximo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox x:Name="PrecioMaxTextBox" Height="40"/>
+                    <TextBlock  Text="Precio" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <StackPanel Grid.Row="3" Margin="0,20,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Min: " FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PrecioMinTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
+                        <TextBlock Text="Max: " Margin="10,0,0,0" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PrecioMaxTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Margin="20,0,50,0">
                     <TextBlock Text="Estado" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <ComboBox x:Name="EstadoComboBox" Height="40">
+                        <ComboBoxItem Content=""/>
                         <ComboBoxItem Content="Disponible"/>
                         <ComboBoxItem Content="Mantenimiento"/>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Margin="20,0,50,0">
-                    <TextBlock  Text="Tamaño (m2) máximo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
-                    <TextBox x:Name="TamanyoMaxTextBox" Height="40"/>
+                    <TextBlock  Text="Tamaño (m2)" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
+                    <StackPanel Grid.Row="5" Margin="0,20,0,0" Orientation="Horizontal">
+                        <TextBlock Text="Min: " FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                        <TextBox x:Name="TamanyoMinTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
+                        <TextBlock Text="Max: " Margin="10,0,0,0" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center"/>
+                        <TextBox x:Name="TamanyoMaxTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Row="6" Margin="20">
+                <StackPanel Grid.Row="6" Margin="20" Orientation="Horizontal">
                     <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50">
                         <Button x:Name="btn_BuscarHab" Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20" Click="btn_BuscarHab_Click"/>
+                    </Border>
+                    <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="Transparent" Width="150" Height="50" Margin="20,0">
+                        <Button x:Name="btnReset" Content="Reset" BorderBrush="Transparent" Background="Transparent" Foreground="#278498" FontSize="20" Click="ResetCampos_Click"/>
                     </Border>
                 </StackPanel>
             </Grid>
@@ -176,13 +190,41 @@
    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </MenuItem.Header>
-
-                            <MenuItem Header="Cerrar sesión" />
+                            <MenuItem x:Name="LogOut" Header="Cerrar sesión" Click="LogOut_Click" />
                         </MenuItem>
                     </Menu>
                 </StackPanel>
 
-                <Image Grid.Column="1" Source="http://localhost:3000/images/campana.png" Width="25" Margin="0,10,40,0"/>
+                <Border x:Name="FondoOscuro"
+                        Background="Transparent"
+                        Visibility="Collapsed"
+                        MouseDown="CerrarPopupNotificaciones"/>
+
+                <Popup x:Name="NotificacionesPopup" Placement="Bottom" StaysOpen="True" AllowsTransparency="True">
+                    <Border Background="White" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Width="300" Height="400">
+                        <StackPanel>
+                            <TextBlock Text="Notificaciones" FontSize="18" FontWeight="Bold" Padding="10" Foreground="#278498"/>
+                            <ScrollViewer Height="350">
+                                <ItemsControl ItemsSource="{Binding Notificaciones}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border BorderThickness="0,0,0,1" BorderBrush="LightGray" Padding="10">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Mensaje}" FontSize="14" TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding Fecha}" FontSize="12" Foreground="Gray"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+                <Image x:Name="CampanaIcono"
+                        Width="25" Margin="0,10,40,0" Grid.Column="1"
+                        Source="{Binding RutaCampana}"
+                        MouseLeftButtonUp="AlternarPopupNotificaciones"/>
             </Grid>
 
             <Grid>

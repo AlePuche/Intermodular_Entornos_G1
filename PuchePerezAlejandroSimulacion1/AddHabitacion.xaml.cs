@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.IO;
 
 namespace PuchePerezAlejandroSimulacion1
 {
@@ -33,6 +34,9 @@ namespace PuchePerezAlejandroSimulacion1
             TiposHabitacion = new ObservableCollection<TipoHabitacion>();
             DataContext = this;
             _ = CargarTiposHabitacion();
+
+            txtIdTextBox.Visibility = Visibility.Visible;
+            txtIdTextBlock.Visibility = Visibility.Collapsed;
         }
 
         public AddHabitacion(Habitacion habitacion, Usuario usuarioLogeado)
@@ -54,6 +58,9 @@ namespace PuchePerezAlejandroSimulacion1
 
             RellenarCampos(habitacion);
             _ = CargarTiposHabitacionYSeleccionar(habitacion);
+
+            txtIdTextBox.Visibility = Visibility.Collapsed;
+            txtIdTextBlock.Visibility = Visibility.Visible;
         }
 
         private async Task CargarTiposHabitacionYSeleccionar(Habitacion habitacion)
@@ -79,7 +86,7 @@ namespace PuchePerezAlejandroSimulacion1
                     {
                         if (item.Tipo == habitacion.TipoHabitacion)
                         {
-                            txtTipo.SelectedItem = item;
+                            ComboBoxTipo.SelectedItem = item;
                             break;
                         }
                     }
@@ -128,18 +135,20 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void RellenarCampos(Habitacion habitacion)
         {
-            txtId.Text = habitacion.IdHabitacion.ToString();
+            txtIdTextBlock.Text = habitacion.IdHabitacion.ToString();
+            numHuespedes.Text = habitacion.NumPersonas.ToString();
+            txtTamanyo.Text = habitacion.Tamanyo.ToString();
 
-            foreach (ComboBoxItem item in numHuespedes.Items)
+            txtDescripcion.Document.Blocks.Clear();
+            txtDescripcion.Document.Blocks.Add(new Paragraph(new Run(habitacion.Descripcion)));
+            foreach (ComboBoxItem item in EstadoBox.Items)
             {
-                if (item.Content.ToString() == habitacion.NumPersonas.ToString())
+                if (item.Content.ToString() == habitacion.Estado)
                 {
-                    numHuespedes.SelectedItem = item;
+                    EstadoBox.SelectedItem = item;
                     break;
                 }
             }
-            txtDescripcion.Document.Blocks.Clear();
-            txtDescripcion.Document.Blocks.Add(new Paragraph(new Run(habitacion.Descripcion)));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -151,24 +160,25 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void TextBox_NumericOnly(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$"); // 🔹 Solo permite números del 0-9
+            e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
         private async void btnAddEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtId.Text))
+            string idTexto = habitacion == null ? txtIdTextBox.Text : txtIdTextBlock.Text;
+            if (string.IsNullOrWhiteSpace(idTexto))
             {
                 MessageBox.Show("El campo 'ID' es obligatorio.", "Error de Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            if (txtTipo.SelectedItem == null)
+            if (ComboBoxTipo.SelectedItem == null)
             {
                 MessageBox.Show("El campo 'Tipo' es obligatorio.", "Error de Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            if (numHuespedes.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(numHuespedes.Text))
             {
                 MessageBox.Show("Debe seleccionar el número de huéspedes.", "Error de Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -186,16 +196,14 @@ namespace PuchePerezAlejandroSimulacion1
                 return;
             }
 
-            // 🔥 Recopilar datos para enviar a la API
             var habitacionData = new
             {
-                idHabitacion = int.Parse(txtId.Text),
-                tipoHabitacion = ((TipoHabitacion)txtTipo.SelectedItem).Tipo, // 🔹 Enviamos el nombre, NO el objeto
-                numPersonas = int.Parse(((ComboBoxItem)numHuespedes.SelectedItem).Content.ToString()),
-                estado = ((ComboBoxItem)EstadoBox.SelectedItem).Content.ToString(), // Puedes modificarlo en la UI si lo deseas
-                tamanyo = int.Parse(txtTamanyo.Text), // Agrega un TextBox en la UI si quieres modificarlo
+                idHabitacion = int.Parse(idTexto),
+                tipoHabitacion = ((TipoHabitacion)ComboBoxTipo.SelectedItem).Tipo, 
+                numPersonas = int.Parse(numHuespedes.Text),
+                estado = ((ComboBoxItem)EstadoBox.SelectedItem).Content.ToString(), 
+                tamanyo = int.Parse(txtTamanyo.Text), 
                 descripcion = new TextRange(txtDescripcion.Document.ContentStart, txtDescripcion.Document.ContentEnd).Text.Trim(),
-                //imagenes = new List<string>() 
             };
 
             string endpoint = habitacion == null ? "/habitaciones/create" : "/habitaciones/update";
@@ -232,13 +240,19 @@ namespace PuchePerezAlejandroSimulacion1
                         var errorResponse = JsonSerializer.Deserialize<Dictionary<string, string>>(responseMessage);
                         string errorMessage = errorResponse.ContainsKey("error") ? errorResponse["error"] : "Error desconocido.";
 
-                        // Si es un error de ID duplicado, mostramos un mensaje más claro
-                        if (errorMessage.Contains("E11000 duplicate key"))
+                        
+                        if (errorMessage.Contains("excede la capacidad"))
                         {
-                            errorMessage = "El ID de la habitación ya existe.";
+                            MessageBox.Show(errorMessage, "Error de Aforo", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-
-                        MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        else if (errorMessage.Contains("E11000 duplicate key"))
+                        {
+                            MessageBox.Show("El ID de la habitación ya existe.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                     catch
                     {
@@ -251,6 +265,111 @@ namespace PuchePerezAlejandroSimulacion1
                 MessageBox.Show($"Error de conexión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             
+        }
+
+        private async void MainImagen_Click(object sender, RoutedEventArgs e)
+        {
+            if (habitacion == null || habitacion.IdHabitacion <= 0)
+            {
+                MessageBox.Show("No se puede subir imágenes hasta que la habitación haya sido guardada.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Imágenes (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png",
+                Title = "Seleccionar Imagen"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                using var client = new HttpClient();
+                using var content = new MultipartFormDataContent();
+
+                var fileStream = File.OpenRead(filePath);
+                var streamContent = new StreamContent(fileStream);
+                content.Add(streamContent, "imagen", Path.GetFileName(filePath));
+
+                var response = await client.PostAsync($"http://localhost:3000/habitaciones/images/uploadMain/{habitacion.IdHabitacion}", content);
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonResponse);
+                    MessageBox.Show($"Imagen subida correctamente.\nURL: {result["imageUrl"]}", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Error al subir imagen: {jsonResponse}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private async void AddImagen_Click(object sender, RoutedEventArgs e)
+        {
+            if (habitacion == null || habitacion.IdHabitacion <= 0)
+            {
+                MessageBox.Show("No se puede subir imágenes hasta que la habitación haya sido guardada.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Imágenes (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png",
+                Title = "Seleccionar Imagen"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var filePath = openFileDialog.FileName;
+                using var client = new HttpClient();
+                using var content = new MultipartFormDataContent();
+
+                var fileStream = File.OpenRead(filePath);
+                var streamContent = new StreamContent(fileStream);
+                content.Add(streamContent, "imagen", Path.GetFileName(filePath));
+
+                var response = await client.PostAsync($"http://localhost:3000/habitaciones/images/upload/{habitacion.IdHabitacion}", content);
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonResponse);
+                    MessageBox.Show($"Imagen subida correctamente.\nURL: {result["imageUrl"]}", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Error al subir imagen: {jsonResponse}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private async void BorrarImages_Click(object sender, RoutedEventArgs e)
+        {
+            if (habitacion == null || habitacion.IdHabitacion <= 0)
+            {
+                MessageBox.Show("No se puede borrar imágenes sin una habitación válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var result = MessageBox.Show("¿Seguro que deseas eliminar todas las imágenes de esta habitación?", "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                using var client = new HttpClient();
+                var response = await client.DeleteAsync($"http://localhost:3000/habitaciones/images/deleteAll/{habitacion.IdHabitacion}");
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Todas las imágenes han sido eliminadas.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Error al eliminar imágenes: {jsonResponse}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

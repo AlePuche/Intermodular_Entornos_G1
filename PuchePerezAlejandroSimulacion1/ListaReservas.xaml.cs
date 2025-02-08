@@ -369,5 +369,18 @@ namespace PuchePerezAlejandroSimulacion1
 
             MessageBox.Show("Los campos han sido restablecidos.", "Reset", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            usuarioLogeado = null;
+
+            MainWindow loginWindow = new MainWindow();
+            loginWindow.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window != loginWindow) window.Close();
+            }
+        }
+
     }
 }

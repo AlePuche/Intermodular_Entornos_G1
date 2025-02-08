@@ -130,7 +130,7 @@
                                         </Grid>
                                     </MenuItem.Header>
 
-                                    <MenuItem Header="Cerrar sesión" />
+                                    <MenuItem x:Name="LogOut" Header="Cerrar sesión" Click="LogOut_Click" />
                                 </MenuItem>
                             </Menu>
                         </StackPanel>

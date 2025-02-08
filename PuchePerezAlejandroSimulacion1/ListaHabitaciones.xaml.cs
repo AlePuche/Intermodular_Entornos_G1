@@ -42,6 +42,15 @@ namespace PuchePerezAlejandroSimulacion1
             this.usuarioLogeado = usuarioLogeado;
             DataContext = this;
 
+            if (usuarioLogeado.Role == "Admin")
+            {
+                AdminButtonsGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                AdminButtonsGrid.Visibility = Visibility.Collapsed;
+            }
+
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:3000")
@@ -165,13 +174,22 @@ namespace PuchePerezAlejandroSimulacion1
 
         private void btn_Add_Click(object sender, RoutedEventArgs e)
         {
-            if (usuarioLogeado.Role == "Empleado")
-            {
-                MessageBox.Show("No tienes permisos para añadir habitaciones.", "Acceso denegado", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
             AddHabitacion ventana = new AddHabitacion(usuarioLogeado);
             ventana.Show();
+            Close();
+        }
+
+        private void btnAddTipo_Click(object sender, RoutedEventArgs e)
+        {
+            AddTipoHabitacion ventanaAddTipo = new AddTipoHabitacion(false, usuarioLogeado);
+            ventanaAddTipo.Show();
+            Close();
+        }
+
+        private void btnEditTipo_Click(object sender, RoutedEventArgs e)
+        {
+            AddTipoHabitacion ventanaEditTipo = new AddTipoHabitacion(true, usuarioLogeado); 
+            ventanaEditTipo.Show();
             Close();
         }
 
@@ -423,5 +441,6 @@ namespace PuchePerezAlejandroSimulacion1
                 if (window != loginWindow) window.Close();
             }
         }
+
     }
 }

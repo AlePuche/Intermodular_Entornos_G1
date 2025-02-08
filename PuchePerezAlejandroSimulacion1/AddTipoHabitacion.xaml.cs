@@ -199,7 +199,7 @@ namespace PuchePerezAlejandroSimulacion1
             var tipoSeleccionado = (TipoHabitacion)ComboBoxTipo.SelectedItem;
 
             var confirmResult = MessageBox.Show(
-                $"¿Seguro que deseas eliminar el tipo de habitación \"{tipoSeleccionado.Tipo}\"?\n\n⚠ Esta acción es irreversible.",
+                $"¿Seguro que deseas eliminar el tipo de habitación \"{tipoSeleccionado.Tipo}\"?\n\nEsta acción es irreversible.",
                 "Confirmar eliminación",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning

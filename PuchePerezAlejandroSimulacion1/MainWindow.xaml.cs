@@ -17,6 +17,7 @@ namespace PuchePerezAlejandroSimulacion1
 
         public MainWindow()
         {
+            this.WindowState = WindowState.Maximized;
             InitializeComponent();
         }
 
@@ -29,9 +30,9 @@ namespace PuchePerezAlejandroSimulacion1
 
             if (usuarioLogeado != null)
             {
-                ListaHabitaciones ventanaHabitaciones = new ListaHabitaciones(usuarioLogeado);
-                ventanaHabitaciones.Show();
-                this.Close();
+                SegundaVentana sv = new SegundaVentana(usuarioLogeado);
+                sv.Show();
+                Close();
             }
             else
             {

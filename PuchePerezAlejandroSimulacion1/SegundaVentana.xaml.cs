@@ -323,5 +323,17 @@ namespace PuchePerezAlejandroSimulacion1
 
             return true;
         }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            usuarioLogeado = null;
+
+            MainWindow loginWindow = new MainWindow();
+            loginWindow.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window != loginWindow) window.Close();
+            }
+        }
     }
 }

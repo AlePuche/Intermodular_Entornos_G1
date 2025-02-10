@@ -51,7 +51,7 @@ namespace PuchePerezAlejandroSimulacion1
             if (button != null)
             {
                 var habitacion = (Habitacion)button.DataContext;
-                AddHabitacion ventana = new AddHabitacion(habitacion);
+                AddHabitacion ventana = new AddHabitacion(habitacion, usuarioLogeado);
                 ventana.Show();
             }
         }

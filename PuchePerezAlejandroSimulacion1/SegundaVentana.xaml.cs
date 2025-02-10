@@ -251,6 +251,7 @@ namespace PuchePerezAlejandroSimulacion1
                 DateTime salida = fechaSalida.SelectedDate.Value;
 
                 var tiposDisponibles = habitaciones
+                .Where(h => h.Estado != "Mantenimiento")
                 .Where(h => PuedeAlojarHuespedes(h, numHuespedes, extraCamaBool))
                 .GroupBy(h => h.TipoHabitacion)
                 .Select(g =>

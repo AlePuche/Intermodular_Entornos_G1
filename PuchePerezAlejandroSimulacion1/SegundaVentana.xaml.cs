@@ -300,8 +300,8 @@ namespace PuchePerezAlejandroSimulacion1
 
         private bool HabitacionDisponible(Habitacion habitacion, List<Reserva> reservas, DateTime entrada, DateTime salida)
         {
-            entrada = entrada.Date;  // 🔹 Eliminar la hora
-            salida = salida.Date;    // 🔹 Eliminar la hora
+            entrada = entrada.Date;
+            salida = salida.Date;
 
             var reservasHabitacion = reservas
                 .Where(r => r.IdHabitacion == habitacion.IdHabitacion)

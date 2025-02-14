@@ -160,6 +160,13 @@ namespace PuchePerezAlejandroSimulacion1
                     return;
                 }
 
+                if (!EsEmailValido(txtEmail.Text.Trim()))
+                {
+                    MessageBox.Show("ERROR: El email introducido no es válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+
                 Reserva reserva = new Reserva
                 {
                     IdHabitacion = int.Parse(id),
@@ -270,5 +277,18 @@ namespace PuchePerezAlejandroSimulacion1
                 MessageBox.Show($"Error de conexión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private bool EsEmailValido(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

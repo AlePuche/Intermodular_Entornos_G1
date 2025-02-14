@@ -13,6 +13,7 @@ namespace PuchePerezAlejandroSimulacion1
             new Usuario { Name = "Alvaro", Email = "alvaro@example.com", Password = "empleado123", Role = "Empleado" },
             new Usuario { Name = "UsuarioAdmin", Email = "1", Password = "1", Role = "Admin" },// Usuario ADMIN para entrar rápido y comodamente mientras se desarrolla el proyecto
             new Usuario { Name = "UsuarioEmpleado", Email = "2", Password = "2", Role = "Empleado" },// Usuario EMPLEADO para entrar rápido y comodamente mientras se desarrolla el proyecto
+            new Usuario { Name = "Diego Santos", Email = "d.santosbailon@edu.gva.es", Password = "Dsantos79", Role = "Admin" },// Usuario para el profesor con Rol de Admin
         };
 
         public MainWindow()
@@ -44,7 +45,7 @@ namespace PuchePerezAlejandroSimulacion1
         {
             foreach (var usuario in usuarios)
             {
-                if (usuario.Email == email && usuario.Password == password)
+                if (usuario.Email.ToLower() == email.ToLower() && usuario.Password == password)
                 {
                     return usuario;
                 }

@@ -232,7 +232,27 @@ namespace PuchePerezAlejandroSimulacion1
                             }
                             else
                             {
-                                MessageBox.Show($"Error al eliminar la habitación: {responseMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                try
+                                {
+                                    var errorData = JsonSerializer.Deserialize<Dictionary<string, object>>(responseMessage);
+                                    string errorMessage = errorData.ContainsKey("message") ? errorData["message"].ToString() : "Ocurrió un error.";
+
+                                    if (errorData.ContainsKey("reservas") && errorData["reservas"] is JsonElement reservasElement)
+                                    {
+                                        var reservas = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(reservasElement.ToString());
+                                        errorMessage += "\n\n🔹 Reservas activas en esta habitación:\n";
+                                        foreach (var res in reservas)
+                                        {
+                                            errorMessage += $"- ID: {res["id"]}, Desde: {res["fechaInicio"]}, Hasta: {res["fechaSalida"]}\n";
+                                        }
+                                    }
+
+                                    MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show($"Error desconocido. Respuesta del servidor:\n{responseMessage}\n\nDetalles: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
                         }
                         catch (Exception ex)

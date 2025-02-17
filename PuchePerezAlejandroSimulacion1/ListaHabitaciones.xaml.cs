@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using PuchePerezAlejandroSimulacion1.Model;
 
 namespace PuchePerezAlejandroSimulacion1
 {

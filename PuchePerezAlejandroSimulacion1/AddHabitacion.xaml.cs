@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.IO;
+using PuchePerezAlejandroSimulacion1.Model;
 
 namespace PuchePerezAlejandroSimulacion1
 {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using PuchePerezAlejandroSimulacion1.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

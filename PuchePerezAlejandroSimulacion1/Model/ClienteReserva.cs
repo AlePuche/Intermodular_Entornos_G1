@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PuchePerezAlejandroSimulacion1
+namespace PuchePerezAlejandroSimulacion1.Model
 {
     public class ClienteReserva
     {

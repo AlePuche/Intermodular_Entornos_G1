@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using PuchePerezAlejandroSimulacion1.Model;
 
 namespace PuchePerezAlejandroSimulacion1
 {

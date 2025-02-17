@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace PuchePerezAlejandroSimulacion1
+namespace PuchePerezAlejandroSimulacion1.Model
 {
     public class TipoHabitacion
     {

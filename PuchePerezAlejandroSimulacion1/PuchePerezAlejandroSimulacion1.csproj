@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="View\**" />
+    <Page Remove="View\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Images\añadir_usuario.png" />
     <None Remove="Images\botonanadir.png" />
     <None Remove="Images\btn-login.png" />
@@ -84,12 +91,6 @@
     <Resource Include="Images\usuario.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="View\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
 
 </Project>

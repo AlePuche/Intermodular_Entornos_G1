@@ -9,81 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\añadir_usuario.png" />
-    <None Remove="Images\botonanadir.png" />
-    <None Remove="Images\btn-login.png" />
-    <None Remove="Images\Buscador Usuarios - Botones.png" />
-    <None Remove="Images\Buscador Usuarios.png" />
-    <None Remove="Images\campana.png" />
-    <None Remove="Images\editar.png" />
-    <None Remove="Images\eliminar.png" />
-    <None Remove="Images\habitacion.png" />
-    <None Remove="Images\hotellogoestrellas.png" />
-    <None Remove="Images\hotelperemaria.png" />
-    <None Remove="Images\hotelperemaria_horizontal.png" />
-    <None Remove="Images\img-cover-login.png" />
-    <None Remove="Images\imgLogin.jpeg" />
-    <None Remove="Images\informacion.png" />
-    <None Remove="Images\Logo.png" />
-    <None Remove="Images\usuario.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Mailjet.Api" Version="3.0.0" />
     <PackageReference Include="MailKit" Version="4.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Images\añadir_usuario.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\botonanadir.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\btn-login.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Buscador Usuarios - Botones.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Buscador Usuarios.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\campana.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\editar.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\eliminar.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\habitacion.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\hotellogoestrellas.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\hotelperemaria.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\hotelperemaria_horizontal.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\img-cover-login.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\informacion.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\usuario.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
 </Project>

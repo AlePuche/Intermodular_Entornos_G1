@@ -16,12 +16,18 @@ namespace PuchePerezAlejandroSimulacion1
     /// </summary>
     public partial class ListaHabitaciones : Window
     {
+        // Colecciones
         public ObservableCollection<Habitacion> Habitaciones { get; set; }
         public ObservableCollection<TipoHabitacion> TiposHabitacion { get; set; }
         public ObservableCollection<Notificacion> Notificaciones { get; set; } = new ObservableCollection<Notificacion>();
+        
+        // Usuario logeado en el sistema
         public Usuario usuarioLogeado { get; set; }
+
+        // Cliente HTTP para conectar con la API
         public readonly HttpClient _httpClient;
 
+        // Variable que almacena la ruta del ícono de la campana de notificaciones
         private string _rutaCampana;
         public string RutaCampana
         {
@@ -29,6 +35,7 @@ namespace PuchePerezAlejandroSimulacion1
             set
             {
                 _rutaCampana = value;
+                // Actualiza la UI en el hilo principal
                 Dispatcher.Invoke(() =>
                 {
                     CampanaIcono.Source = new BitmapImage(new Uri(_rutaCampana, UriKind.RelativeOrAbsolute));
@@ -36,13 +43,15 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Constructor de la ventana, recibe el usuario logueado
         public ListaHabitaciones(Usuario usuarioLogeado)
         {
             this.WindowState = WindowState.Maximized;
             InitializeComponent();
             this.usuarioLogeado = usuarioLogeado;
-            DataContext = this;
+            DataContext = this; // Asigna el contexto de datos para el data binding
 
+            // Verifica si el usuario es administrador para mostrar los botones de gestión
             if (usuarioLogeado.Role == "Admin")
             {
                 AdminButtonsGrid.Visibility = Visibility.Visible;
@@ -52,20 +61,24 @@ namespace PuchePerezAlejandroSimulacion1
                 AdminButtonsGrid.Visibility = Visibility.Collapsed;
             }
 
+            // Configuración del cliente HTTP
             _httpClient = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:3000")
             };
 
+            // Inicializa las colecciones
             Habitaciones = new ObservableCollection<Habitacion>();
             TiposHabitacion = new ObservableCollection<TipoHabitacion>();
-            
+
+            // Carga los datos desde la API
             _ = CargarListaHabitaciones();
             _ = CargarTiposHabitacion();
             VerificarNotificaciones();
 
         }
 
+        // Carga los tipos de habitaciones desde la API
         private async Task CargarTiposHabitacion()
         {
             try
@@ -96,6 +109,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Carga la lista de habitaciones desde la API
         private async Task CargarListaHabitaciones()
         {
             try
@@ -127,6 +141,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Evento de clic para editar una habitación
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (usuarioLogeado.Role == "Empleado")
@@ -194,6 +209,7 @@ namespace PuchePerezAlejandroSimulacion1
             Close();
         }
 
+        // Evento para eliminar una habitación
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (usuarioLogeado.Role == "Empleado")
@@ -265,11 +281,13 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Restringe la entrada de texto en un TextBox a solo números
         private void TextBox_NumericOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !Regex.IsMatch(e.Text, "^[0-9]+$");
         }
 
+        // Realiza una búsqueda de habitaciones aplicando los filtros ingresados en la UI
         private async void btn_BuscarHab_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -303,6 +321,7 @@ namespace PuchePerezAlejandroSimulacion1
                     return;
                 }
 
+                // Se crea un objeto con los filtros para enviarlo en la solicitud HTTP
                 var filtros = new
                 {
                     idHabitacion = idHabitacion > 0 ? idHabitacion : (int?)null,
@@ -316,6 +335,7 @@ namespace PuchePerezAlejandroSimulacion1
                     tamanyoMax = tamanyoMax > 0 ? tamanyoMax : (double?)null
                 };
 
+                // Serializa el objeto a JSON y lo envía en la solicitud HTTP
                 var json = JsonSerializer.Serialize(filtros);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -324,11 +344,13 @@ namespace PuchePerezAlejandroSimulacion1
 
                 if (response.IsSuccessStatusCode)
                 {
+                    // Deserializa la respuesta JSON en una lista de habitaciones
                     var habitacionesFiltradas = JsonSerializer.Deserialize<Habitacion[]>(responseMessage, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     });
 
+                    // Limpia la lista actual y agrega las habitaciones filtradas
                     Habitaciones.Clear();
                     foreach (var habitacion in habitacionesFiltradas)
                     {
@@ -351,6 +373,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Restablece los valores de los filtros en la UI
         private void ResetCampos_Click(object sender, RoutedEventArgs e)
         {
             IdHabitacionTextBox.Text = "";
@@ -365,6 +388,7 @@ namespace PuchePerezAlejandroSimulacion1
             ComboBoxTipo.SelectedItem = null;
         }
 
+        // Verifica si hay notificaciones no vistas y actualiza el ícono de la campana
         private async Task VerificarNotificaciones()
         {
             try
@@ -391,6 +415,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Muestra las notificaciones y las marca como vistas en la API
         private async void MostrarNotificaciones(object sender, MouseButtonEventArgs e)
         {
             await CargarNotificaciones();
@@ -401,10 +426,12 @@ namespace PuchePerezAlejandroSimulacion1
             RutaCampana = "http://localhost:3000/images/campana.png";
         }
 
+        // Alterna la visibilidad del popup de notificaciones
         private async void AlternarPopupNotificaciones(object sender, MouseButtonEventArgs e)
         {
             if (NotificacionesPopup.IsOpen)
             {
+                // Si el popup está abierto, lo cierra y marca las notificaciones como vistas
                 await _httpClient.PostAsync("/notificaciones/marcarVistas", null);
                 Notificaciones.Clear();
 
@@ -415,6 +442,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
             else
             {
+                // Si está cerrado, carga las notificaciones y lo muestra
                 await CargarNotificaciones();
 
                 NotificacionesPopup.IsOpen = true;
@@ -422,11 +450,14 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Cierra el popup de notificaciones
         private void CerrarPopupNotificaciones(object sender, MouseButtonEventArgs e)
         {
             NotificacionesPopup.IsOpen = false;
             FondoOscuro.Visibility = Visibility.Collapsed;
         }
+
+        // Carga las notificaciones no vistas desde la API
         private async Task CargarNotificaciones()
         {
             try
@@ -451,6 +482,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Evento de clic para cerrar sesión
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             usuarioLogeado = null;

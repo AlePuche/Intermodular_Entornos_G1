@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="AddHabitacion" Height="969" Width="1440">
     <Window.Resources>
+        <!-- Estilo para los botones: fondo y borde transparentes, cursor de mano -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -20,7 +21,9 @@
             </Setter>
         </Style>
     </Window.Resources>
-        <Grid>
+    <!-- Contenedor principal -->
+    <Grid>
+        <!-- Panel principal con fondo blanco y bordes redondeados -->
         <Border Height="691" Width="1297" Background="WhiteSmoke" CornerRadius="20">
             <Grid>
                 <Grid.RowDefinitions>
@@ -30,36 +33,49 @@
                     <RowDefinition Height="4*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
+                
+                <!-- Encabezado con título y botón de cerrar -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="txtAddEdit" Text="Añadir habitación" Foreground="#278498" FontSize="50" FontFamily="Monstserrat" FontWeight="Bold" Margin="50,30,0,0"/>
+                    <!-- Botón de cierre con borde redondeado -->
                     <Border Grid.Column="1" CornerRadius="80" BorderThickness="3" Background="Black" Height="70" VerticalAlignment="Center" Margin="0,10,10,0">
                         <Button Width="60" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="White" FontStyle="Italic"  FontSize="30" Content="X" Click="Button_Click" />
                     </Border>
                 </Grid>
+                
+                <!-- Campos principales -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="1.6*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    
+                    <!-- Campo para ID de la habitación -->
                     <StackPanel Margin="50,0,0,0">
                         <TextBlock  Text="Id" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
                         <TextBox x:Name="txtIdTextBox" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly" Visibility="Visible"/>
                         <TextBlock x:Name="txtIdTextBlock" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" VerticalAlignment="Center" Visibility="Collapsed"/>
                     </StackPanel>
+                    
+                    <!-- Selección de tipo de habitación -->
                     <StackPanel Grid.Column="1" Margin="50,0,50,0">
                        <TextBlock  Text="Tipo" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
                         <ComboBox x:Name="ComboBoxTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" SelectedItem="{Binding TipoSeleccionado, Mode=TwoWay}" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     </StackPanel>
+                    
+                    <!-- Campo para número de huéspedes -->
                     <StackPanel Grid.Column="2" Margin="50,0,50,0">
                         <TextBlock Text="Aforo" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
                         <TextBox x:Name="numHuespedes" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
                 </Grid>
+
+                <!-- Campo de descripción -->
                 <StackPanel Grid.Row="2" Margin="50,0,50,0">
                     <TextBlock  Text="Descripción" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
                     <RichTextBox x:Name="txtDescripcion" Height="200" VerticalScrollBarVisibility="Auto">
@@ -68,31 +84,41 @@
                         </FlowDocument>
                     </RichTextBox>
                 </StackPanel>
+
+                <!-- Administración de imágenes y otros datos -->
                 <Grid Grid.Row="3" Cursor="">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+
+                    <!-- Sección de imágenes -->
                     <StackPanel Margin="50,0,50,0">
                         <TextBlock Text="Administrar imágenes" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" TextAlignment="Center"/>
+                        <!-- Botón para añadir imagen principal-->
                         <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="250" Height="40" Margin="0,20,0,0" HorizontalAlignment="Center">
                             <Button x:Name="btn_MainImagen" Content="Añadir imagen principal" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="MainImagen_Click"/>
                         </Border>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                           <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="150" Height="40" Margin="0,10,0,0">
+                            <!-- Botón para añadir imagen -->
+                            <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="150" Height="40" Margin="0,10,0,0">
                                 <Button x:Name="btn_AddImage" Content="Añadir" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="AddImagen_Click"/>
-                           </Border>
+                            </Border>
+                            <!-- Botón para borrar imágenes -->
                             <Border CornerRadius="30" BorderThickness="2" BorderBrush="Red" Background="Red" Width="150" Height="40" Margin="10,10,0,0">
                                 <Button x:Name="btn_BorrarImages" Content="Borrar todas" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="BorrarImages_Click"/>
                             </Border>
                         </StackPanel>
-                        
                     </StackPanel>
+
+                    <!-- Campo de tamaño -->
                     <StackPanel Grid.Column="1" Margin="50,0,50,0">
                         <TextBlock  Text="Tamaño (m2)" FontSize="20" FontWeight="Bold" FontFamily="Montserrat"/>
                         <TextBox x:Name="txtTamanyo" Height="40" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
+
+                    <!-- Estado de la habitación -->
                     <StackPanel Grid.Column="2" Margin="50,0,50,0">
                         <TextBlock  Text="Estado" FontSize="20" FontWeight="Bold" FontFamily="Montserrat" />
                         <ComboBox x:Name="EstadoBox" Height="40">
@@ -101,6 +127,8 @@
                         </ComboBox>
                     </StackPanel>
                 </Grid>
+
+                <!-- Botón de acción (Añadir o Editar) -->
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

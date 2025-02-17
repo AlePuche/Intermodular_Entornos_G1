@@ -24,12 +24,20 @@ namespace PuchePerezAlejandroSimulacion1
     /// </summary>
     public partial class AddTipoHabitacion : Window
     {
+        // Tipo de habitación seleccionado en modo edición
         private TipoHabitacion tipoSeleccionado;
+
+        // Colección de tipos de habitación para mostrar en el ComboBox
         public ObservableCollection<TipoHabitacion> TiposHabitacion { get; set; } = new ObservableCollection<TipoHabitacion>();
+
+        // Cliente HTTP para realizar peticiones a la API
         private readonly HttpClient _httpClient;
+        // Usuario logueado en la aplicación
         public Usuario usuarioLogeado { get; set; }
+        // Indica si la ventana está en modo edición o en modo agregar
         private bool esModoEdicion;
 
+        // Constructor principal de la ventana
         public AddTipoHabitacion(bool esEditar, Usuario usuarioLogeado)
         {
             this.WindowState = WindowState.Maximized;
@@ -37,12 +45,17 @@ namespace PuchePerezAlejandroSimulacion1
             _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:3000") };
             esModoEdicion = esEditar;
             this.usuarioLogeado = usuarioLogeado;
-
+            
+            // Define el contexto de datos de la ventana
             DataContext = this;
+
+            // Configura la ventana según el modo (edición o creación)
             ConfigurarModo();
+
             this.usuarioLogeado = usuarioLogeado;
         }
 
+        // Configura la interfaz dependiendo si está en modo edición o creación
         private async void ConfigurarModo()
         {
             if (esModoEdicion)
@@ -51,7 +64,7 @@ namespace PuchePerezAlejandroSimulacion1
                 txtNombre.Visibility = Visibility.Collapsed;
                 ComboBoxTipo.Visibility = Visibility.Visible;
                 btnEliminar.Visibility = Visibility.Visible;
-                await CargarTiposHabitacion();
+                await CargarTiposHabitacion(); // Carga los tipos de habitación desde la API
             }
             else
             {
@@ -60,6 +73,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Obtiene la lista de tipos de habitación desde la API y la carga en la UI
         private async Task CargarTiposHabitacion()
         {
             try
@@ -77,7 +91,7 @@ namespace PuchePerezAlejandroSimulacion1
                         TiposHabitacion.Add(tipo);
                     }
 
-                    ComboBoxTipo.ItemsSource = TiposHabitacion;
+                    ComboBoxTipo.ItemsSource = TiposHabitacion; // Asigna los tipos al ComboBox
                 }
                 else
                 {
@@ -90,6 +104,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Evento al seleccionar un tipo de habitación en el ComboBox
         private void ComboBoxTipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ComboBoxTipo.SelectedItem is TipoHabitacion tipo)
@@ -101,8 +116,10 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Evento para guardar o actualizar un tipo de habitación
         private async void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
+            // Obtiene el nombre del tipo de habitación
             string nombreTipo = esModoEdicion ? ((TipoHabitacion)ComboBoxTipo.SelectedItem)?.Tipo : txtNombre.Text;
 
             if (string.IsNullOrWhiteSpace(nombreTipo))
@@ -189,6 +206,7 @@ namespace PuchePerezAlejandroSimulacion1
             }
         }
 
+        // Evento para eliminar un tipo de habitación
         private async void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
             if (ComboBoxTipo.SelectedItem == null)

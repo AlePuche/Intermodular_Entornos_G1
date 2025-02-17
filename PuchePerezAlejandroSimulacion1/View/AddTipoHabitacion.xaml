@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="AddTipoHabitacion" Height="969" Width="1440">
     <Window.Resources>
+        <!-- Estilo global para los botones: Sin borde, fondo transparente y cursor en forma de mano -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -20,7 +21,10 @@
             </Setter>
         </Style>
     </Window.Resources>
+    
+    <!-- Contenedor principal -->
     <Grid>
+        <!-- Cuadro principal con fondo blanco y bordes redondeados -->
         <Border Height="691" Width="1297" Background="WhiteSmoke" CornerRadius="20" Padding="20">
             <Grid>
                 <Grid.RowDefinitions>
@@ -32,36 +36,50 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Título de la ventana -->
                 <TextBlock x:Name="txtAddEdit" Text="Añadir Tipo de Habitación" Foreground="#278498" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
 
+                <!-- Campo para ingresar el nombre del tipo de habitación -->
                 <StackPanel Grid.Row="1" Margin="10" HorizontalAlignment="Center">
                     <TextBlock Text="Nombre del Tipo" FontSize="18" FontWeight="Bold"/>
+                    
+                    <!-- Se puede elegir entre ComboBox (para edición) o TextBox (para agregar uno nuevo) -->
                     <ComboBox x:Name="ComboBoxTipo" Grid.Row="1" Height="35" Width="200" DisplayMemberPath="Tipo" SelectionChanged="ComboBoxTipo_SelectionChanged" Visibility="Collapsed"/>
                     <TextBox x:Name="txtNombre" Grid.Row="1" Height="35" Width="200" FontSize="16" HorizontalAlignment="Left"/>
                 </StackPanel>
-
+                
+                <!-- Campo para ingresar el precio base -->
                 <StackPanel Grid.Row="2" Margin="10" HorizontalAlignment="Center">
                     <TextBlock Text="Precio Base (€)" FontSize="20" FontWeight="Bold"/>
                     <TextBox x:Name="txtPrecioBase" Height="30" Width="200" FontSize="18" PreviewTextInput="TextBox_NumericOnly" HorizontalAlignment="Left"/>
                 </StackPanel>
 
+                <!-- Campo para ingresar la capacidad máxima de personas -->
                 <StackPanel Grid.Row="3" Margin="10" HorizontalAlignment="Center">
                     <TextBlock Text="Capacidad Máxima" FontSize="20" FontWeight="Bold"/>
                     <TextBox x:Name="txtCapacidadMaxima" Height="30" Width="200" FontSize="18" PreviewTextInput="TextBox_NumericOnly" HorizontalAlignment="Left"/>
                 </StackPanel>
 
+                <!-- Campo para ingresar los servicios separados por comas -->
                 <StackPanel Grid.Row="4" Margin="10">
                     <TextBlock Text="Servicios (separados por comas)" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
                     <TextBox x:Name="txtServicios" Height="30" FontSize="18" Margin="100,0"/>
                 </StackPanel>
 
+                <!-- Botones de acción: Guardar, Cancelar y Eliminar -->
                 <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
+
+                    <!-- Botón para guardar los cambios -->
                     <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="150" Height="40">
                         <Button x:Name="btnGuardar" Content="Guardar" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="btnGuardar_Click"/>
                     </Border>
+                    
+                    <!-- Botón para cancelar y cerrar la ventana -->
                     <Border CornerRadius="30" BorderThickness="2" BorderBrush="Gray" Background="Gray" Width="150" Height="40" Margin="100,0,0,0">
                         <Button Content="Cancelar" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="Cancelar_Click"/>
                     </Border>
+
+                    <!-- Botón para eliminar un tipo de habitación (solo visible en modo edición) -->
                     <Border x:Name="btnEliminar" CornerRadius="30" BorderThickness="2" BorderBrush="Red" Background="Red" Width="150" Height="40" Margin="400,0,0,0" Visibility="Collapsed">
                         <Button Content="Eliminar" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="btnEliminar_Click" Cursor="Hand" />
                     </Border>

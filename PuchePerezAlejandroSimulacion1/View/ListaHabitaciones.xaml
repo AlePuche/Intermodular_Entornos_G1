@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:PuchePerezAlejandroSimulacion1"
         mc:Ignorable="d"
         Title="ListaHabitaciones" Height="1018" Width="1440">
+    <!-- Sección de recursos: Define estilos y colores reutilizables -->
     <Window.Resources>
-
+        <!-- Definición de colores personalizados para la barra de desplazamiento -->
         <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#E0E0E0"/>
         <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#278498"/>
         <SolidColorBrush x:Key="ScrollBarHoverThumbBrush" Color="#1E6F82"/>
 
+        <!-- Estilo para el "thumb" (control deslizante) de la barra de desplazamiento -->
         <Style x:Key="ScrollThumbStyle" TargetType="Thumb">
             <Setter Property="Template">
                 <Setter.Value>
@@ -27,6 +29,7 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
 
+        <!-- Estilo de la barra de desplazamiento -->
         <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="{StaticResource ScrollBarBackgroundBrush}"/>
             <Setter Property="Template">
@@ -51,6 +54,7 @@
             </Setter>
         </Style>
 
+        <!-- Estilo personalizado para botones -->
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -90,7 +94,10 @@
             </Setter>
         </Style>
     </Window.Resources>
+
+    <!-- Definición del layout principal con Grid -->
     <Grid>
+        <!-- Definición de filas y columnas del Grid -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -101,8 +108,14 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+        
+        <!-- Logo del hotel -->
         <Image Width="300" Source="http://localhost:3000/images/hotelperemaria_horizontal.png" HorizontalAlignment="Center"/>
+
+        <!-- Título de la sección de búsqueda -->
         <TextBlock Grid.Row="1" Text="Buscador" FontFamily="Montserrat" FontWeight="Bold" Foreground="#278498" FontSize="60" HorizontalAlignment="Center"/>
+
+        <!-- Sección del buscador con filtros -->
         <Border Grid.Row="2" CornerRadius="20" Background="WhiteSmoke" Margin="50,20">
             <Grid>
                 <Grid.RowDefinitions>
@@ -114,10 +127,14 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                
+                <!-- Campo para filtrar por ID de habitación -->
                 <StackPanel Margin="20,20,50,0">
                     <TextBlock Text="Nº Habitación" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <TextBox x:Name="IdHabitacionTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly" HorizontalAlignment="Left"/>
                 </StackPanel>
+
+                <!-- Filtros de aforo mínimo y máximo -->
                 <StackPanel Grid.Row="1" Margin="20,0,50,0">
                     <TextBlock Text="Aforo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <StackPanel Grid.Row="1" Margin="0,20,0,0" Orientation="Horizontal">
@@ -127,10 +144,14 @@
                         <TextBox x:Name="AforoMaxTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
                 </StackPanel>
+
+                <!-- Lista desplegable de tipos de habitación -->
                 <StackPanel Grid.Row="2" Margin="20,0,50,0">
                     <TextBlock Text="Tipo" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <ComboBox x:Name="ComboBoxTipo" ItemsSource="{Binding TiposHabitacion}" DisplayMemberPath="Tipo" Height="40" FontSize="15" FontWeight="DemiBold" FontFamily="Montserrat"/>
                 </StackPanel>
+                
+                <!-- Campo para filtrar por Precio -->
                 <StackPanel Grid.Row="3" Margin="20,0,50,0">
                     <TextBlock  Text="Precio" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <StackPanel Grid.Row="3" Margin="0,20,0,0" Orientation="Horizontal">
@@ -140,6 +161,8 @@
                         <TextBox x:Name="PrecioMaxTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
                 </StackPanel>
+
+                <!-- Lista desplegable de los estados -->
                 <StackPanel Grid.Row="4" Margin="20,0,50,0">
                     <TextBlock Text="Estado" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <ComboBox x:Name="EstadoComboBox" Height="40">
@@ -148,6 +171,7 @@
                         <ComboBoxItem Content="Mantenimiento"/>
                     </ComboBox>
                 </StackPanel>
+                <!-- Campo para filtrar por Tamaño m2 -->
                 <StackPanel Grid.Row="5" Margin="20,0,50,0">
                     <TextBlock  Text="Tamaño (m2)" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                     <StackPanel Grid.Row="5" Margin="0,20,0,0" Orientation="Horizontal">
@@ -157,6 +181,8 @@
                         <TextBox x:Name="TamanyoMaxTextBox" Height="40" Width="100" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" PreviewTextInput="TextBox_NumericOnly"/>
                     </StackPanel>
                 </StackPanel>
+
+                <!-- Botones de acción para búsqueda y reset -->
                 <StackPanel Grid.Row="6" Margin="20" Orientation="Horizontal">
                     <Border CornerRadius="30" BorderThickness="2" BorderBrush="#278498"  Background="#278498" Width="150" Height="50">
                         <Button x:Name="btn_BuscarHab" Content="Buscar" BorderBrush="Transparent" Background="Transparent" Foreground="White" FontSize="20" Click="btn_BuscarHab_Click"/>
@@ -167,18 +193,22 @@
                 </StackPanel>
             </Grid>
         </Border>
+        <!-- Grid que contiene la barra de navegación superior y el menú de usuario -->
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
+                <!-- Definimos dos columnas: una grande y otra pequeña -->
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-
+            
+            <!-- Grid secundario para la información del usuario y notificaciones -->
             <Grid Grid.Column="1" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- Panel que muestra el nombre del usuario logueado y el menú de cierre de sesión -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,10,0" Cursor="">
                     <TextBlock Text="{Binding usuarioLogeado.Name}" FontSize="20" Foreground="#278498" FontWeight="DemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
@@ -190,16 +220,19 @@
    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </MenuItem.Header>
+                            <!-- Opción del menú para cerrar sesión -->
                             <MenuItem x:Name="LogOut" Header="Cerrar sesión" Click="LogOut_Click" />
                         </MenuItem>
                     </Menu>
                 </StackPanel>
 
+                <!-- Fondo oscuro que aparece al abrir las notificaciones -->
                 <Border x:Name="FondoOscuro"
                         Background="Transparent"
                         Visibility="Collapsed"
                         MouseDown="CerrarPopupNotificaciones"/>
 
+                <!-- Ventana emergente para las notificaciones -->
                 <Popup x:Name="NotificacionesPopup" Placement="Bottom" StaysOpen="True" AllowsTransparency="True">
                     <Border Background="White" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Width="300" Height="400">
                         <StackPanel>
@@ -221,12 +254,15 @@
                         </StackPanel>
                     </Border>
                 </Popup>
+                
+                <!-- Ícono de la campana de notificaciones -->
                 <Image x:Name="CampanaIcono"
                         Width="25" Margin="0,10,40,0" Grid.Column="1"
                         Source="{Binding RutaCampana}"
                         MouseLeftButtonUp="AlternarPopupNotificaciones"/>
             </Grid>
 
+            <!-- Grid con los botones de navegación del sistema -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -241,7 +277,11 @@
                 <Button Content="Habitaciones" Style="{StaticResource CustomButtonStyle}" Grid.Column="3" Click="HabitacionesButton_Click"/>
             </Grid>
         </Grid>
+
+        <!-- Título de la sección de habitaciones -->
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Habitaciones" FontFamily="Montserrat" FontWeight="Bold" Foreground="Black" FontSize="60" Margin="50,0"/>
+
+        <!-- Grid que contiene la lista de habitaciones -->
         <Grid Grid.Column="1" Grid.Row="2" Margin="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -257,6 +297,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!-- Encabezados de la tabla de habitaciones -->
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7" BorderThickness="1" BorderBrush="WhiteSmoke" Background="#F0F0F0">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -278,7 +319,7 @@
                 </Grid>
             </Border>
 
-
+            <!-- Tabla de habitaciones -->
             <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Habitaciones}">
                     <ItemsControl.ItemsPanel>
@@ -330,6 +371,8 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        
+        <!-- Panel de botones de administración para usuarios con permisos -->
         <Grid Grid.Row="3" Grid.Column="1" x:Name="AdminButtonsGrid" Visibility="Collapsed" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -337,14 +380,18 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            
+            <!-- Botón para añadir una nueva habitación -->
             <Border Grid.Column="1" CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="180" Height="50" Margin="10,0,100,0">
                 <Button x:Name="btn_Add" Content="Añadir Habitación" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="btn_Add_Click"/>
             </Border>
             
+            <!-- Botón para añadir un nuevo tipo de habitación -->
             <Border Grid.Column="2" CornerRadius="30" BorderThickness="2" BorderBrush="#278498" Background="#278498" Width="150" Height="50" Margin="10,0,0,0">
                 <Button x:Name="btnAddTipo" Content="Añadir Tipo" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="btnAddTipo_Click"/>
             </Border>
-
+            
+            <!-- Botón para editar o eliminar tipos de habitación -->
             <Border Grid.Column="3" CornerRadius="30" BorderThickness="2" BorderBrush="#FFA500" Background="#FFA500" Width="200" Height="50" Margin="10,0,0,0">
                 <Button x:Name="btnEditTipo" Content="Editar/Eliminar Tipo" Foreground="White" BorderBrush="Transparent" Background="Transparent" FontSize="20" Click="btnEditTipo_Click"/>
             </Border>

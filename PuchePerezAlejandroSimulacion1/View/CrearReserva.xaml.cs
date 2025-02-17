@@ -22,17 +22,18 @@ namespace PuchePerezAlejandroSimulacion1
     /// </summary>
     public partial class CrearReserva : Window
     {
-        bool editable;
-        Reserva reservaEdit;
-        public int extras = 0;
-        public DateTime entrada;
-        public DateTime salida;
-        public int price;
-        public Usuario usuarioLogeado;
-        public String id;
+        bool editable; // Indica si la reserva está en modo edición
+        Reserva reservaEdit; // Reserva a editar
+        public int extras = 0; // Contador de extras seleccionados
+        public DateTime entrada; // Fecha de entrada
+        public DateTime salida; // Fecha de salida
+        public int price; // Precio total de la reserva
+        public Usuario usuarioLogeado; // Usuario actualmente logeado
+        public string id; // ID de la habitación
 
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;// Cliente HTTP para realizar peticiones a la API
 
+        // Constructor para editar o visualizar una reserva existente.
         public CrearReserva(bool editable, Reserva reserva, Usuario usuario)
         {
             this.WindowState = WindowState.Maximized;
@@ -42,8 +43,9 @@ namespace PuchePerezAlejandroSimulacion1
             this.reservaEdit = reserva;
             this.usuarioLogeado = usuario;
 
-            if (editable)
+            if (editable)// Si está en modo edición
             {
+                // Inicializa el cliente HTTP
                 _httpClient = new HttpClient
                 {
                     BaseAddress = new Uri("http://localhost:3000")
@@ -52,7 +54,7 @@ namespace PuchePerezAlejandroSimulacion1
                 reservaButton.Content = "Editar Reserva";
                 lblTitulo.Text = "Editar Reserva";
 
-                txtTipo.Text = "Habitación " + reservaEdit.TipoHabitacion;
+                txtTipo.Text = reservaEdit.TipoHabitacion;
 
                 txtFechaEntradaEdit.Text = reservaEdit.FechaInicioFormatted.ToString();
 
@@ -74,7 +76,7 @@ namespace PuchePerezAlejandroSimulacion1
                 txtEmail.Visibility = Visibility.Visible;
                 txtEmail.Text = reservaEdit.Cliente.Email;
             }
-            else
+            else // Si solo se muestra la información de la reserva
             {
                 _httpClient = new HttpClient
                 {
@@ -110,6 +112,7 @@ namespace PuchePerezAlejandroSimulacion1
                 txtEmailInfo.Text = reservaEdit.Cliente.Email;
             }
         }
+        // Constructor para crear una nueva reserva.
         public CrearReserva(Usuario usuario)
         {
             this.WindowState = WindowState.Maximized;
@@ -121,13 +124,14 @@ namespace PuchePerezAlejandroSimulacion1
             };
             InitializeComponent();
         }
-
+        // Cierra la ventana y vuelve a la lista de reservas.
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ListaReservas listaReservas = new ListaReservas(usuarioLogeado);
             listaReservas.Show();
             Close();
         }
+        // Maneja la creación o edición de una reserva.
         private async void clickCrearReserva(object sender, RoutedEventArgs e)
         {
             if (editable)
@@ -183,6 +187,7 @@ namespace PuchePerezAlejandroSimulacion1
                 await crearReserva(reserva);
             }
         }
+        // Crea una nueva reserva enviando una solicitud a la API.
         private async Task crearReserva(Reserva nuevaReserva)
         {
             try
@@ -232,7 +237,7 @@ namespace PuchePerezAlejandroSimulacion1
                 MessageBox.Show($"Error de conexión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        // Edita una reserva existente enviando una solicitud a la API.
         private async Task EditarReserva(Reserva reservaActualizada)
         {
             try
@@ -278,6 +283,7 @@ namespace PuchePerezAlejandroSimulacion1
                 MessageBox.Show($"Error de conexión: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        // Verifica si un email tiene un formato válido.
         private bool EsEmailValido(string email)
         {
             try

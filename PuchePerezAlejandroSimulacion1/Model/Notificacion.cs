@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace PuchePerezAlejandroSimulacion1.Model
 {
+    // Clase que representa una notificación en el sistema
     public class Notificacion
     {
-        public string Mensaje { get; set; }
-        public string Fecha { get; set; }
+        public string Mensaje { get; set; } // Contenido del mensaje de la notificación
+        public string Fecha { get; set; } // Fecha en la que se generó la notificación (formateada como string)
     }
 }

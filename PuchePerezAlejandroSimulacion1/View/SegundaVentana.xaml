@@ -8,10 +8,12 @@
         Title="SegundaVentana" Height="1018" Width="1440">
 
     <Window.Resources>
+        <!-- Definición de colores para la barra de desplazamiento -->
         <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#E0E0E0"/>
         <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="#278498"/>
         <SolidColorBrush x:Key="ScrollBarHoverThumbBrush" Color="#1E6F82"/>
 
+        <!-- Estilo para el botón deslizante de la barra de desplazamiento -->
         <Style x:Key="ScrollThumbStyle" TargetType="Thumb">
             <Setter Property="Template">
                 <Setter.Value>
@@ -27,6 +29,7 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
 
+        <!-- Estilo de la barra de desplazamiento -->
         <Style TargetType="ScrollBar">
             <Setter Property="Background" Value="{StaticResource ScrollBarBackgroundBrush}"/>
             <Setter Property="Template">
@@ -50,6 +53,7 @@
             </Setter>
         </Style>
 
+        <!-- Estilo personalizado para botones con apariencia moderna -->
         <Style x:Key="CustomButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -76,6 +80,7 @@
             </Setter>
         </Style>
 
+        <!--Quita el estilo de base de los botones-->
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -91,12 +96,17 @@
     </Window.Resources>
 
     <Grid>
+        <!-- Definición de la estructura de filas -->
         <Grid.RowDefinitions>
             <RowDefinition Height="73*"/>
+            <!-- Cabecera -->
             <RowDefinition Height="274*"/>
+            <!-- Buscador -->
             <RowDefinition Height="655*"/>
+            <!-- Resultados -->
         </Grid.RowDefinitions>
 
+        <!-- Cabecera -->
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -104,8 +114,10 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
+                <!-- Logo del hotel -->
                 <Image HorizontalAlignment="Left" Width="300" Source="http://localhost:3000/images/hotelperemaria_horizontal.png" Margin="50,0"/>
 
+                <!-- Sección de usuario y notificaciones -->
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -121,6 +133,7 @@
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,10,10,0">
                             <TextBlock Text="{Binding usuarioLogeado.Name}" FontSize="20" Foreground="#278498" FontWeight="DemiBold" VerticalAlignment="Center" Margin="0,0,10,0"/>
 
+                            <!-- Menú de cierre de sesión -->
                             <Menu Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <MenuItem Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                                     <MenuItem.Header>
@@ -129,7 +142,6 @@
            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Grid>
                                     </MenuItem.Header>
-
                                     <MenuItem x:Name="LogOut" Header="Cerrar sesión" Click="LogOut_Click" />
                                 </MenuItem>
                             </Menu>
@@ -140,17 +152,37 @@
     Visibility="Collapsed"
     MouseDown="CerrarPopupNotificaciones"/>
 
-                        <Popup x:Name="NotificacionesPopup" Placement="Bottom" StaysOpen="True" AllowsTransparency="True">
+                        <!-- Popup de notificaciones -->
+                        <Popup x:Name="NotificacionesPopup"
+                            Placement="Bottom"  
+                            StaysOpen="True"
+                            AllowsTransparency="True">
+                            <!-- Permite que el fondo sea transparente -->
+
+                            <!-- Contenedor principal del popup -->
                             <Border Background="White" CornerRadius="10" BorderBrush="Gray" BorderThickness="1" Width="300" Height="400">
                                 <StackPanel>
-                                    <TextBlock Text="Notificaciones" FontSize="18" FontWeight="Bold" Padding="10" Foreground="#278498"/>
+                                    <!-- Título de la sección de notificaciones -->
+                                    <TextBlock Text="Notificaciones"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Padding="10"
+                       Foreground="#278498"/>
+                                    <!-- Color azul para resaltar -->
+
+                                    <!-- Área de desplazamiento para mostrar las notificaciones -->
                                     <ScrollViewer Height="350">
+                                        <!-- Control para mostrar la lista de notificaciones -->
                                         <ItemsControl ItemsSource="{Binding Notificaciones}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
+                                                    <!-- Cada notificación está dentro de un borde con una línea separadora -->
                                                     <Border BorderThickness="0,0,0,1" BorderBrush="LightGray" Padding="10">
                                                         <StackPanel>
+                                                            <!-- Muestra el mensaje de la notificación -->
                                                             <TextBlock Text="{Binding Mensaje}" FontSize="14" TextWrapping="Wrap"/>
+
+                                                            <!-- Muestra la fecha de la notificación en color gris -->
                                                             <TextBlock Text="{Binding Fecha}" FontSize="12" Foreground="Gray"/>
                                                         </StackPanel>
                                                     </Border>
@@ -161,6 +193,7 @@
                                 </StackPanel>
                             </Border>
                         </Popup>
+
 
                         <Image x:Name="CampanaIcono"
    Width="25" Margin="0,10,40,0" Grid.Column="1"
@@ -187,6 +220,7 @@
             </Grid>
         </StackPanel>
 
+        <!-- Buscador -->
         <StackPanel Canvas.Top="70" Grid.Row="1" Margin="0,23,0,0">
             <TextBlock Text="Buscador" VerticalAlignment="Bottom" FontSize="50" Foreground="#278498" FontWeight="Bold"  FontFamily="Montserrat" Margin="30,0,0,0"/>
             <Border Canvas.Top="150" Canvas.Left="50" CornerRadius="20" BorderThickness="3" Background="WhiteSmoke" DockPanel.Dock="Right" Height="163" Margin="80,0,80,0" Grid.Row="1">
@@ -202,6 +236,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
+                    <!-- Selección de huéspedes -->
                     <StackPanel Margin="20,0,0,0">
                         <TextBlock Text="Numero de huéspedes:" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
                         <ComboBox x:Name="comboNumHuespedes" Margin="0,0,20,0" Height="30">
@@ -212,6 +247,7 @@
                         </ComboBox>
                     </StackPanel>
 
+                    <!-- Selección de fechas -->
                     <StackPanel Margin="20,0,0,0" Grid.Column="1">
                         <TextBlock Text="Fecha de entrada:" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat" Margin="0,10,0,0"/>
                         <DatePicker x:Name="fechaEntrada" Height="30" Margin="0,0,20,0"/>
@@ -222,6 +258,7 @@
                         <DatePicker x:Name="fechaSalida" Height="30" Margin="0,0,20,0"/>
                     </StackPanel>
 
+                    <!--Checkbpx de extras-->
                     <StackPanel Margin="20,10,0,0" Grid.Row="1">
                         <TextBlock Text="Extras" VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" FontFamily="Montserrat"/>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,5,0,0">
@@ -231,6 +268,7 @@
                         </StackPanel>
                     </StackPanel>
 
+                    <!-- Botón de búsqueda -->
                     <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Border CornerRadius="20" BorderThickness="3" Background="#278498" DockPanel.Dock="Right" Height="40">
                             <Button Width="140" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Foreground="White" Content="Buscar" Click="Button_Click_4"/>
@@ -240,6 +278,7 @@
             </Border>
         </StackPanel>
 
+        <!-- Resultados de la búsqueda -->
         <StackPanel Grid.Row="2" Margin="30,0,30,0">
             <TextBlock Text="Resultados" Foreground="Black" FontFamily="Montserrat" FontSize="60" FontWeight="Bold" Margin="0,0,0,20"/>
 
@@ -255,6 +294,7 @@
                             <StackPanel Width="280" Margin="10,0,10,0">
                                 <Border CornerRadius="20" BorderThickness="0" ClipToBounds="True">
                                     <Grid>
+                                        <!-- Carga un video de carga mientras se obtiene la imagen -->
                                         <MediaElement x:Name="LoaderVideo"
                               Source="http://localhost:3000/images/loadingVid.mp4"
                               Width="100" Height="100"
@@ -264,7 +304,7 @@
                               IsMuted="True"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"/>
-
+                                        <!-- Imagen de la habitación -->
                                         <Image x:Name="HabitacionImagen"
                        Source="{Binding FotoUrl}"
                        Width="250"
@@ -276,7 +316,7 @@
                                                 <RectangleGeometry Rect="0,0,250,350" RadiusX="20" RadiusY="20"/>
                                             </Image.Clip>
                                         </Image>
-
+                                        <!-- Animación de aparición de la imagen -->
                                         <Grid.Triggers>
                                             <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                                                 <BeginStoryboard>
@@ -297,7 +337,7 @@
                                         </Grid.Triggers>
                                     </Grid>
                                 </Border>
-
+                                <!-- Botón para reservar -->
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <TextBlock Text="{Binding Tipo}" FontFamily="Montserrat" FontSize="30" Margin="0,10,0,0"/>
                                     <TextBlock Text="{Binding Precio, StringFormat='{}{0} € / noche'}" FontFamily="Montserrat" FontSize="20" Foreground="#278498" Margin="70,10,0,0"/>
@@ -320,7 +360,6 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-
         </StackPanel>
     </Grid>
 </Window>

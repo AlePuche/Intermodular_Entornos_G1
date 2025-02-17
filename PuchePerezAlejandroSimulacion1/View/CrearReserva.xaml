@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="CrearReserva" Height="969" Width="1440">
     <Window.Resources>
+        <!-- Estilo general para los botones: Sin fondo ni borde, cursor en mano -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -22,6 +23,7 @@
     </Window.Resources>
 
     <Grid>
+        <!-- Contenedor principal con bordes redondeados -->
         <Border Height="691" Width="1297" Background="WhiteSmoke" CornerRadius="20">
             <StackPanel Margin="50">
                 <Grid>
@@ -29,9 +31,9 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-
+                    <!-- Título de la ventana -->
                     <TextBlock x:Name="lblTitulo" Text="Crear Reserva" Foreground="#278498" FontSize="50" FontFamily="Monstserrat" FontWeight="Bold" VerticalAlignment="Center" />
-
+                    <!-- Botón para cerrar la ventana -->
                     <Border Grid.Column="1" CornerRadius="80" BorderThickness="3" Background="Black" Height="70" VerticalAlignment="Center">
                         <Button Width="60" Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent" Foreground="White" FontStyle="Italic"  FontSize="30" Content="X" Click="Button_Click" />
                     </Border>
@@ -41,10 +43,10 @@
                         <ColumnDefinition Width="305*"/>
                         <ColumnDefinition Width="892*"/>
                     </Grid.ColumnDefinitions>
-
+                    <!-- Sección de la imagen de la habitación -->
                     <StackPanel>
-                        <Image Source="Images\habitacion.png"/>
-                        <TextBlock x:Name="txtTipo" Text="Habitación Londres" FontSize="34" Margin="0,10,0,0" FontFamily="Monstserrat" FontWeight="DemiBold" TextWrapping="Wrap"/>
+                        <Image Source="http://localhost:3000/images/habitacion.png"/>
+                        <TextBlock x:Name="txtTipo" Text="" FontSize="34" Margin="0,10,0,0" FontFamily="Monstserrat" FontWeight="DemiBold" TextWrapping="Wrap"/>
                     </StackPanel>
 
                     <Grid Grid.Column="1" Margin="70,0,0,0">
@@ -59,18 +61,20 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
+                        <!-- Información de la reserva -->
+                        <!--Información de la fecha de entrada-->
                         <StackPanel>
                             <TextBlock x:Name="lblFechaEntrada" Text="Fecha entrada" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" />
                             <TextBlock x:Name="txtFechaEntrada" Text="20/04/2023" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray" Margin="0,20,0,0" Visibility="Visible" />
                             <TextBox x:Name="txtFechaEntradaEdit" Text="20/04/2023" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Margin="0,20,20,0" Visibility="Collapsed" />
                         </StackPanel>
-
+                        <!--Información de la fecha de salida-->
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="Fecha entrada" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                             <TextBlock x:Name="txtFechaSalida" Text="25/04/2023" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray" Margin="0,20,0,0" Visibility="Visible" />
                             <TextBox x:Name="txtFechaSalidaEdit" Text="20/04/2023" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Margin="0,20,20,0" Visibility="Collapsed" />
                         </StackPanel>
-
+                        <!--Número de huespedes-->
                         <StackPanel Grid.Column="2">
                             <TextBlock Text="Huespedes" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                             <TextBlock x:Name="txtHuespedes" Text="6" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray" Margin="0,20,0,0" Visibility="Visible" />
@@ -81,25 +85,25 @@
                                 <ComboBoxItem Content="4"></ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
-
+                        <!--Precio total de la reserva-->
                         <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
                             <TextBlock Text="Precio" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                             <TextBlock x:Name="txtPrecio" Text="205,95 €" FontSize="50" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="#278498" Margin="0,10,0,0" Visibility="Visible" />
                             <TextBox x:Name="txtPrecioEdit" Text="205,95 €" FontSize="50" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="#278498" Margin="0,10,0,0" Visibility="Collapsed" />
                         </StackPanel>
-
+                        <!--Nombre del cliente-->
                         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,10,0">
                             <TextBlock Text="Cliente" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                             <TextBlock x:Name="txtClienteLbl" FontSize="50" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="#278498" Margin="0,10,0,0" Visibility="Collapsed" />
                             <TextBox x:Name="txtCliente" Height="50" FontSize="30" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray"/>
                         </StackPanel>
-
+                        <!--Email del cliente-->
                         <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3">
                             <TextBlock Text="Email" FontSize="20" FontWeight="DemiBold" FontFamily="Montserrat"/>
                             <TextBlock x:Name="txtEmailInfo"  FontSize="50" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="#278498" Margin="0,10,0,0" Visibility="Collapsed" />
                             <TextBox x:Name="txtEmail" Height="50" FontSize="30" FontWeight="DemiBold" FontFamily="Montserrat" Foreground="Gray"/>
                         </StackPanel>
-
+                        <!--Usuario logueado-->
                         <StackPanel Grid.Row="3" Grid.ColumnSpan="3">
                             <TextBlock x:Name="txtUser" Text="Iván Nieto  -    ivan@peremaria.com" FontSize="20" FontWeight="Light" FontFamily="Montserrat" Foreground="Gray" Margin="0,20,0,0"/>
                         </StackPanel>
@@ -110,7 +114,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
+                    <!-- Botón para crear o editar reserva -->
                     <Border CornerRadius="20" BorderThickness="3" Background="#278498" Height="48" Grid.Column="1" Margin="0,10,0,0">
                         <Button x:Name="reservaButton" Width="169" Background="Transparent" HorizontalAlignment="Left" BorderBrush="Transparent" Content="Crear reserva" FontSize="20" Foreground="White" Click="clickCrearReserva"/>
                     </Border>
